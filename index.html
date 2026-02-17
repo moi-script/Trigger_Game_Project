@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigger Game</title>
+    <link rel="stylesheet" href="./BackgroundDesign/designs.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            font-family: sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* --- MAIN CONTENT STYLES --- */
+        .game-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #00CCFF; 
+            text-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+        }
+
+        p.subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .start-btn {
+            padding: 15px 50px;
+            font-size: 1.5rem;
+            background-color: transparent;
+            color: #00CCFF;
+            border: 3px solid #00CCFF;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        .start-btn:hover {
+            background-color: #00CCFF;
+            color: #1e1e1e;
+            box-shadow: 0 0 30px rgba(0, 204, 255, 0.8);
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(0, 204, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0); }
+        }
+
+        /* --- WARNING OVERLAY (Hidden by default) --- */
+        #size-warning {
+            display: none; /* Hidden on big screens */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #size-warning h2 {
+            font-size: 2.5rem;
+            color: #ff4444; /* Red for warning */
+            margin-bottom: 20px;
+        }
+
+        #size-warning p {
+            font-size: 1.2rem;
+            color: #cccccc;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        #size-warning .icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- SCREEN DETECTION LOGIC --- */
+        /* If screen is smaller than 1024px (Laptop width) */
+        @media screen and (max-width: 1024px) {
+            /* Hide the game */
+            .game-content {
+                display: none !important;
+            }
+            /* Show the warning */
+            #size-warning {
+                display: flex !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-content">
+        <h1>Trigger Game</h1>
+        <p class="subtitle">Are you ready to start?</p>
+        <a href="./Login/login.html" class="start-btn">PLAY NOW</a>
+    </div>
+
+    <div id="size-warning">
+        <div class="icon">💻 🚫 📱</div>
+        <h2>Device Not Supported</h2>
+        <p>This game is designed for <strong>Desktop and Laptop</strong> screens.</p>
+        <p>Your screen is too small to display the game mechanics correctly. Please switch to a larger device or maximize your browser window.</p>
+    </div>
+
+    <script src="./trailingMouseEffect/trailsEffect.js"></script>
+    <link rel="stylesheet" href="./trailingMouseEffect/trailsEffect.css">
+
+</body>
+</html>

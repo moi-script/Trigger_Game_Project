@@ -128,7 +128,7 @@ document.getElementById('yes').addEventListener('click', function () {
     if (progScore !== null) {
         let db = null;
         let objectStore = null;
-        let dbReqOpen = indexedDB.open('leaderBoard', 4);
+        let dbReqOpen = indexedDB.open('leaderBoard', 7);
         console.log('this is the value of programming score' + progScore)
 
         dbReqOpen.onsuccess = (ev) => {
@@ -211,7 +211,7 @@ document.getElementById('yes').addEventListener('click', function () {
         }
         dbReqOpen.onerror = function (event) {
             console.error('Error opening cursor:', event.target.error);
-            callback(false); // additonl safety thresats
+            // callback(false); // additonl safety thresats
         };
 
     }
@@ -230,7 +230,7 @@ document.getElementById('yes').addEventListener('click', function () {
 
 
 const displayRankings = (function item() {
-    let reqDb = indexedDB.open('leaderBoard', 4);
+    let reqDb = indexedDB.open('leaderBoard', 7);
     let db = null;
 
     reqDb.onsuccess = function (ev) {

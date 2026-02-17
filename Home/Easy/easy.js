@@ -401,7 +401,7 @@ function storedProgScore(progScore) {
     if (progScore !== null) {
         let db = null;
         let objectStore = null;
-        let dbReqOpen = indexedDB.open('leaderBoard', 2);
+        let dbReqOpen = indexedDB.open('leaderBoard', 7);
         console.log('this is the value of programming score' + progScore)
 
         dbReqOpen.onsuccess = (ev) => {
