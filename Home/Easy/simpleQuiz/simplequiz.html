@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz</title>
+    <link rel="stylesheet" href="../../../BackgroundDesign/designs.css">
+    <link rel="stylesheet" href="../../../trailingMouseEffect/trailsEffect.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            user-select: none;
+        }
+
+        body {
+           background-image: url('./simpleQuizIMG/06c2b0a1cdc89c4e95450ac6d412dfe0.gif');
+           background-repeat: no-repeat;
+           background-size: cover;
+        }
+        .headers,
+        #questionContainer {
+            display: flex;
+            margin: 50px auto 30px auto;
+            justify-content: space-around;
+            align-items: center;
+            width: 90%;
+            height: 300px;
+            border: .2px solid white;
+            background-color:rgba(0, 0, 0, 0.387) ;
+            box-shadow: var(--shadow);
+            border-radius: 15px;
+            font-size: 20px;
+        }
+
+        .Score,
+        .timeLeft {
+            font-size: 45px;
+        }
+
+        pre {
+            display: flex;
+            font-weight: 500;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 25px;
+
+            border-radius: 5px;
+        }
+        .ch {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .choices,
+        #choicesContainer {
+            display: flex;
+            margin: auto;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 10px;
+            height: 400px;
+        }
+
+        .ch,
+        #choicesContainer>div {
+            border-radius: 15px;
+            width: 200px;
+            height: 200px;
+            border: none;
+            background-color:transparent;
+            border: .2px solid white;
+            font-size: 35px;
+            opacity: 0.8;
+            margin: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .ch {
+            font-size: 7px;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            text-align: center;
+            color: #000;
+            border: none;
+            background-color:transparent;
+            border: .2px solid white;
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .ch:hover {
+            background-color: rgb(253, 222, 85);
+            box-shadow: 0px 15px 20px rgb(255, 255, 255);
+            color: #ffffff;
+            font-size: 20;
+            transform: translateY(-7px);
+        }
+
+        .ch:active
+       {
+            transform: translateY(-1px);
+        }
+      
+
+
+    </style>
+</head>
+
+<body>
+
+    <audio id="audioBackground" loop>
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/ogg">
+    </audio>
+
+    
+    <audio id="correctAnsAud" >
+        <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/ogg">
+    </audio>
+
+
+
+    <div id="questionContainer">
+        <div id="Score" class="Score">Score: 0 </div>
+        <pre id="q1" class="q1">Something question here </pre>
+        <div id="timeLeft" class="timeLeft">Time left</div>
+
+    </div>
+    <div id="choicesContainer">
+        <div id="item-1" class="ch"></div>
+        <div id="item-2" class="ch"></div>
+        <div id="item-3" class="ch"></div>
+        <div id="item-4" class="ch"></div>
+    </div>
+
+    <script>
+        let correctAnsSound = document.getElementById('correctAnsAud');
+        let quizScore = 0;
+        localStorage.setItem('simpleQuizTotal', quizScore.toString());
+
+        let MUSICINFO = localStorage.getItem('playMusicInfo');
+        let MUSICBACKGROUND = document.getElementById('audioBackground');
+
+
+        function checkMusicBackground(music) {
+            let convertedToInt = parseInt(music);
+            if (convertedToInt) {
+                MUSICBACKGROUND.play();
+            }
+        }
+        checkMusicBackground(MUSICINFO);
+
+        
+
+        class Mechanics {
+            constructor(countDownTime, questions, choices, correctAnswers) {
+                this.correctAnswers = correctAnswers;
+                this.countDownTime = countDownTime;
+                this.initialCountDownTime = countDownTime; // Store the initial countdown time
+                this.questionCount = 0; // Initialize the question count
+                this.choices = choices;
+                this.questions = questions; // Store the question list
+                this.totalQuestions = Object.keys(questions).length; // Get the total number of questions
+                this.minutes = Math.floor(countDownTime / 60);
+                this.seconds = countDownTime % 60;
+            }
+
+            setTime() {
+                this.displayQuestion(); // Display the current question
+                this.displayChoices(this.questionCount); // to display the choices
+                this.setupChoices(); // Setup choice click handlers
+
+                this.x = setInterval(() => { // Arrow function to maintain the context of `this`
+                    this.minutes = Math.floor(this.countDownTime / 60);
+                    this.seconds = this.countDownTime % 60;
+                    document.getElementById("timeLeft").innerHTML = this.minutes + ":" + (this.seconds < 10 ? "0" : "") + this.seconds;
+                    this.countDownTime--;
+
+                    if (this.countDownTime < 0) {
+                        clearInterval(this.x);
+                        this.questionCount++;
+                        document.getElementById("timeLeft").innerHTML = "TIME OUT";
+
+                        if (this.questionCount < this.totalQuestions) {
+                            this.resetTime(); // Reset the timer and start again
+                        } else {
+                            window.location.href = "simpleQuizTemp.html";
+                        }
+                    }
+                }, 1000);
+            }
+
+            resetTime() {
+                clearInterval(this.x); // Clear the current interval
+                this.countDownTime = this.initialCountDownTime; // Reset the countdown time
+                if (this.questionCount < this.totalQuestions) {
+                    this.setTime(); // Start the timer again
+                } else {
+                    //alert("You completed all the questions");
+                    localStorage.setItem('simpleQuizTotal', quizScore.toString());
+                    window.location.href = 'simpleQuizTemp.html';
+                    document.getElementById("timeLeft").innerHTML = "Completed all questions";
+                }
+            }
+
+            displayQuestion() {
+                const currentQuestionKey = `question${this.questionCount + 1}`;
+                const currentQuestion = this.questions[currentQuestionKey];
+                if (currentQuestion) {
+                    document.getElementById('q1').innerHTML = currentQuestion;
+                }
+            }
+
+            displayChoices(questionNumber) {
+                this.questionNumber = questionNumber;
+                let divChoices = document.querySelectorAll('.ch');
+                let keyObj;
+                switch (this.questionNumber) {
+                    case 0:
+                        keyObj = choicesList[0].question1;
+                        break;
+                    case 1:
+                        keyObj = choicesList[1].question2;
+                        break;
+                    case 2:
+                        keyObj = choicesList[2].question3;
+                        break;
+                    case 3:
+                        keyObj = choicesList[3].question4;
+                        break;
+                    case 4:
+                        keyObj = choicesList[4].question5;
+                        break;
+                    case 5:
+                        keyObj = choicesList[5].question6;
+                        break;
+                    case 6:
+                        keyObj = choicesList[6].question7;
+                        break;
+                    case 7:
+                        keyObj = choicesList[7].question8;
+                        break;
+                    case 8:
+                        keyObj = choicesList[8].question9;
+                        break;
+                    case 9:
+                        keyObj = choicesList[9].question10;
+                        break;
+                }
+                Object.entries(keyObj).forEach(([qkey, qvalue], index) => {
+                    divChoices[index].textContent = qvalue;
+                });
+            }
+
+
+            setupChoices() {
+                let divChoices = document.querySelectorAll('.ch');
+                divChoices.forEach((choice, index) => {
+                    choice.onclick = () => {
+                        if (choice.textContent === this.correctAnswers[this.questionCount]) {
+                            // alert('Nice you got it right');
+                            quizScore += 3;
+                            document.getElementById('Score').textContent = `Score: ${quizScore}`;
+                            correctAnsSound.play();
+                            this.questionCount++;
+                            this.resetTime();
+                        } else {
+                            this.questionCount++;
+                            this.resetTime();
+                            //alert('Hehe boy');
+                        }
+                    }
+                });
+            }
+        };
+
+
+        // ../simpleQuiz/simplequiz.html
+
+
+        const questionList = {
+            question1: `
+            What is the value of π up to two decimal places?`,
+            question2: `
+            What is the acceleration due to gravity on Earth's surface?`,
+            question3: `
+            Which element has the chemical symbol 'O'?`,
+            question4: `
+            What does 'HTTP' stand for in computer networking`,
+            question5: `
+            Solve for x: 2x + 6 = 14`,
+            question6: `
+            What is the unit of electrical resistance?`,
+            question7: `
+            What is the pH level of pure water at 25°C?`,
+            question8: `
+            Which data structure uses a FIFO method?`,
+            question9: `
+            What is the speed of light in a vacuum?`,
+            question10: `
+            What is the common name for dihydrogen monoxide?`
+        };
+
+        const choicesList = [
+            {
+                question1: { A: "3.14", B: "2.15", C: "4.13", D: "3.16" }
+            },
+            {
+                question2: { A: "9.8 m/s²", B: "8.9 m/s²", C: "10.8 m/s²", D: "7.8 m/s²" }
+            },
+            {
+                question3: { A: "Oxygen", B: "Gold", C: "Osmium", D: "Helium" }
+            },
+            {
+                question4: { A: "HyperText Transfer Protocol", B: "High Transfer Text Protocol", C: "Hyper Transfer Text Process", D: "HyperText Transmission Protocol" }
+            },
+            {
+                question5: { A: "x = 2", B: "x = 3", C: "x = 4", D: "x = 5" }
+            },
+            {
+                question6: { A: "Volt", B: "Ampere", C: "Ohm", D: "Watt" }
+            },
+            {
+                question7: { A: "6", B: "7", C: "8", D: "9" }
+            },
+            {
+                question8: { A: "Stack", B: "Queue", C: "Array", D: "Tree" }
+            },
+            {
+                question9: { A: "3 x 10^8 m/s", B: "2 x 10^8 m/s", C: "1 x 10^8 m/s", D: "4 x 10^8 m/s" }
+            },
+            {
+                question10: { A: "Salt", B: "Water", C: "Alcohol", D: "Acid" }
+            }
+        ];
+
+        const correctAnswers = [
+            "3.14",        // Question 1
+            "9.8 m/s²",    // Question 2
+            "Oxygen",      // Question 3
+            "HyperText Transfer Protocol", // Question 4
+            "x = 4",       // Question 5
+            "Ohm",         // Question 6
+            "7",           // Question 7
+            "Queue",       // Question 8
+            "3 x 10^8 m/s",// Question 9
+            "Water"        // Question 10
+        ];
+
+
+        /*
+        
+        
+                const questionList = {
+                    question1: "What is the value of π up to two decimal places?",
+                    question2: "What is the acceleration due to gravity on Earth's surface?",
+                    question3: "Which element has the chemical symbol 'O'?",
+                    question4: "What does 'HTTP' stand for in computer networking?",
+                    question5: "Solve for x: 2x + 6 = 14",
+                    question6: "What is the unit of electrical resistance?",
+                    question7: "What is the pH level of pure water at 25°C?",
+                    question8: "Which data structure uses a FIFO method?",
+                    question9: "What is the speed of light in a vacuum?",
+                    question10: "What is the common name for dihydrogen monoxide?"
+                };
+        
+        
+                const choicesList = {
+                    question1: { A: "3.14", B: "2.15", C: "4.13", D: "3.16" },
+                    question2: { A: "9.8 m/s²", B: "8.9 m/s²", C: "10.8 m/s²", D: "7.8 m/s²" },
+                    question3: { A: "Oxygen", B: "Gold", C: "Osmium", D: "Helium" },
+                    question4: { A: "HyperText Transfer Protocol", B: "High Transfer Text Protocol", C: "Hyper Transfer Text Process", D: "HyperText Transmission Protocol" },
+                    question5: { A: "x = 2", B: "x = 3", C: "x = 4", D: "x = 5" },
+                    question6: { A: "Volt", B: "Ampere", C: "Ohm", D: "Watt" },
+                    question7: { A: "6", B: "7", C: "8", D: "9" },
+                    question8: { A: "Stack", B: "Queue", C: "Array", D: "Tree" },
+                    question9: { A: "3 x 10^8 m/s", B: "2 x 10^8 m/s", C: "1 x 10^8 m/s", D: "4 x 10^8 m/s" },
+                    question10: { A: "Salt", B: "Water", C: "Alcohol", D: "Acid" }
+                };
+                const answerList = [
+                    "A", // Question 1
+                    "A", // Question 2
+                    "A", // Question 3
+                    "A", // Question 4
+                    "C", // Question 5
+                    "C", // Question 6
+                    "B", // Question 7
+                    "B", // Question 8
+                    "A", // Question 9
+                    "B"  // Question 10
+                ];
+        
+        
+        
+        
+        */
+
+
+
+        const timer = new Mechanics(.7 * 60, questionList, choicesList, correctAnswers); // Pass the total seconds directly
+        timer.setTime();
+
+
+
+
+
+    </script>
+    <script src="../../../trailingMouseEffect/trailingMouse.js"></script>
+
+</body>
+
+</html>

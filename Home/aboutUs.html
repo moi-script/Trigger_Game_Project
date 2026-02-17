@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>aboutUs</title>
+  <link rel="icon" type="image/png" href="../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-weight: 500;
+      font-family: "Permanent Marker", cursive;
+      color: white;
+
+
+    }
+
+    body {
+      direction: ltr;
+      overflow-y: scroll;
+      background-image: url('./aboutUsImg/books-2596809_1280.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    ::-webkit-scrollbar {
+      width: 2px;
+      height: 20%;
+    }
+
+    ::-webkit-scrollbar-track {
+      background:rgb(188, 147, 188);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3a0139ed;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555555;
+    }
+
+
+
+    #containerFirst,
+    #containerSecond,
+    #containerThird {
+      width: 100vw;
+      height: 100vh;
+      background-color: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    header {
+      width: 80%;
+      height: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    section {
+      width: 80%;
+      height: 60%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+
+    }
+
+    section>div {
+      height: 100%;
+      width: 30%;
+      background-color: transparent;
+    }
+
+    #subjectCovered {
+      margin-bottom: 5%;
+      margin-top: 5%;
+    }
+
+    #subjects {
+      width: 100%;
+      height: 1800px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+
+    }
+
+    #subjects>section {
+      width: 80%;
+      margin-bottom: 20px;
+      height: 300px;
+    }
+
+    h1 {
+      font-size: 3em;
+      font-weight: bolder;
+      text-shadow: 1.5px 4px 5px rgb(0, 0, 0);
+    }
+
+    #containerFirst>section>p {
+      width: 100%;
+      height: 100%;
+      font-size: 1.5em;
+      text-indent: 50px;
+      text-align: center;
+      text-transform: uppercase;
+      word-spacing: 10px;
+      line-height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+
+
+    #containerThird {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      height:2000px;
+    }
+    #containerThird > #subjects > section{
+      margin-top: 40px;
+    }
+   
+
+    .chem {
+      align-self: flex-start;
+    }
+
+    .phy {
+      align-self: flex-end;
+    }
+
+    .math {
+      align-self: flex-start;
+    }
+
+    .prog {
+      align-self: flex-end;
+    }
+
+    .calc {
+      align-self: flex-start;
+    }
+
+    #persons {
+      width: 100%;
+      height: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    #fourthContainer {
+      width: 100vw;
+      height: 1300px;
+      background-color: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content:center;
+      align-items: center;
+    }
+
+    .devs1,
+    .devs2,
+    .devs3 {
+      width: 200px;
+      height: 200px;
+      border-radius: 15px;
+      background-color: transparent;
+    }
+
+
+
+
+
+
+    /*FRONT CARD */
+    .card {
+      width: 100%;
+      height: 100%;
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      
+      transition: transform 0.999s;
+    }
+
+    .card:hover .card-inner {
+      box-shadow: 1px 5px 10px rgba(248, 40, 255, 0.768);
+
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+
+    .card-front {
+      background-color: #6A2C70;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
+      justify-content: center;
+      font-size: 2.5em;
+      text-shadow: 1px 4px 5px black;
+      transform: rotateY(0deg);
+    }
+
+    .card-back {
+      background-color: #ff77f6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
+      justify-content: center;
+      font-size: 24px;
+      transform: rotateY(180deg);
+    }
+
+    .card-back>p {
+      text-shadow: 1px 4px 4px rgba(45, 5, 83, 0.635);
+    }
+
+
+    /*Subjects cover*/
+    .chem {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(163deg, #f677ffa4 0%, #fb73f464 100%);
+      
+      border-radius: 20px;
+      transition: all .3s;
+    }
+
+    .chem2 {
+      width: 100%;
+      height: 100%;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      font-size: 4em;
+      background-image: url('./aboutUsImg/CHEMISTRY.jpg');
+      box-shadow: 1px 5px 9px #000;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 15px;
+      transition: all .2s;
+    }
+
+    .chem2:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+    }
+
+    .chem:hover {
+      box-shadow: 0px 0px 30px 1px rgba(253, 89, 250, 0.775);
+    }
+
+
+
+
+
+
+    .phy {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(163deg, #f677ffa4 0%, #fb73f464 100%);
+
+
+      border-radius: 20px;
+      transition: all .3s;
+    }
+
+    .phy2 {
+      width: 100%;
+      height: 100%;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      font-size: 4em;
+      background-image: url('./aboutUsImg/PYYSICS.jpg');
+      box-shadow: 1px 5px 9px #000;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 15px;
+      transition: all .2s;
+    }
+
+    .phy2:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+    }
+
+    .phy:hover {
+      box-shadow: 0px 0px 30px 1px rgba(253, 89, 250, 0.775);
+
+
+    }
+
+
+
+    .math {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(163deg, #f677ffa4 0%, #fb73f464 100%);
+
+
+      border-radius: 20px;
+      transition: all .3s;
+    }
+
+    .math2 {
+      width: 100%;
+      height: 100%;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      font-size: 4em;
+      background-image: url('./aboutUsImg/Mathematics.jpg');
+      box-shadow: 1px 5px 9px #000;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 15px;
+      transition: all .2s;
+    }
+
+    .math2:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+    }
+
+    .math:hover {
+      box-shadow: 0px 0px 30px 1px rgba(253, 89, 250, 0.775);
+
+
+    }
+
+
+
+
+    .prog {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(163deg, #f677ffa4 0%, #fb73f464 100%);
+
+      border-radius: 20px;
+      transition: all .3s;
+    }
+
+    .prog2 {
+      width: 100%;
+      height: 100%;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      font-size: 4em;
+      background-image: url('./aboutUsImg/programming.jpg');
+      box-shadow: 1px 5px 9px #000;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 15px;
+      transition: all .2s;
+    }
+
+    .prog2:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+    }
+
+    .prog:hover {
+      box-shadow: 0px 0px 30px 1px rgba(253, 89, 250, 0.775);
+
+
+    }
+
+
+
+
+
+    .calc {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(163deg, #f677ffa4 0%, #fb73f464 100%);
+
+
+      border-radius: 20px;
+      transition: all .3s;
+    }
+
+    .calc2 {
+      width: 100%;
+      height: 100%;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      font-size: 4em;
+      background-image: url('./aboutUsImg/CALCDERIV.jpg');
+      box-shadow: 1px 5px 9px #000;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 15px;
+      transition: all .2s;
+    }
+
+    .calc2:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+    }
+
+    .calc:hover {
+      box-shadow: 0px 0px 30px 1px rgba(253, 89, 250, 0.775);
+
+
+    }
+
+
+
+
+
+
+
+
+    #fourthContainer {
+      padding-top: 90px;
+      height: auto;
+    }
+
+    #persons>section {
+      align-self: flex-start;
+      width: 45%;
+      height: 25%;
+      margin-left: 50px;
+      margin-bottom: 50px;
+    }
+
+    #devTem {
+      margin-bottom: 100px;
+    }
+
+
+
+    .book {
+      position: relative;
+      border-radius: 10px;
+      height: 50%;
+      width: 50%;
+      background-color: whitesmoke;
+      -webkit-box-shadow: 1px 1px 12px #000;
+      box-shadow: 1px 1px 12px #000;
+      -webkit-transform: preserve-3d;
+      -ms-transform: preserve-3d;
+      transform: preserve-3d;
+      -webkit-perspective: 2000px;
+      perspective: 2000px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      color: #000;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+    }
+
+    .cover {
+      position: absolute;
+      background-color: lightgray;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s;
+      -webkit-transform-origin: 0;
+      -ms-transform-origin: 0;
+      transform-origin: 0;
+      -webkit-box-shadow: 1px 1px 12px #000;
+      box-shadow: 1px 1px 12px #000;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+
+    .book:hover .cover {
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s;
+      -webkit-transform: rotatey(-80deg);
+      -ms-transform: rotatey(-80deg);
+      transform: rotatey(-80deg);
+    }
+
+    .cover p {
+      font-size: 2.5em;
+      font-weight: 500;
+      color: white;
+      text-shadow: 1px 4px 5px black;
+    }
+
+
+    #programmer {
+      background-image: url('./aboutUsImg/441973397_1826931271153433_7168194990503437911_n.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .devs1>.book>p,
+    .devs2>.book>p,
+    .devs3>.book>p {
+      margin-left: 50px;
+      font-size: 1.5em;
+      color: rgb(23, 3, 35);
+      text-shadow: .3px 2px 5px rgba(43, 4, 75, 0.675);
+    }
+
+
+    #contentDev {
+      background-image: url('./aboutUsImg/441885590_499246029124362_3683223538025267619_n.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    #resouce {
+      background-image: url('./aboutUsImg/447581556_1558695225043095_8538227590818990991_n.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    footer {
+      width: 100%;
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+    }
+
+    footer h3 {
+      width: 100%;
+      height: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+      font-size: 1.5em;
+      text-indent: 50px;
+      text-align: center;
+      text-transform: uppercase;
+      word-spacing: 10px;
+      line-height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 1.5px 4px 5px rgb(0, 0, 0);
+    }
+
+
+    #easyFront {
+      background-image: url('./aboutUsImg/the-periodic-table-4273681_640.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    #mediumFront {
+      background-image: url('./aboutUsImg/puzzle.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    #hardFront {
+      background-image: url('./aboutUsImg/calculus.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+
+  </style>
+
+</head>
+
+<body>
+  <div id="containerFirst">
+    <header id="gameName" class="gameName">
+      <h1>Project Name: Trigger Game</h1>
+    </header>
+
+    <section>
+      <p id="animateTextPage"></p>
+    </section>
+
+  </div>
+
+  <div id="containerSecond">
+    <header id="difficulties" class="difficulties">
+      <h1>Difficulty Levels</h1>
+    </header>
+    <section>
+      <div>
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front" id="easyFront">
+              <p>Easy</p>
+            </div>
+            <div class="card-back">
+              <p>Chemistry Periodic Table</p>
+              <p>Programming Guess Syntax</p>
+              <p>Simple Quiz Test Commons</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div>
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front" id="mediumFront">
+              <p>Medium</p>
+            </div>
+            <div class="card-back">
+              <p>Crossword Some Physics</p>
+              <p>4 Pics 1 Word Physics</p>
+              <p>Math Riddles Math Logic</p>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div>
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front" id="hardFront">
+              <p>Hard</p>
+            </div>
+            <div class="card-back">
+              <p>Derivatives</p>
+              <p>Integrals</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+
+
+
+
+  <div id="containerThird">
+    <header id="subjectCovered">
+      <h1>Subjects Covered:</h1>
+    </header>
+
+    <main id="subjects">
+
+
+      <section class="chem">
+        <div class="chem">
+          <div class="chem2"> Chemistry
+          </div>
+        </div>
+      </section>
+
+
+
+      <section class="phy">
+        <div class="phy">
+          <div class="phy2"> Physics
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <section class="math">
+        <div class="math">
+          <div class="math2">Mathematics
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <section class="prog">
+        <div class="prog">
+          <div class="prog2"> Programming
+          </div>
+        </div>
+      </section>
+
+
+
+      <section class="calc">
+        <div class="calc">
+          <div class="calc2"> Calculus
+          </div>
+        </div>
+      </section>
+
+
+
+    </main>
+
+  </div>
+
+
+
+
+
+  <div id="fourthContainer">
+    <header id="devTem">
+      <h1>Development Team</h1>
+    </header>
+
+    <main id="persons">
+
+      <section class="devs1">
+        <div class="book">
+          <p>Is responsible for coding and developing the game. He ensures that the game runs smoothly and that players
+            have a great experience.</p>
+          <div class="cover" id="programmer">
+            <p>John Moises A. Nugal</p>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="devs2">
+        <div class="book">
+          <p>Rimer creates the questions and content for the game, making sure they are interesting and educational.</p>
+          <div class="cover" id="contentDev">
+            <p>Rimer Lupian</p>
+          </div>
+        </div>
+
+
+      </section>
+
+
+
+      <section class="devs3">
+        <div class="book">
+          <p>Zymund gathers all the materials needed for the game and works with others to make sure the content is
+            accurate and helpful.</p>
+          <div class="cover" id="resouce">
+            <p>Zymund Orillo</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <h3>
+      Trigger Game is a project by first-year engineering students for Engineering Week. It's designed to be a fun and
+      educational way for students to learn and review important engineering concepts. Developed by John Moises A.
+      Nugal, Zymund Orillo, and Rimer Lupian, this game combines their skills and efforts to create an enjoyable
+      learning tool for their peers.  <i class="fa-regular fa-copyright fa-2xl"></i>
+    </h3>
+     
+
+   
+  </footer>
+
+  <script>
+    let animateTextPage = document.getElementById('animateTextPage');
+
+    function animateText() {
+      const textsMotion = `Project Purpose: The Trigger Game is a fun and educational quiz game designed to help students understand the basics of engineering subjects. Created for Engineering Week, it offers a way for students to learn and review topics in an interactive and engaging manner.`;
+      let i = 0;
+      function typeWriter() {
+        if (i < textsMotion.length) {
+          animateTextPage.textContent += textsMotion[i];
+          i++;
+          setTimeout(typeWriter, 15);
+        }
+      }
+      typeWriter();
+    }
+
+    animateText();
+
+  </script>
+  <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../BackgroundDesign/designs.css">
+    <link rel="stylesheet" href="home.css">
+    <title>Home</title>
+    <link rel="stylesheet" href="../trailingMouseEffect/trailsEffect.css">
+    <link rel="icon" type="image/png" href="../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+
+</head>
+
+
+
+<body id="background">
+
+
+    <audio id="audioBackground" loop>
+        <source src="/GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/ogg">
+    </audio>
+
+
+
+    <section id="section" class="head">
+        <h1 id="guides" class="guides"><a target="_self" id="greetPlayer" href="#"></a></h1>
+    </section>
+
+    <div id="body" class="body">
+
+
+        <div id="settingsContainer">
+            <i class="fa-solid fa-ellipsis-vertical fa-2xl"></i> <br>
+        </div>
+        <div id="buttonsSelection">
+            <button id="buttonUp"><i class="fa-solid fa-arrow-up fa-2xl"></i></button>
+            <button id="buttonDown"><i class="fa-solid fa-arrow-down fa-2xl"></i></i></button>
+        </div>
+
+
+        <div class="difficulties">
+            <a target="_self" href="./Hard/hard.html">
+                <section id="hard" class="hard">Hard</section>
+            </a>
+            <a target="_self" href="./Easy/easy.html" class="section-2">
+                <section id="easy" class="easy">Easy</section>
+            </a>
+            <a target="_self" href="./Medium/medium.html" class="section-3">
+                <section id="medium" class="medium">Medium</section>
+            </a>
+        </div>
+
+
+        <div id="description" class="description">
+            <div id="content" class="contents">
+                <p id="page"></p>
+            </div>
+            
+            <div class="contents">
+                <p id="score"></p>
+            </div>
+            <div class="contents"><span> <a id="go" class="goButton" class="go" href="./Easy/easy.html">
+                        Play</a></span></div>
+            <div class="contents"><span> <a class="exit" id="exit"> Exit </a></span></div>
+
+
+        </div>
+
+        <div id="boardsBackground" class="leaderboards">
+            <a id="leaderboards" class="boards">
+                <h1>1</h1>
+                <i class="fa-solid fa-ranking-star"></i>
+                <h1>3</h1>
+            </a>
+        </div>
+
+    </div>
+
+
+
+    <div id="leaderboardDisplay" class="leaderboardDisplay">
+        <header>
+            <h1>Leader Board</h1>
+        </header>
+        <div id="playerRankingList"></div>
+        <button id="backButton" onclick="goBackFromHome()">Back</button>
+    </div>
+
+    
+    <div id="settingsBackground">
+        <main id="settingsSpan">
+            <button class="btn-1" id="aboutUs" onclick="aboutUsPage()">About Us <i class="fa-solid fa-person"></i></button>
+            <button class="btn-1" id="clearData" onclick="clearData()">Clear Data <i class="fa-solid fa-trash"></i></button>
+            <button class="btn-1" id="onMusic">On <i class="fa-solid fa-music"></i></button>
+            <button class="btn-1" id="offMusic">Off <i class="fa-solid fa-music"></i></button>
+            <button class="btn-1" id="backToHomeButton">Back<i class="fa-solid fa-arrow-left"></i></button>
+        </main>
+
+    </div>
+
+
+
+
+    <div id="confirmPlate">
+        <section id="top"><p id="gameStats"></p></section>
+        <section id="down">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </section>
+       
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="home.js"></script>
+    <script>
+
+/*
+
+
+this is the css code
+.leaderboardDisplay>header>h1 {
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 4px 4px black;
+    font-weight: bolder;
+    font-size: 3em;
+}
+
+.leaderboardDisplay>div>span>p {
+    padding: 5%;
+    display: inline;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.leaderboardDisplay>div>span {
+    margin-bottom: 5%;
+
+}
+
+.leaderboardDisplay>div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 70%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.leaderboardDisplay>div::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+
+
+this is the html code
+what happened here is it can be scrollable even if it was like many span and page
+ <div id="playerRankingList">
+            
+            <span>
+                <p></p>
+            </span>
+            <span>
+                <p>1. hdhdfhdhf</p>
+            </span>
+            <span>
+                <p>2. hdhdfhdhf</p>
+            </span>
+            <span>
+                <p>3. hdhdfhdhf</p>
+            </span>
+            <span>
+                <p>4. hdhdfhdhf</p>
+            </span>
+            <span>
+                <p>5. hdhdfhdhf</p>
+            </span>
+            
+            <span>
+                <p>6. hdhdfhdhf</p>
+            </span>
+            <span>
+                <p>7. hdhdfhdhf</p>
+            </span>
+            <span>
+                <p>8. hdhdfhdhf</p>
+            </span>
+            <span>
+                <p>9. hdhdfhdhf</p>
+            </span>
+            <span>
+                <p>10. hdhdfhdhf</p>
+            </span>  
+
+
+now what i wanted to happend is that when i try removing this all
+<div id="playerRankingList">
+            
+            <span>
+                <p></p>
+            </span>
+            <span>
+                <p>1. hdhdfhdhf</p>
+            </span>
+           
+
+</div>
+
+to this degree but when displaying this sorted data form the database it will append this span with a child of p, then in p age will be displayed the
+player score and rankings like 0, 1, 2, 3
+
+
+*/
+       
+
+
+           
+            //THE PROBLEM NOW IS HOW TO DISTRIBUTE THE SORTED DATE TO THE SPECIFIC PAGE INSINDE THE SOPAN
+            // HOW TO MAKE SOME IDENTIFEIR TO LOOP IN THIS TAGS TO SELECT SPECIFICALLY 
+            // WIHOUT AFFECTING THE WEBKIT SCROLL BAR
+            // GETTING THE DB ITSELT AFTER THE VERY FIRST UER LOGOUT ENTER THE NAME AND SCORE WHEN APPENDING THE VERY FIRST
+            // CHILD ELEMENTS, WIHT A CONTENTS CONTAINS, NAME AND SCORE
+            // ADD SOME CONDITION TO CONTROL THE SCORE FLOW
+
+            // THE LAST ONE IS CALCULUS
+            // HAING A DIFFERENT QUESTIONS WTIH VAST AMOUT OF CONDIITIONS
+            // MAKING A TIME FUNCTIONS
+
+            // LASAT PART REFINING
+            // INSERTING THE NECCESARRY SOUND (THE MOST EASIEST FOR TESETING )
+            // THEN DONE CHARAN
+            
+            
+        
+    
+
+
+        /*
+         let displayScore = document.getElementById('score');
+
+
+
+
+
+        // get the total score of easy games
+        function getEasyTotalScore() {
+            let total = localStorage.getItem('easyTotal');
+            return total;
+        }
+
+        function getMediumTotalScore() {
+            let total = localStorage.getItem('mediumTotal');
+            return total;
+        }
+
+         function displayEasyScore() {
+            const chemScore = localStorage.getItem('chemScore');
+            const simpleQuizScore = localStorage.getItem('simpleQuizTotal');
+            const score = localStorage.getItem('scoreprog');
+
+            if (getEasyTotalScore() === null) {
+                displayScore.textContent =
+                    `You didnt play yet, your score: 0/90
+                 Play all the game to calculate your total score`;
+            }
+            else if (chemScore !== null && simpleQuizScore !== null && score !== null) {
+                displayScore.textContent = `Your score: ${getEasyTotalScore()} / 90`;
+            }
+        }
+
+
+
+        function displayMediumScore() {
+            const crosswordScore = localStorage.getItem("crossWordScore");
+            const _4pics1wordTotalScore = localStorage.getItem("4picsTotalScore");
+            const mathRiddlesScore = localStorage.getItem('mathRiddlesScore');
+            if (getMediumTotalScore() === null) {
+                displayScore.textContent = `You didnt play yet, your score: 0/70
+            Play all the game to calculate your total score`;
+            }
+            else if (crosswordScore !== null && _4pics1wordTotalScore !== null && mathRiddlesScore !== null) {
+                displayScore.textContent = `Your score: ${getMediumTotalScore()} / 70`;
+            }
+        }
+
+        
+        if (getEasyTotalScore() === null) {
+            displayScore.textContent =
+                `You didnt play yet, your score: 0/90
+                 Play all the game to calculate your total score`;
+        }
+        else if (chemScore !== null && simpleQuizScore !== null && score !== null) {
+            displayScore.textContent = `Your score: ${getEasyTotalScore()} / 90`;
+        }
+
+        else {
+            displayScore.textContent = `Complete the game to get gain more points`;
+        }
+
+        */
+       
+
+
+    </script>
+    <script src="../trailingMouseEffect/trailingMouse.js"></script>
+    <script src="touchSound.js"></script>
+    <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+
+
+    <!--
+i need to connect this script code in home.js
+do those condition in there connect in to the other event
+
+
+-->
+
+
+
+</body>
+
+
+</html>

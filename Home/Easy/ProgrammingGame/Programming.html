@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is Programming game</title>
+    <link rel="stylesheet" href="../../../BackgroundDesign/designs.css">
+    <link rel="stylesheet" href="../../../trailingMouseEffect/trailsEffect.css">
+    <link rel="icon" type="image/png" href="../../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: "Permanent Marker", cursive;
+        }
+
+        body {
+            background-image: url('./ProgrammingImg/9044a634e09b2a633ff73efad0fdf470.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100vw;
+            height: 100vh;
+            padding-top: 10%;
+
+        }
+
+        .languageSelect {
+            width: 100%;
+            height:30%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: none;
+        }
+
+        main {
+            width: 100%;
+            height: 80%;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: none;
+        }
+
+        .languageSelect>div {
+            width:19%;
+            height: 100%;
+            transition: opacity 0.3s linear;
+            background-color: none;
+            border-radius: 15px;
+            box-shadow: 0px 5px 7px rgba(255, 255, 255, 0.326);
+
+        }
+        .languageSelect > div:hover{
+            cursor: pointer
+            ;
+        }
+
+        .languageSelect:hover> :not(:hover) {
+            opacity: 0.2;
+        }
+
+        section {
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            justify-content: space-evenly;
+            border: .2px solid white;
+            border-radius: 15px;
+            height: 200px;
+            width: 600px;
+        }
+
+
+        #go {
+            padding: 1.3em 3em;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #000;
+            background-color:rgb(3, 174, 210);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 3px 3px 7px rgba(25, 24, 24, 0.803);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #go:hover {
+            background-color: rgb(253, 222, 85);
+            box-shadow: 0px 15px 20px rgb(255, 255, 255);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+
+        #go:active {
+            transform: translateY(-1px);
+        }
+        a{
+            text-decoration: none;
+            display: inline-block;
+        }
+        .descriptions{
+            color: rgb(255, 255, 255);
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .languageSelect > .Javascript{
+            background-image: url('../gamesImg/JavaScript_Logo.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .languageSelect > .Python{
+            background-image: url('../gamesImg/python-logo-4k-i6.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .languageSelect > #cpp{
+            background-image: url('../gamesImg/technology-programming-c-coding-wallpaper-thumb.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .languageSelect > .Java{
+            background-image: url('../gamesImg/R.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .languageSelect > #cSharp{
+            background-image: url('../gamesImg/OIP (13).jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+
+        
+
+
+       
+
+    </style>
+</head>
+
+<body>
+
+    
+    <!--
+            <img src="..\gamesImg\JavaScript_Logo.png" src="../gamesImg/">
+
+            <img src="../gamesImg/python-logo-4k-i6.jpg">
+
+            <img src="../gamesImg/technology-programming-c-coding-wallpaper-thumb.jpg">
+
+            <img src="../gamesImg/R.png">
+
+            <img src="../gamesImg/OIP (13).jpg">
+
+    -->
+    
+    <audio id="audioBackground" loop>
+        <source src="/GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/ogg">
+    </audio>
+
+    
+
+    <header class="languageSelect" id="languageSelect">
+
+        <div id="js" class="Javascript">
+        </div>
+
+        <div id="py" class="Python">
+        </div>
+
+        <div id="cpp" class="C++">
+        </div>
+        <div id="java" class="Java">
+        </div>
+
+        <div id="cSharp" class="c#">
+        </div>
+    </header>
+    <!--
+-->
+    <main>
+        <section>
+            <h1 class="descriptions">Select a languge you are familiar with</h1>
+            <div class="contents"><span> <a id="go" class="go" href="../easy.html">Back</a></span></div>
+<!--
+ --next thing to do tommorow is to add some effects in the buttons of choices
+ -- and some designs in divisions
+ -- add the wrong sound and touch sound 
+ -- create a desing in the buttons of the template in html
+
+-->
+        </section>
+    </main>
+
+    <script src="Programming.js"></script>
+    <script src="../../../trailingMouseEffect/trailingMouse.js"></script>
+    <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+:root {
+    /* For sliding card difficulties */
+    --GrowSizeWidth: 500px;
+    --GrowSizeHeight: 100px;
+    --ShrinkSizeWidth: 150px;
+    --ShrinkSizeHeight: 50px;
+    --ShrinkSize: 100px;
+    --GrowFontSize: 70px;
+    /* Defualt Design*/
+    --HovOpacity: .5;
+    --BlackTransparency: 0.658;
+    /* Color */
+    --text-color: rgb(220, 191, 191);
+
+/*
+GrowSizeWidth
+GrowSizeHeight
+*/
+
+
+    --divBackground: linear-gradient(to left, rgb(3, 174, 210), rgb(6, 214, 255));
+    --backgroundColor: linear-gradient(to left, rgb(3, 174, 210), rgb(4, 96, 114));
+    --shadow: .5px 2px 8px rgba(51, 50, 50, 0.25);
+
+
+    
+
+    --vividSkyBlue: rgb(3, 174, 210);
+    --skyBlue: rgb(104, 210, 232);
+    --dandelion: rgb(253, 222, 85);
+    --lightGoldenrodYellow: rgb(254, 239, 173);
+
+
+
+    --textShadow: 3px 3px rgb(0, 0, 0);
+}

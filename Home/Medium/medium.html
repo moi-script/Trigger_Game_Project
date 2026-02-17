@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medium</title>
+  <link rel="stylesheet" href="/BackgroundDesign/designs.css">
+  <link rel="icon" type="image/png" href="../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+  <style>
+    * {
+      user-select: none;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Permanent Marker", cursive;
+      color: black;
+
+    }
+
+    body {
+      display: flex;
+      background-image: url('../Easy/EasyImg/Placa_de_madeira_de_desenho_animado___Vetor_Premium-removebg-preview.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+
+    }
+
+    .containerFirst {
+      width: 30%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      background-color: transparent;
+      border-bottom: .2px solid white;
+      border-top: .2px solid white;
+
+      box-shadow: 2px 4px 8px rgba(48, 48, 48, 0.743);
+      border-radius: 15px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .containerSecond {
+      width: 40%;
+      height: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      font-weight: 500;
+      margin-bottom: -150px;
+      color: rgb(255, 255, 255);
+    }
+
+    h2 {
+      font-size: 1.5em;
+      font-family: "Permanent Marker", cursive;
+
+      text-align: center;
+      font-weight: 500;
+      color: rgb(255, 255, 255);
+    }
+
+    #play {
+      margin-bottom: -150px;
+    }
+
+
+    /*
+        default or centered view
+        width 350;
+        height 180
+
+        after centered view or middle view
+        width: 200px;
+        height: 70px;
+
+        smallest view
+        width: 100px;
+        height: 40px;
+
+        */
+    .containerSecond>.imaginaryTop,
+    .containerSecond>.imaginaryBottom {
+      background-color: transparent;
+      width: 10%;
+      height: 10%;
+      transition: transform 0.3s;
+
+    }
+
+    /* Opacity for top and bottom when viewing in defaul */
+    .containerSecond>.bottom,
+    .containerSecond>.top {
+      opacity: 0.5;
+    }
+
+    .containerFirst>button>a {
+      text-decoration: none;
+    }
+
+    .containerFirst>button,
+    .containerFirst>button {
+      font-size: 12px;
+      width: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 50px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
+      margin-bottom: 40px;
+      color: #000;
+      border: none;
+      background-color: transparent;
+      border-bottom: .2px solid white;
+      border-right: .2px solid white;
+
+      border-radius: 10px;
+      box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .containerFirst>button:hover,
+    .containerFirst>button:hover {
+      font-size: 20px;
+      background-color: rgb(253, 222, 85);
+      box-shadow: 0px 15px 20px rgb(254, 239, 173);
+      color: rgb(0, 0, 0);
+      transform: translateY(-7px);
+    }
+
+    .containerFirst>button:active,
+    .containerFirst>button:active {
+      transform: translateY(-1px);
+    }
+
+    .imaginaryTop:hover,
+    .imaginaryBottom:hover {
+      cursor: pointer;
+      transform: scale(0.9, 0.9);
+    }
+
+    .imaginaryTop:active,
+    .imaginaryBottom:active {
+      transform: translate(0, -10px);
+    }
+
+    /*
+        <img src="/Home/Medium/MediumGamesImg/512x512bb.jpg" alt="" />
+        <p id="crosswordGame" class="texts"></p>
+      </div>
+      <div id="default" class="default">
+        <img
+          src="/Home/Medium/MediumGamesImg/606cc3065c9c003b70213d93d8a5122f--question-mark-maths.jpg"
+          alt=""
+        />
+        <p id="mathRiddlesGame" class="texts"></p>
+      </div>
+      <div id="bottom" class="bottom">
+        <img
+          src="/Home/Medium/MediumGamesImg/word-addict-free-word-games-removebg-preview.png"
+          alt=""
+      
+      */
+
+    .top,
+    .default,
+    .bottom {
+      transition: transform 0.3s;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      box-shadow: 2px 8px 10px rgb(0, 0, 0);
+      /* or contain */
+    }
+
+    .top {
+      background-image: url('./MediumGamesImg/c42cca1b14162cd0a97fad35248f507c.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 50%;
+      height: 25%;
+
+
+
+    }
+
+    .default {
+      background-image: url('./MediumGamesImg/692065321ed4497319e59191b8133be0.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 70%;
+
+
+
+    }
+
+    .bottom {
+      background-image: url('./MediumGamesImg/ea22dde6c1720310b5d14a0e81bc3962.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 50%;
+      height: 25%;
+    }
+
+
+    .texts {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: rgb(255, 255, 255);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .imaginaryTop {
+      border: none;
+      border-bottom: 6px solid white;
+    }
+
+    .imaginaryBottom {
+      border: none;
+
+      border-top: 6px solid white;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+        2 div container
+        .containerFirst{
+            h1 game title
+            h3 Score
+
+            Play
+            Back
+        }
+        first, play, back, h1 h3 container
+
+        .containerSecond{
+            imaginary top
+            top
+            middle
+            bottom
+            imaginary bottom
+
+        }
+        second games type img, button up button down, imaginary div for checking position for transform
+
+/Home/Medium/mathRiddles.html
+
+    -->
+
+
+  <audio id="audioBackground" loop>
+    <source src="/GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/mpeg">
+    <source src="/GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/ogg">
+  </audio>
+
+  <div class="containerFirst">
+    <h1 id="gameName">Math Riddles</h1>
+    <h2 id="score">Score</h2>
+    <button id="play">
+
+
+
+
+
+
+
+
+
+
+
+      <a id="playLink" href="./mathRiddles.html" target="_self">Play</a>
+    </button>
+
+    <button id="back"><a href="../../Home/home.html">Back</a></button>
+  </div>
+
+  <div class="containerSecond">
+    <button id="imaginaryTop" class="imaginaryTop" class="btns">
+      <i class="fa-solid fa-arrow-up fa-2xl" style="color: #ffffff;"></i>
+      <a href="#"></a>
+    </button>
+
+    <div id="top" class="top">
+      <p id="crosswordGame" style="color:rgb(255, 0, 0); text-shadow:1px 1px black; font-weight: bolder;" class="texts">
+      </p>
+      <a href="../Medium/mathRiddles.html"></a>
+      <a href="../Medium/crossword.html"></a>
+      <a href="../Medium/4pics1word.html"></a>
+
+
+    </div>
+    <div id="default" class="default">
+      <p id="mathRiddlesGame"
+        style="color:rgb(255, 0, 0);font-size: 2em; text-shadow:1px 1px black; font-weight: bolder;" class="texts"></p>
+    </div>
+    <div id="bottom" class="bottom">
+      <p id="fourPicsGame" style="color:rgb(255, 0, 0); text-shadow:1px 1px black; font-weight: bolder;" class="texts">
+      </p>
+    </div>
+
+    <button id="imaginaryBottom" class="imaginaryBottom" class="btns">
+      <i class="fa-solid fa-arrow-down fa-2xl" style="color: #ffffff;"></i>
+      <a href="#"></a>
+    </button>
+  </div>
+
+  <script>
+    let buttonUp = document.getElementById("imaginaryTop"); // // this is the y: 180.1999969482422, this is the x 622
+    let buttonDown = document.getElementById("imaginaryBottom"); // y: 579.7999877929688, this is the x 987.1124877929688
+
+    let topDiv = document.getElementById("top");
+    let defaultDiv = document.getElementById("default");
+    let bottom = document.getElementById("bottom");
+
+    let play = document.getElementById("playLink");
+    let gameName = document.getElementById("gameName");
+
+    // SCORES
+
+    let scoreHomeDisplay = document.getElementById("score");
+    let checkDefault = defaultDiv.getBoundingClientRect();
+    let checkBottom = bottom.getBoundingClientRect();
+    let topChecked = topDiv.getBoundingClientRect();
+
+    var topOrBottWidth = 200;
+    var topOrBottHeight = 70;
+
+    // Target dimensions
+    var defWidth = 350;
+    var defHeight = 180;
+
+
+    let MUSICINFO = localStorage.getItem('playMusicInfo');
+    let MUSICBACKGROUND = document.getElementById('audioBackground');
+
+
+    function checkMusicBackground(music) {
+      if (parseInt(music)) {
+        MUSICBACKGROUND.play();
+      }
+    }
+
+
+    checkMusicBackground(MUSICINFO);
+
+
+
+
+
+
+
+
+    // default x and y ->  this is the y: 310, this is the x 497
+    // top x and y ->  this is the y: 240, this is the x 572
+    // bottom x and y -> this is the y: 490, this is the x 572
+
+    /*
+    console.log(
+    `This is the Top: height: ${topChecked.height}, width: ${topChecked.width}`
+  );
+  console.log(
+    `This is the default: height: ${checkDefault.height}, width: ${checkDefault.width}`
+  );
+  console.log(
+    `This is the bottom: height: ${checkBottom.height}, width: ${checkBottom.width}`
+  );
+
+    
+console.log(
+      `From the top to default centered this is height: ${checkTop.height}, this is width ${checkTop.width}`
+    );
+console.log(
+      `From the default to the bottom  this is height: ${checkDef.height}, this is width ${checkDef.width}`
+    );
+console.log(
+      `This is bottom the width: ${checkBottom.width}, height: ${checkBottom.height}`
+    );
+
+     console.log(
+        `This is buttonDown up opacity: ${buttonDown.style.opacity} bool: ${btnDown}`
+      );
+
+
+     This is the Top: height: 70, width: 200
+     This is the default: height: 180, width: 350
+     This is the bottom: height: 70, width: 200
+    */
+
+    function scaleXAndY(
+      origBotWidth,
+      targetWidth,
+      origBotHeight,
+      targetHeight
+    ) {
+      let x = targetWidth / origBotWidth;
+      let y = targetHeight / origBotHeight;
+      return `scale(${x}, ${y})`;
+      //
+    }
+
+    function defToTop(
+      origBotWidth,
+      targetWidth,
+      origBotHeight,
+      targetHeight
+    ) {
+      let checkTop = topDiv.getBoundingClientRect();
+      // top -> default, default - > bottom, bottom -> imaginaryBottom 'translate(497, 310) scale(`) '
+      topDiv.style.transform = `translate(0, 125px) ${scaleXAndY(
+        origBotWidth,
+        targetWidth,
+        origBotHeight,
+        targetHeight
+      )}`;
+      topDiv.style.zIndex = `1`;
+      topDiv.style.opacity = `1`;
+    }
+
+    function defToBot(
+      origBotWidth,
+      targetWidth,
+      origBotHeight,
+      targetHeight
+    ) {
+      let checkDef = defaultDiv.getBoundingClientRect();
+
+      defaultDiv.style.transform = `translate(0, 125px) ${scaleXAndY(
+        origBotWidth,
+        targetWidth,
+        origBotHeight,
+        targetHeight
+      )}`;
+      defaultDiv.style.zIndex = `-1`;
+      defaultDiv.style.opacity = `.4`;
+    }
+    function botToLast(
+      origBotWidth,
+      targetWidth,
+      origBotHeight,
+      targetHeight
+    ) {
+      bottom.style.transform = `translate(0, 55px) ${scaleXAndY(
+        origBotWidth,
+        targetWidth,
+        origBotHeight,
+        targetHeight
+      )}`;
+      bottom.style.zIndex = `-2`;
+      bottom.style.opacity = `.2`;
+      let checkBottom = bottom.getBoundingClientRect();
+    }
+
+    function bottomToDefault(
+      origBotWidth,
+      targetWidth,
+      origBotHeight,
+      targetHeight
+    ) {
+      bottom.style.transform = `translate(0, -125px) ${scaleXAndY(
+        origBotWidth,
+        targetWidth,
+        origBotHeight,
+        targetHeight
+      )}`;
+      bottom.style.zIndex = `1`;
+      bottom.style.opacity = `1`;
+    }
+    function defaultToTop(
+      origBotWidth,
+      targetWidth,
+      origBotHeight,
+      targetHeight
+    ) {
+      defaultDiv.style.transform = `translate(0, -125px) ${scaleXAndY(
+        origBotWidth,
+        targetWidth,
+        origBotHeight,
+        targetHeight
+      )}`;
+      defaultDiv.style.zIndex = `-1`;
+      defaultDiv.style.opacity = `.4`;
+    }
+    function topToLast(
+      origBotWidth,
+      targetWidth,
+      origBotHeight,
+      targetHeight
+    ) {
+      topDiv.style.transform = `translate(0, -55px) ${scaleXAndY(
+        origBotWidth,
+        targetWidth,
+        origBotHeight,
+        targetHeight
+      )}`;
+      topDiv.style.zIndex = `-2`;
+      topDiv.style.opacity = `.1`;
+    }
+
+    /*
+     This is the Top: height: 70, width: 200
+     This is the default: height: 180, width: 350
+     This is the bottom: height: 70, width: 200
+    */
+
+    var btnUp = true;
+    var btnDown = true;
+
+    // UP
+    buttonUp.addEventListener("click", function () {
+      if (btnUp && btnDown) {
+        defToTop(topOrBottWidth, defWidth, topOrBottHeight, defHeight);
+        defToBot(350, 200, 180, 70);
+        botToLast(200, 100, 70, 40);
+        buttonUp.style.opacity = "0.4"; // Ensure opacity is set as a string
+        buttonDown.style.opacity = "1";
+
+        play.setAttribute("href", "../Medium/crossword.html");
+        gameName.textContent = "CrossWord";
+        if (crosswordScore == null) {
+          document.getElementById('score').textContent = `Play game to gain point`
+        }
+        else {
+          document.getElementById('score').textContent = `Current score: [${crosswordScore}]
+          you can only play once`;
+          play.setAttribute("href", "#");
+        }
+
+        btnUp = !btnUp;
+      } else if (btnDown === false) {
+        // logic ofr the going defautl
+        /*
+     This is the Top: height: 70, width: 200
+     This is the default: height: 180, width: 350
+
+     This is the bottom: height: 70, width: 200
+
+      
+            topToNormal(350, 200, 180, 70);
+            defaultToNormal(200, 150, 70, 40);
+            botToNormal(200, 100, 100, 70);
+    */
+
+        bottom.style.transform = "translate(0, 0) scale(1, 1)";
+        bottom.style.zIndex = "-1";
+        bottom.style.opacity = ".4";
+
+        defaultDiv.style.transform = "translate(0, 0px) scale(.9, .9)";
+        defaultDiv.style.zIndex = "1";
+        defaultDiv.style.opacity = "1";
+
+        topDiv.style.transform = "translate(0, 0) scale(1,1)";
+        topDiv.style.zIndex = "-1";
+        topDiv.style.opacity = ".4";
+        buttonDown.style.opacity = "1";
+        play.setAttribute("href", "../Medium/mathRiddles.html");
+        gameName.textContent = "Math Riddles";
+        btnDown = !btnDown;
+      }
+    });
+
+    // DOWN
+    buttonDown.addEventListener("click", function () {
+      if (btnUp && btnDown) {
+        // (origBotWidth, targetWidth, origBotHeight, targetHeight
+
+        bottomToDefault(200, 350, 70, 180); // largest
+        defaultToTop(350, 200, 180, 70); // medium
+        topToLast(200, 100, 70, 40); // smallest
+
+        buttonDown.style.opacity = "0.4"; // Ensure opacity is set as a string
+        buttonUp.style.opacity = "1";
+
+        play.setAttribute("href", "../Medium/4pics1word.html");
+        gameName.textContent = "4 PICS 1 WORD";
+        if (_4pics1wordTotalScore == null) {
+          document.getElementById('score').textContent = `Play game to gain point`;
+        }
+        else {
+          document.getElementById('score').textContent = `Current score: [${_4pics1wordTotalScore}]
+          you can only play once`;
+
+          play.setAttribute("href", "#");
+        }
+
+        btnDown = !btnDown;
+      } else if (btnUp === false) {
+        // logic for going default
+
+        // origwith > targetWith, origHeight -> targetHeight
+
+        /*
+
+          console.log(
+        `This is button up opacity: ${buttonUp.style.opacity} bool: ${btnDown}`
+      );
+
+        console.log("THE BTN DOWN IS CLICK WHILE THE BTN UP IS FALSE");
+
+console.log(
+        `This is the width of top: ${checkTop.width} height: ${checkTop.height}`
+      );
+
+
+              default or centered view
+    width 350;
+    height 180
+
+    after centered view or middle view
+    width: 200px;
+    height: 70px;
+
+    smallest view
+    width: 100px;
+    height: 40px;
+            */
+
+        let checkTop = topDiv.getBoundingClientRect();
+
+        // (200, 100, 70, 40)
+        bottom.style.transform = "translate(0, 0) scale(1, 1)";
+        bottom.style.zIndex = "-1";
+        bottom.style.opacity = ".4";
+
+        defaultDiv.style.transform = "translate(0, 0px) scale(.9, .9)";
+        defaultDiv.style.zIndex = "1";
+        defaultDiv.style.opacity = "1";
+
+        topDiv.style.transform = "translate(0, 0) scale(1,1)";
+        topDiv.style.zIndex = "-1";
+        topDiv.style.opacity = ".4";
+        buttonUp.style.opacity = "1";
+        play.setAttribute("href", "/Home/Medium/mathRiddles.html");
+        gameName.textContent = "Math Riddles";
+        if (mathRiddlesScore == null) {
+          document.getElementById('score').textContent = `Play game to gain point`;
+        }
+        else {
+          document.getElementById('score').textContent = `Current score: [${mathRiddlesScore}]
+          you can only play once`;
+
+          play.setAttribute("href", "#");
+        }
+        btnUp = !btnUp;
+      }
+    });
+
+
+
+    var crosswordScore = localStorage.getItem("crossWordScore");
+    let _4pics1wordTotalScore = localStorage.getItem("4picsTotalScore");
+    let mathRiddlesScore = localStorage.getItem('mathRiddlesScore');
+    let totalScore = (parseInt(crosswordScore) + parseInt(_4pics1wordTotalScore) + parseInt(mathRiddlesScore));
+    localStorage.setItem('mediumTotal', totalScore.toString());
+
+    // set the attribute to #
+    // this will add text to the page after playing a certain game;
+    // waiting for the 4pics and math riddles game
+    function displayScore4PicsScore(gameScore) {
+      if (gameScore !== null) {
+        console.log(`This is the fourPicsGame score ${gameScore}`);
+        document.getElementById(
+          "fourPicsGame"
+        ).innerHTML = `Your score: ${gameScore}`;
+      }
+    }
+    function displayScoreCrossWordScore(gameScore) {
+      if (gameScore !== null) {
+        console.log(`This is the crossword score ${gameScore}`);
+        document.getElementById(
+          "crosswordGame"
+        ).innerHTML = `Your score: ${gameScore}`;
+      }
+    }
+    function displayScoreMathRiddles(gameScore) {
+      if (gameScore !== null) {
+        document.getElementById('mathRiddlesGame').innerHTML = `Your score: ${gameScore}`;
+      }
+    }
+
+    function displayAllScoreList() {
+      if (crosswordScore !== null) {
+        displayScoreCrossWordScore(crosswordScore);
+      }
+      if (_4pics1wordTotalScore !== null) {
+
+        displayScore4PicsScore(_4pics1wordTotalScore);
+      }
+      if (mathRiddlesScore !== null) {
+        play.setAttribute("href", "#");
+
+        console.log('This is null');
+
+        displayScoreMathRiddles(mathRiddlesScore);
+      }
+    }
+    displayAllScoreList();
+
+
+
+
+    // to do tommorow
+    // get the location of  x and y -> getBoundingClientRect();
+    // get the scale from direction
+    // indeces
+    // defTop -> topToDef -> defBot -> botToDef
+  </script>
+
+
+
+
+
+
+<script src="../touchSound.js"></script>
+  <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

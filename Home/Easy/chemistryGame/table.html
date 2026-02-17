@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic table</title>
+    <link rel="stylesheet" href="../../../BackgroundDesign/designs.css">
+    <link rel="stylesheet" href="../../../trailingMouseEffect/trailsEffect.css">
+    <link rel="icon" type="image/png" href="../../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border-style: border-box;
+            user-select: none;
+            font-family:'Times New Roman', Times, serif;
+            
+
+        }
+
+        body {
+            background-image:url('./ChemistryImg/fb440644bbf644e641303f1009488a66.jpg');
+            display: flex;
+            background-repeat: no-repeat;
+            background-size: cover;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        table {
+            width: 90vw;
+            height: 85vh;
+            margin-top: 20px;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-weight: bolder;
+            color: rgb(255, 255, 255);
+            font-size: 3em;
+            text-align: center;
+            animation: scale .3s;
+        }
+        .h1Scale{
+            transform: scale(1.5, 1.5);
+        }
+
+        tr>td:first-child,
+        td:nth-child(2),
+        td:nth-child(3),
+        td:nth-child(4),
+        td:nth-child(5),
+        td:nth-child(6),
+        td:nth-child(7),
+        td:nth-child(8),
+        td:nth-child(9) {
+
+            color: rgb(255, 255, 255);
+        }
+
+        .td-notshow {
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .td-notshow:hover {
+            opacity: 0;
+            cursor: default;
+        }
+
+        tr>td {
+            font-size: 13px;
+            font-weight: 500;
+            width: 5%;
+            color: rgb(255, 255, 255);
+            height: 12.14%;
+            background-color:rgba(69, 60, 60, 0.862);
+            padding: 5px;
+            text-align: center;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+            border: .2px solid white;
+
+        }
+
+        /*
+         tr>td {
+            font-size: 13px;
+            font-weight: bold;
+            width: 40px;
+            color: rgb(0, 0, 0);
+            height: 40px;
+            background-color: rgb(157, 160, 160);
+            border-radius: 20px;
+            padding: 5px;
+            text-align: center;
+            border-bottom: .5px solid rgb(248, 248, 248);
+            border-right: .5px solid rgb(248, 248, 248);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+
+        }
+        */
+        tr>td:hover {
+            background-color: rgb(253, 222, 85);
+            box-shadow: 0px 15px 20px rgb(255, 255, 255);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+
+        tr>td:active {
+            transform: translateY(-1px);
+        }
+
+        .disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <audio id="audioBackground" loop>
+        <source src="../../../GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/mpeg">
+        <source src="../../../GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/ogg">
+    </audio>
+
+
+
+    <h1 id="tryDebuggInfo">Select up to 10 elements</h1>
+    <table>
+        <tr>
+            <td id="elem-1">
+                <div>
+                    <p>1</p>
+                    <p>H</p>
+                    <p>Hydrogen</p>
+                    <p>1.008</p>
+                </div>
+            </td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td id="elem-2">
+                <div>
+                    <p>2</p>
+                    <p>He</p>
+                    <p>Helium</p>
+                    <p>4.0026</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="elem-3">
+                <div>
+                    <p>3</p>
+                    <p>Li</p>
+                    <p>Lithium</p>
+                    <p>6.94</p>
+                </div>
+            </td>
+            <td id="elem-4">
+                <div>
+                    <p>4</p>
+                    <p>Be</p>
+                    <p>Beryllium</p>
+                    <p>9.0122</p>
+                </div>
+            </td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td id="elem-5" class="elemItem">
+                <div>
+                    <p>5</p>
+                    <p>B</p>
+                    <p>Boron</p>
+                    <p>10.81</p>
+                </div>
+            </td>
+            <td id="elem-6" class="elemItem">
+                <div>
+                    <p>6</p>
+                    <p>C</p>
+                    <p>Carbon</p>
+                    <p>12.011</p>
+                </div>
+            </td>
+            <td id="elem-7" class="elemItem">
+                <div>
+                    <p>7</p>
+                    <p>N</p>
+                    <p>Nitrogen</p>
+                    <p>14.007</p>
+                </div>
+            </td>
+            <td id="elem-8" class="elemItem">
+                <div>
+                    <p>8</p>
+                    <p>O</p>
+                    <p>Oxygen</p>
+                    <p>15.999</p>
+                </div>
+            </td>
+            <td id="elem-9" class="elemItem">
+                <div>
+                    <p>9</p>
+                    <p>F</p>
+                    <p>Fluorine</p>
+                    <p>18.998</p>
+                </div>
+            </td>
+            <td id="elem-10" class="elemItem">
+                <div>
+                    <p>10</p>
+                    <p>Ne</p>
+                    <p>Neon</p>
+                    <p>20.180</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="elem-11" class="elemItem">
+                <div>
+                    <p>11</p>
+                    <p>Na</p>
+                    <p>Sodium</p>
+                    <p>22.990</p>
+                </div>
+            </td>
+            <td id="elem-12" class="elemItem">
+                <div>
+                    <p>12</p>
+                    <p>Mg</p>
+                    <p>Magnesium</p>
+                    <p>24.305</p>
+                </div>
+            </td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td id="elem-13" class="elemItem">
+                <div>
+                    <p>13</p>
+                    <p>Al</p>
+                    <p>Aluminum</p>
+                    <p>26.982</p>
+                </div>
+            </td>
+            <td id="elem-14" class="elemItem">
+                <div>
+                    <p>14</p>
+                    <p>Si</p>
+                    <p>Silicon</p>
+                    <p>28.085</p>
+                </div>
+            </td>
+            <td id="elem-15" class="elemItem">
+                <div>
+                    <p>15</p>
+                    <p>P</p>
+                    <p>Phosphorus</p>
+                    <p>30.974</p>
+                </div>
+            </td>
+            <td id="elem-16" class="elemItem">
+                <div>
+                    <p>16</p>
+                    <p>S</p>
+                    <p>Sulfur</p>
+                    <p>32.06</p>
+                </div>
+            </td>
+            <td id="elem-17" class="elemItem">
+                <div>
+                    <p>17</p>
+                    <p>Cl</p>
+                    <p>Chlorine</p>
+                    <p>35.45</p>
+                </div>
+            </td>
+            <td id="elem-18" class="elemItem">
+                <div>
+                    <p>18</p>
+                    <p>Ar</p>
+                    <p>Argon</p>
+                    <p>39.948</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="elem-19" class="elemItem">
+                <div>
+                    <p>19</p>
+                    <p>K</p>
+                    <p>Potassium</p>
+                    <p>39.098</p>
+                </div>
+            </td>
+            <td id="elem-20" class="elemItem">
+                <div>
+                    <p>20</p>
+                    <p>Ca</p>
+                    <p>Calcium</p>
+                    <p>40.078</p>
+                </div>
+            </td>
+            <td id="elem-21" class="elemItem">
+                <div>
+                    <p>21</p>
+                    <p>Sc</p>
+                    <p>Scandium</p>
+                    <p>44.956</p>
+                </div>
+            </td>
+            <td id="elem-22" class="elemItem">
+                <div>
+                    <p>22</p>
+                    <p>Ti</p>
+                    <p>Titanium</p>
+                    <p>47.867</p>
+                </div>
+            </td>
+            <td id="elem-23" class="elemItem">
+                <div>
+                    <p>23</p>
+                    <p>V</p>
+                    <p>Vanadium</p>
+                    <p>50.942</p>
+                </div>
+            </td>
+            <td id="elem-24" class="elemItem">
+                <div>
+                    <p>24</p>
+                    <p>Cr</p>
+                    <p>Chromium</p>
+                    <p>51.996</p>
+                </div>
+            </td>
+            <td id="elem-25" class="elemItem">
+                <div>
+                    <p>25</p>
+                    <p>Mn</p>
+                    <p>Manganese</p>
+                    <p>54.938</p>
+                </div>
+            </td>
+            <td id="elem-26" class="elemItem">
+                <div>
+                    <p>26</p>
+                    <p>Fe</p>
+                    <p>Iron</p>
+                    <p>55.845</p>
+                </div>
+            </td>
+            <td id="elem-27" class="elemItem">
+                <div>
+                    <p>27</p>
+                    <p>Co</p>
+                    <p>Cobalt</p>
+                    <p>58.933</p>
+                </div>
+            </td>
+            <td id="elem-28" class="elemItem">
+                <div>
+                    <p>28</p>
+                    <p>Ni</p>
+                    <p>Nickel</p>
+                    <p>58.693</p>
+                </div>
+            </td>
+            <td id="elem-29" class="elemItem">
+                <div>
+                    <p>29</p>
+                    <p>Cu</p>
+                    <p>Copper</p>
+                    <p>63.546</p>
+                </div>
+            </td>
+            <td id="elem-30" class="elemItem">
+                <div>
+                    <p>30</p>
+                    <p>Zn</p>
+                    <p>Zinc</p>
+                    <p>65.38</p>
+                </div>
+            </td>
+            <td id="elem-31" class="elemItem">
+                <div>
+                    <p>31</p>
+                    <p>Ga</p>
+                    <p>Gallium</p>
+                    <p>69.723</p>
+                </div>
+            </td>
+            <td id="elem-32" class="elemItem">
+                <div>
+                    <p>32</p>
+                    <p>Ge</p>
+                    <p>Germanium</p>
+                    <p>72.63</p>
+                </div>
+            </td>
+            <td id="elem-33" class="elemItem">
+                <div>
+                    <p>33</p>
+                    <p>As</p>
+                    <p>Arsenic</p>
+                    <p>74.922</p>
+                </div>
+            </td>
+            <td id="elem-34" class="elemItem">
+                <div>
+                    <p>34</p>
+                    <p>Se</p>
+                    <p>Selenium</p>
+                    <p>78.96</p>
+                </div>
+            </td>
+            <td id="elem-35" class="elemItem">
+                <div>
+                    <p>35</p>
+                    <p>Br</p>
+                    <p>Bromine</p>
+                    <p>79.904</p>
+                </div>
+            </td>
+            <td id="elem-36" class="elemItem">
+                <div>
+                    <p>36</p>
+                    <p>Kr</p>
+                    <p>Krypton</p>
+                    <p>83.798</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="elem-37" class="elemItem">
+                <div>
+                    <p>37</p>
+                    <p>Rb</p>
+                    <p>Rubidium</p>
+                    <p>85.468</p>
+                </div>
+            </td>
+            <td id="elem-38" class="elemItem">
+                <div>
+                    <p>38</p>
+                    <p>Sr</p>
+                    <p>Strontium</p>
+                    <p>87.62</p>
+                </div>
+            </td>
+            <td id="elem-39" class="elemItem">
+                <div>
+                    <p>39</p>
+                    <p>Y</p>
+                    <p>Yttrium</p>
+                    <p>88.906</p>
+                </div>
+            </td>
+            <td id="elem-40" class="elemItem">
+                <div>
+                    <p>40</p>
+                    <p>Zr</p>
+                    <p>Zirconium</p>
+                    <p>91.224</p>
+                </div>
+            </td>
+            <td id="elem-41">
+                <div>
+                    <p>41</p>
+                    <p>Nb</p>
+                    <p>Niobium</p>
+                    <p>92.906</p>
+                </div>
+            </td>
+            <td id="elem-42">
+                <div>
+                    <p>42</p>
+                    <p>Mo</p>
+                    <p>Molybdenum</p>
+                    <p>95.95</p>
+                </div>
+            </td>
+            <td id="elem-43">
+                <div>
+                    <p>43</p>
+                    <p>Tc</p>
+                    <p>Technetium</p>
+                    <p>[98]</p>
+                </div>
+            </td>
+            <td id="elem-44">
+                <div>
+                    <p>44</p>
+                    <p>Ru</p>
+                    <p>Ruthenium</p>
+                    <p>101.07</p>
+                </div>
+            </td>
+            <td id="elem-45">
+                <div>
+                    <p>45</p>
+                    <p>Rh</p>
+                    <p>Rhodium</p>
+                    <p>102.91</p>
+                </div>
+            </td>
+            <td id="elem-46">
+                <div>
+                    <p>46</p>
+                    <p>Pd</p>
+                    <p>Palladium</p>
+                    <p>106.42</p>
+                </div>
+            </td>
+            <td id="elem-47">
+                <div>
+                    <p>47</p>
+                    <p>Ag</p>
+                    <p>Silver</p>
+                    <p>107.87</p>
+                </div>
+            </td>
+            <td id="elem-48">
+                <div>
+                    <p>48</p>
+                    <p>Cd</p>
+                    <p>Cadmium</p>
+                    <p>112.41</p>
+                </div>
+            </td>
+            <td id="elem-49">
+                <div>
+                    <p>49</p>
+                    <p>In</p>
+                    <p>Indium</p>
+                    <p>114.82</p>
+                </div>
+            </td>
+            <td id="elem-50">
+                <div>
+                    <p>50</p>
+                    <p>Sn</p>
+                    <p>Tin</p>
+                    <p>118.71</p>
+                </div>
+            </td>
+            <td id="elem-51">
+                <div>
+                    <p>51</p>
+                    <p>Sb</p>
+                    <p>Antimony</p>
+                    <p>121.76</p>
+                </div>
+            </td>
+            <td id="elem-52">
+                <div>
+                    <p>52</p>
+                    <p>Te</p>
+                    <p>Tellurium</p>
+                    <p>127.60</p>
+                </div>
+            </td>
+            <td id="elem-53">
+                <div>
+                    <p>53</p>
+                    <p>I</p>
+                    <p>Iodine</p>
+                    <p>126.90</p>
+                </div>
+            </td>
+            <td id="elem-54">
+                <div>
+                    <p>54</p>
+                    <p>Xe</p>
+                    <p>Xenon</p>
+                    <p>131.29</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="elem-55">
+                <div>
+                    <p>55</p>
+                    <p>Cs</p>
+                    <p>Cesium</p>
+                    <p>132.91</p>
+                </div>
+            </td>
+            <td id="elem-56">
+                <div>
+                    <p>56</p>
+                    <p>Ba</p>
+                    <p>Barium</p>
+                    <p>137.33</p>
+                </div>
+            </td>
+            <td class="td-notshow" colspan="2"></td>
+            <td id="elem-72">
+                <div>
+                    <p>72</p>
+                    <p>Hf</p>
+                    <p>Hafnium</p>
+                    <p>178.49</p>
+                </div>
+            </td>
+            <td id="elem-73">
+                <div>
+                    <p>73</p>
+                    <p>Ta</p>
+                    <p>Tantalum</p>
+                    <p>180.95</p>
+                </div>
+            </td>
+            <td id="elem-74">
+                <div>
+                    <p>74</p>
+                    <p>W</p>
+                    <p>Tungsten</p>
+                    <p>183.84</p>
+                </div>
+            </td>
+            <td id="elem-75">
+                <div>
+                    <p>75</p>
+                    <p>Re</p>
+                    <p>Rhenium</p>
+                    <p>186.21</p>
+                </div>
+            </td>
+            <td id="elem-76">
+                <div>
+                    <p>76</p>
+                    <p>Os</p>
+                    <p>Osmium</p>
+                    <p>190.23</p>
+                </div>
+            </td>
+            <td id="elem-77">
+                <div>
+                    <p>77</p>
+                    <p>Ir</p>
+                    <p>Iridium</p>
+                    <p>192.22</p>
+                </div>
+            </td>
+            <td id="elem-78">
+                <div>
+                    <p>78</p>
+                    <p>Pt</p>
+                    <p>Platinum</p>
+                    <p>195.08</p>
+                </div>
+            </td>
+            <td id="elem-79">
+                <div>
+                    <p>79</p>
+                    <p>Au</p>
+                    <p>Gold</p>
+                    <p>196.97</p>
+                </div>
+            </td>
+            <td id="elem-80">
+                <div>
+                    <p>80</p>
+                    <p>Hg</p>
+                    <p>Mercury</p>
+                    <p>200.59</p>
+                </div>
+            </td>
+            <td id="elem-81">
+                <div>
+                    <p>81</p>
+                    <p>Tl</p>
+                    <p>Thallium</p>
+                    <p>204.38</p>
+                </div>
+            </td>
+            <td id="elem-82">
+                <div>
+                    <p>82</p>
+                    <p>Pb</p>
+                    <p>Lead</p>
+                    <p>207.2</p>
+                </div>
+            </td>
+            <td id="elem-83">
+                <div>
+                    <p>83</p>
+                    <p>Bi</p>
+                    <p>Bismuth</p>
+                    <p>208.98</p>
+                </div>
+            </td>
+            <td id="elem-84">
+                <div>
+                    <p>84</p>
+                    <p>Po</p>
+                    <p>Polonium</p>
+                    <p>[209]</p>
+                </div>
+            </td>
+            <td id="elem-85">
+                <div>
+                    <p>85</p>
+                    <p>At</p>
+                    <p>Astatine</p>
+                    <p>[210]</p>
+                </div>
+            </td>
+            <td id="elem-86">
+                <div>
+                    <p>86</p>
+                    <p>Rn</p>
+                    <p>Radon</p>
+                    <p>[222]</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="elem-87">
+                <div>
+                    <p>87</p>
+                    <p>Fr</p>
+                    <p>Francium</p>
+                    <p>[223]</p>
+                </div>
+            </td>
+            <td id="elem-88">
+                <div>
+                    <p>88</p>
+                    <p>Ra</p>
+                    <p>Radium</p>
+                    <p>[226]</p>
+                </div>
+            </td>
+            <td class="td-notshow" colspan="2"></td>
+            <td id="elem-104">
+                <div>
+                    <p>104</p>
+                    <p>Rf</p>
+                    <p>Rutherfordium</p>
+                    <p>[267]</p>
+                </div>
+            </td>
+            <td id="elem-105">
+                <div>
+                    <p>105</p>
+                    <p>Db</p>
+                    <p>Dubnium</p>
+                    <p>[268]</p>
+                </div>
+            </td>
+            <td id="elem-106">
+                <div>
+                    <p>106</p>
+                    <p>Sg</p>
+                    <p>Seaborgium</p>
+                    <p>[271]</p>
+                </div>
+            </td>
+            <td id="elem-107">
+                <div>
+                    <p>107</p>
+                    <p>Bh</p>
+                    <p>Bohrium</p>
+                    <p>[272]</p>
+                </div>
+            </td>
+            <td id="elem-108">
+                <div>
+                    <p>108</p>
+                    <p>Hs</p>
+                    <p>Hassium</p>
+                    <p>[270]</p>
+                </div>
+            </td>
+            <td id="elem-109">
+                <div>
+                    <p>109</p>
+                    <p>Mt</p>
+                    <p>Meitnerium</p>
+                    <p>[276]</p>
+                </div>
+            </td>
+            <td id="elem-110">
+                <div>
+                    <p>110</p>
+                    <p>Ds</p>
+                    <p>Darmstadtium</p>
+                    <p>[281]</p>
+                </div>
+            </td>
+            <td id="elem-111">
+                <div>
+                    <p>111</p>
+                    <p>Rg</p>
+                    <p>Roentgenium</p>
+                    <p>[282]</p>
+                </div>
+            </td>
+            <td id="elem-112">
+                <div>
+                    <p>112</p>
+                    <p>Cn</p>
+                    <p>Copernicium</p>
+                    <p>[285]</p>
+                </div>
+            </td>
+            <td id="elem-113">
+                <div>
+                    <p>113</p>
+                    <p>Nh</p>
+                    <p>Nihonium</p>
+                    <p>[286]</p>
+                </div>
+            </td>
+            <td id="elem-114">
+                <div>
+                    <p>114</p>
+                    <p>Fl</p>
+                    <p>Flerovium</p>
+                    <p>[289]</p>
+                </div>
+            </td>
+            <td id="elem-115" class="elemItem">
+                <div>
+                    <p>115</p>
+                    <p>Mc</p>
+                    <p>Moscovium</p>
+                    <p>[290]</p>
+                </div>
+            </td>
+            <td id="elem-116" class="elemItem">
+                <div>
+                    <p>116</p>
+                    <p>Lv</p>
+                    <p>Livermorium</p>
+                    <p>[293]</p>
+                </div>
+            </td>
+            <td id="elem-117" class="elemItem">
+                <div>
+                    <p>117</p>
+                    <p>Ts</p>
+                    <p>Tennessine</p>
+                    <p>[294]</p>
+                </div>
+            </td>
+            <td id="elem-118" class="elemItem">
+                <div>
+                    <p>118</p>
+                    <p>Og</p>
+                    <p>Oganesson</p>
+                    <p>[294]</p>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+   
+
+    <script src="easyMechanicsSetUp.js"></script>
+    <script src="./game1read.js"></script>
+    <script src="../../../trailingMouseEffect/trailingMouse.js"></script>
+    <script>
+        
+        /*
+            h1 {
+            margin-top: 20px;
+            font-weight: bolder;
+            color: aquamarine;
+            font-size: 3em;
+            text-align: center;
+            animation: scale .3s;
+        }
+        .h1{
+            transform: scale(1.5, 1.5);
+        }
+        
+        */
+
+        // will try this later
+
+
+
+        document.getElementById('DOMContentLoaded', function(){
+            document.getElementById('tryDebuggInfo').classList.add('.h1Scale');
+        });
+
+    </script>
+    <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
+
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic table</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border-style: border-box;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        tr>td {
+            width: 60px;
+            height: 55px;
+            padding: 5px;
+            background-color: aqua;
+            border: 1px solid black;
+        }
+
+        .td-notshow {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Select up to 10 elements</h1>
+    <table>
+        <tr>
+            <td id="elem-1">
+                <div>
+                    <p>1</p>
+                    <p>H</p>
+                    <p>Hydrogen</p>
+                    <p>1.008</p>
+                </div>
+            </td>
+            <td id="td-notshow"></td>
+            <td id="td-notshow"></td>
+            <td id="td-notshow"></td>
+            <td id="td-notshow"></td>
+            <td id="td-notshow"></td>
+            <td id="td-notshow"></td>
+            <td id="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="elem-2">
+                <div>
+                    <p>2</p>
+                    <p>He</p>
+                    <p>Helium</p>
+                    <p>4.0026</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="elem-3"><div><p>3</p><p>Li</p><p>Lithium</p><p>6.94</p></div></td>
+            <td class="elem-4"><div><p>4</p><p>Be</p><p>Beryllium</p><p>9.0122</p></div></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="elem-5"><div><p>5</p><p>B</p><p>Boron</p><p>10.81</p></div></td>
+            <td class="elem-6"><div><p>6</p><p>C</p><p>Carbon</p><p>12.011</p></div></td>
+            <td class="elem-7"><div><p>7</p><p>N</p><p>Nitrogen</p><p>14.007</p></div></td>
+            <td class="elem-8"><div><p>8</p><p>O</p><p>Oxygen</p><p>15.999</p></div></td>
+            <td class="elem-9"><div><p>9</p><p>F</p><p>Fluorine</p><p>18.998</p></div></td>
+            <td class="elem-10"><div><p>10</p><p>Ne</p><p>Neon</p><p>20.180</p></div></td>
+        </tr>
+        <tr>
+            <td class="elem-11"><div><p>11</p><p>Na</p><p>Sodium</p><p>22.990</p></div></td>
+            <td class="elem-12"><div><p>12</p><p>Mg</p><p>Magnesium</p><p>24.305</p></div></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="elem-13"><div><p>13</p><p>Al</p><p>Aluminum</p><p>26.982</p></div></td>
+            <td class="elem-14"><div><p>14</p><p>Si</p><p>Silicon</p><p>28.085</p></div></td>
+            <td class="elem-15"><div><p>15</p><p>P</p><p>Phosphorus</p><p>30.974</p></div></td>
+            <td class="elem-16"><div><p>16</p><p>S</p><p>Sulfur</p><p>32.06</p></div></td>
+            <td class="elem-17"><div><p>17</p><p>Cl</p><p>Chlorine</p><p>35.45</p></div></td>
+            <td class="elem-18"><div><p>18</p><p>Ar</p><p>Argon</p><p>39.948</p></div></td>
+        </tr>
+        <tr>
+            <td class="elem-19"><div><p>19</p><p>K</p><p>Potassium</p><p>39.098</p></div></td>
+            <td class="elem-20"><div><p>20</p><p>Ca</p><p>Calcium</p><p>40.078</p></div></td>
+            <td class="elem-21"><div><p>21</p><p>Sc</p><p>Scandium</p><p>44.956</p></div></td>
+            <td class="elem-22"><div><p>22</p><p>Ti</p><p>Titanium</p><p>47.867</p></div></td>
+            <td class="elem-23"><div><p>23</p><p>V</p><p>Vanadium</p><p>50.942</p></div></td>
+            <td class="elem-24"><div><p>24</p><p>Cr</p><p>Chromium</p><p>51.996</p></div></td>
+            <td class="elem-25"><div><p>25</p><p>Mn</p><p>Manganese</p><p>54.938</p></div></td>
+            <td class="elem-26"><div><p>26</p><p>Fe</p><p>Iron</p><p>55.845</p></div></td>
+            <td class="elem-27"><div><p>27</p><p>Co</p><p>Cobalt</p><p>58.933</p></div></td>
+            <td class="elem-28"><div><p>28</p><p>Ni</p><p>Nickel</p><p>58.693</p></div></td>
+            <td class="elem-29"><div><p>29</p><p>Cu</p><p>Copper</p><p>63.546</p></div></td>
+            <td class="elem-30"><div><p>30</p><p>Zn</p><p>Zinc</p><p>65.38</p></div></td>
+            <td class="elem-31"><div><p>31</p><p>Ga</p><p>Gallium</p><p>69.723</p></div></td>
+            <td class="elem-32"><div><p>32</p><p>Ge</p><p>Germanium</p><p>72.63</p></div></td>
+            <td class="elem-33"><div><p>33</p><p>As</p><p>Arsenic</p><p>74.922</p></div></td>
+            <td class="elem-34"><div><p>34</p><p>Se</p><p>Selenium</p><p>78.971</p></div></td>
+            <td class="elem-35"><div><p>35</p><p>Br</p><p>Bromine</p><p>79.904</p></div></td>
+            <td class="elem-36"><div><p>36</p><p>Kr</p><p>Krypton</p><p>83.798</p></div></td>
+        </tr>
+        <tr>
+            <td class="elem-37"><div><p>37</p><p>Rb</p><p>Rubidium</p><p>85.468</p></div></td>
+            <td class="elem-38"><div><p>38</p><p>Sr</p><p>Strontium</p><p>87.62</p></div></td>
+            <td class="elem-39"><div><p>39</p><p>Y</p><p>Yttrium</p><p>88.906</p></div></td>
+            <td class="elem-40"><div><p>40</p><p>Zr</p><p>Zirconium</p><p>91.224</p></div></td>
+            <td class="elem-41"><div><p>41</p><p>Nb</p><p>Niobium</p><p>92.906</p></div></td>
+            <td class="elem-42"><div><p>42</p><p>Mo</p><p>Molybdenum</p><p>95.95</p></div></td>
+            <td class="elem-43"><div><p>43</p><p>Tc</p><p>Technetium</p><p>98</p></div></td>
+            <td class="elem-44"><div><p>44</p><p>Ru</p><p>Ruthenium</p><p>101.07</p></div></td>
+            <td class="elem-45"><div><p>45</p><p>Rh</p><p>Rhodium</p><p>102.91</p></div></td>
+            <td class="elem-46"><div><p>46</p><p>Pd</p><p>Palladium</p><p>106.42</p></div></td>
+            <td class="elem-47"><div><p>47</p><p>Ag</p><p>Silver</p><p>107.87</p></div></td>
+            <td class="elem-48"><div><p>48</p><p>Cd</p><p>Cadmium</p><p>112.41</p></div></td>
+            <td class="elem-49"><div><p>49</p><p>In</p><p>Indium</p><p>114.82</p></div></td>
+            <td class="elem-50"><div><p>50</p><p>Sn</p><p>Tin</p><p>118.71</p></div></td>
+            <td class="elem-51"><div><p>51</p><p>Sb</p><p>Antimony</p><p>121.76</p></div></td>
+            <td class="elem-52"><div><p>52</p><p>Te</p><p>Tellurium</p><p>127.6</p></div></td>
+            <td class="elem-53"><div><p>53</p><p>I</p><p>Iodine</p><p>126.9</p></div></td>
+            <td class="elem-54"><div><p>54</p><p>Xe</p><p>Xenon</p><p>131.29</p></div></td>
+        </tr>
+        <tr>
+            <td class="elem-55"><div><p>55</p><p>Cs</p><p>Cesium</p><p>132.91</p></div></td>
+            <td class="elem-56"><div><p>56</p><p>Ba</p><p>Barium</p><p>137.33</p></div></td>
+            <td class="td-notshow"></td>
+            <td class="elem-72"><div><p>72</p><p>Hf</p><p>Hafnium</p><p>178.49</p></div></td>
+            <td class="elem-73"><div><p>73</p><p>Ta</p><p>Tantalum</p><p>180.95</p></div></td>
+            <td class="elem-74"><div><p>74</p><p>W</p><p>Tungsten</p><p>183.84</p></div></td>
+            <td class="elem-75"><div><p>75</p><p>Re</p><p>Rhenium</p><p>186.21</p></div></td>
+            <td class="elem-76"><div><p>76</p><p>Os</p><p>Osmium</p><p>190.23</p></div></td>
+            <td class="elem-77"><div><p>77</p><p>Ir</p><p>Iridium</p><p>192.22</p></div></td>
+            <td class="elem-78"><div><p>78</p><p>Pt</p><p>Platinum</p><p>195.08</p></div></td>
+            <td class="elem-79"><div><p>79</p><p>Au</p><p>Gold</p><p>196.97</p></div></td>
+            <td class="elem-80"><div><p>80</p><p>Hg</p><p>Mercury</p><p>200.59</p></div></td>
+            <td class="elem-81"><div><p>81</p><p>Tl</p><p>Thallium</p><p>204.38</p></div></td>
+            <td class="elem-82"><div><p>82</p><p>Pb</p><p>Lead</p><p>207.2</p></div></td>
+            <td class="elem-83"><div><p>83</p><p>Bi</p><p>Bismuth</p><p>208.98</p></div></td>
+            <td class="elem-84"><div><p>84</p><p>Po</p><p>Polonium</p><p>209</p></div></td>
+            <td class="elem-85"><div><p>85</p><p>At</p><p>Astatine</p><p>210</p></div></td>
+            <td class="elem-86"><div><p>86</p><p>Rn</p><p>Radon</p><p>222</p></div></td>
+        </tr>
+        <tr>
+            <td class="elem-87"><div><p>87</p><p>Fr</p><p>Francium</p><p>223</p></div></td>
+            <td class="elem-88"><div><p>88</p><p>Ra</p><p>Radium</p><p>226</p></div></td>
+            <td class="td-notshow"></td>
+            <td class="elem-104"><div><p>104</p><p>Rf</p><p>Rutherfordium</p><p>267</p></div></td>
+            <td class="elem-105"><div><p>105</p><p>Db</p><p>Dubnium</p><p>268</p></div></td>
+            <td class="elem-106"><div><p>106</p><p>Sg</p><p>Seaborgium</p><p>271</p></div></td>
+            <td class="elem-107"><div><p>107</p><p>Bh</p><p>Bohrium</p><p>270</p></div></td>
+            <td class="elem-108"><div><p>108</p><p>Hs</p><p>Hassium</p><p>277</p></div></td>
+            <td class="elem-109"><div><p>109</p><p>Mt</p><p>Meitnerium</p><p>276</p></div></td>
+            <td class="elem-110"><div><p>110</p><p>Ds</p><p>Darmstadtium</p><p>281</p></div></td>
+            <td class="elem-111"><div><p>111</p><p>Rg</p><p>Roentgenium</p><p>280</p></div></td>
+            <td class="elem-112"><div><p>112</p><p>Cn</p><p>Copernicium</p><p>285</p></div></td>
+            <td class="elem-113"><div><p>113</p><p>Nh</p><p>Nihonium</p><p>284</p></div></td>
+            <td class="elem-114"><div><p>114</p><p>Fl</p><p>Flerovium</p><p>289</p></div></td>
+            <td class="elem-115"><div><p>115</p><p>Mc</p><p>Moscovium</p><p>288</p></div></td>
+            <td class="elem-116"><div><p>116</p><p>Lv</p><p>Livermorium</p><p>293</p></div></td>
+            <td class="elem-117"><div><p>117</p><p>Ts</p><p>Tennessine</p><p>294</p></div></td>
+            <td class="elem-118"><div><p>118</p><p>Og</p><p>Oganesson</p><p>294</p></div></td>
+        </tr>
+        <tr>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="elem-57"><div><p>57</p><p>La</p><p>Lanthanum</p><p>138.91</p></div></td>
+            <td class="elem-58"><div><p>58</p><p>Ce</p><p>Cerium</p><p>140.12</p></div></td>
+            <td class="elem-59"><div><p>59</p><p>Pr</p><p>Praseodymium</p><p>140.91</p></div></td>
+            <td class="elem-60"><div><p>60</p><p>Nd</p><p>Neodymium</p><p>144.24</p></div></td>
+            <td class="elem-61"><div><p>61</p><p>Pm</p><p>Promethium</p><p>145</p></div></td>
+            <td class="elem-62"><div><p>62</p><p>Sm</p><p>Samarium</p><p>150.36</p></div></td>
+            <td class="elem-63"><div><p>63</p><p>Eu</p><p>Europium</p><p>151.96</p></div></td>
+            <td class="elem-64"><div><p>64</p><p>Gd</p><p>Gadolinium</p><p>157.25</p></div></td>
+            <td class="elem-65"><div><p>65</p><p>Tb</p><p>Terbium</p><p>158.93</p></div></td>
+            <td class="elem-66"><div><p>66</p><p>Dy</p><p>Dysprosium</p><p>162.5</p></div></td>
+            <td class="elem-67"><div><p>67</p><p>Ho</p><p>Holmium</p><p>164.93</p></div></td>
+            <td class="elem-68"><div><p>68</p><p>Er</p><p>Erbium</p><p>167.26</p></div></td>
+            <td class="elem-69"><div><p>69</p><p>Tm</p><p>Thulium</p><p>168.93</p></div></td>
+            <td class="elem-70"><div><p>70</p><p>Yb</p><p>Ytterbium</p><p>173.05</p></div></td>
+            <td class="elem-71"><div><p>71</p><p>Lu</p><p>Lutetium</p><p>174.97</p></div></td>
+        </tr>
+        <tr>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="td-notshow"></td>
+            <td class="elem-89"><div><p>89</p><p>Ac</p><p>Actinium</p><p>227</p></div></td>
+            <td class="elem-90"><div><p>90</p><p>Th</p><p>Thorium</p><p>232.04</p></div></td>
+            <td class="elem-91"><div><p>91</p><p>Pa</p><p>Protactinium</p><p>231.04</p></div></td>
+            <td class="elem-92"><div><p>92</p><p>U</p><p>Uranium</p><p>238.03</p></div></td>
+            <td class="elem-93"><div><p>93</p><p>Np</p><p>Neptunium</p><p>237</p></div></td>
+            <td class="elem-94"><div><p>94</p><p>Pu</p><p>Plutonium</p><p>244</p></div></td>
+            <td class="elem-95"><div><p>95</p><p>Am</p><p>Americium</p><p>243</p></div></td>
+            <td class="elem-96"><div><p>96</p><p>Cm</p><p>Curium</p><p>247</p></div></td>
+            <td class="elem-97"><div><p>97</p><p>Bk</p><p>Berkelium</p><p>247</p></div></td>
+            <td class="elem-98"><div><p>98</p><p>Cf</p><p>Californium</p><p>251</p></div></td>
+            <td class="elem-99"><div><p>99</p><p>Es</p><p>Einsteinium</p><p>252</p></div></td>
+            <td class="elem-100"><div><p>100</p><p>Fm</p><p>Fermium</p><p>257</p></div></td>
+            <td class="elem-101"><div><p>101</p><p>Md</p><p>Mendelevium</p><p>258</p></div></td>
+            <td class="elem-102"><div><p>102</p><p>No</p><p>Nobelium</p><p>259</p></div></td>
+            <td class="elem-103"><div><p>103</p><p>Lr</p><p>Lawrencium</p><p>262</p></div></td>
+        </tr>
+        
+
+    </table>
+</body>
+
+</html>
+
+
+-->

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 1</title>
+    <link rel="stylesheet" href="../../../BackgroundDesign/designs.css">
+    <link rel="stylesheet" href="../../../trailingMouseEffect/trailsEffect.css">
+    <link rel="icon" type="image/png" href="../../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            color: white;
+            font-family: "Permanent Marker", cursive;
+
+        }
+
+
+        .backBody {
+            width: 100vw;
+            height:100vh;
+            background-image: url('./ChemistryImg/65a89fe1f78afc2ba695fdd0a710320a.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 20px;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .backBody>div {
+            width: 100%;
+            height: 120px;
+            background-color: none;
+        }
+
+        .elements {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+        }
+
+        .elements>div {
+            display: flex;
+            justify-content: center;
+            color: white;
+            align-items: center;
+            font-size: 4em;
+            font-weight: 500;
+            width: 9%;
+            height: 100px;
+            border: .1px solid white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .headers {
+            display: flex;
+            width: 100%;
+            height: 50px;
+
+            justify-content: space-evenly;
+            align-items: center;
+            background-color:transparent;
+            border: .2px solid white;
+            border-radius: 20px;
+            box-shadow: 4px 4px black;
+
+
+        }
+
+        .descriptions {
+            display: flex;
+            background-color:transparent;
+            border: .2px solid white;
+            width: 100%;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+
+        }
+
+        .choiceNum-2,
+        .choiceNum-6 {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 20px;
+
+        }
+
+        .choiceNum-2>div,
+        .choiceNum-6>div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            width: 9%;
+            height: 100px;
+            background-color: rgb(104, 210, 232);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+
+
+        }
+
+        .choice:hover {
+            opacity: .5;
+            cursor: pointer;
+        }
+
+        div>.num2, div .num6{
+            background-color: transparent;
+            border: .2px solid white;
+            color: rgb(255, 255, 255);
+            box-shadow: 4px 8px 7px rgba(1, 10, 19, 0.326);
+
+
+        }
+
+        div>.item2 > p, div >.item6 >p {
+            display: none;
+        }
+
+        button {
+            padding: 1.3em 3em;
+            font-size: 1.5em;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #ffffff;
+            background-color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 3px 7px rgba(255, 255, 255, 0.549);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: rgb(117, 117, 117);
+            box-shadow: 0px 15px 20px rgb(254, 239, 173);
+            color: rgb(131, 131, 131);
+            transform: translateY(-7px);
+        }
+
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <audio id="audioBackground" loop>
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/ogg">
+    </audio>
+
+    <audio id="correctAnsAud" >
+        <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/ogg">
+    </audio>
+
+
+
+    
+    <div class="backBody" id="backBody">
+        <div class="details">
+            <div class="headers">
+                <h1 class="item" id="score">Score</h1>
+                <h1 class="item" id="lives">Lives</h1>
+
+            </div>
+            <div class="descriptions">
+                <h1>Provide the missing elements </h1>
+            </div>
+        </div>
+
+        <div class="elements">
+            <div class="item1" id="item1"></p></div>
+            <div class="item2" id=""><p id="item2"></p></div>
+            <div class="item3" id="item3"></div>
+            <div class="item4" id="item4"></div>
+            <div class="item5" id="item5"></div>
+            <div class="item6" id=""><p id="item6"></p></div>
+            <div class="item7" id="item7"></div>
+            <div class="item8" id="item8"></div>
+            <div class="item9" id="item9"></div>
+            <div class="item10" id="item10"></div>
+        </div>
+
+        <div class="choiceNum-2">
+            <div id="num2" class="num2"> 2 </div>
+            <button id="choice-1" class="choice"></button>
+            <button id="choice-2" class="choice"></button>
+            <button id="choice-3" class="choice"></button>
+        </div>
+
+        <div class="choiceNum-6">
+            <div id="num6" class="num6"> 6 </div>
+            <button id="choice-4" class="choice"></button>
+            <button id="choice-5" class="choice"></button>
+            <button id="choice-6" class="choice"></button>
+        </div>
+
+    </div>
+
+    <script src="game1read.js"></script>
+    <script src="../../../trailingMouseEffect/trailingMouse.js"></script>
+    <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

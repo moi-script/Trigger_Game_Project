@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry</title>
+    <link rel="stylesheet" href="/BackgroundDesign/designs.css">
+  <link rel="icon" type="image/png" href="../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+    <style>
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: 500;
+            user-select: none;
+        }
+
+        body {
+            background-image:url('./MediumGamesImg/silver-bordered-fritillary-877121_1280.jpg');
+            height: 100vh;
+            /* Ensure body takes full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35%;
+            height:70%;
+            background-color: transparent;
+            display: flex;
+
+            flex-direction: column;
+            justify-content: space-around;
+            border-bottom:2px solid white ;
+            border-right:2px solid white ;
+            text-align: center;
+            /* Center text inside container */
+            border-radius: 15px;
+            box-shadow: 2px 4px 9px white;
+        }
+
+        .container>h1 {
+            word-wrap: break-word;
+            color: white;
+            width: 100%;
+            margin-bottom: 10%;
+        }
+
+        .you-got {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1em;
+            width: 100%;
+            font-weight: 200;
+            margin-bottom: 10%;
+
+        }
+
+        a#links {
+            text-decoration: none;
+        }
+
+        
+        button {
+            font-size: 20px;
+            letter-spacing: 2.5px;
+            width: 200px;
+            height: 60px;
+            font-weight: 500;
+            color: #ffffff;
+            border: none;
+            background-color: transparent;
+            border-bottom:2px solid white ;
+            border-right:2px solid white ;
+
+            border-radius: 15px;
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            font-size: 25px;
+            background-color: rgb(253, 222, 85);
+            box-shadow: 0px 15px 20px rgb(249, 249, 249);
+            color: #000000;
+            transform: translateY(-10px);
+        }
+
+        button:active
+       {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="audio" autoplay>
+        <source src="/GameSounds/loginSounds/mixkit-game-bonus-reached-2065.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/mixkit-game-bonus-reached-2065.wav" type="audio/ogg">
+    </audio>
+    
+    <div class="container">
+        <h1 id="greet">
+            Congrats you completed a game in medium
+        <div class="you-got"><h1 id="score"></h1></div>
+        
+        <a href="/Home/Medium/medium.html" id="links"> <button id="buttongoHome"> Go Home </button></a>
+    </div>
+
+    <script>
+        let mathRiddlesScore = localStorage.getItem('mathRiddlesScore');
+
+        document.getElementById('score').textContent = `You got: ${mathRiddlesScore}`
+    </script>
+<script src="../touchSound.js"></script>
+
+
+
+</body>
+
+</html>

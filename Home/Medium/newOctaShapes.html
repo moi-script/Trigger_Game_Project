@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Octagon</title>
+    
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .octagon {
+            position: relative;
+            width:200px;
+            height: 200px;
+            background-color: #4CAF50;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .octagon h1 {
+            position: absolute;
+        }
+
+        .first { top: 0; left: 50%; transform: translateX(-50%); }
+        .second { top: 15%; left: 75%; transform: translate(-50%, -50%); }
+        .third { top: 50%; right: 0; transform: translateY(-50%); }
+        .fourth { bottom: 15%; right: 75%; transform: translate(50%, 50%); }
+        .fifth { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .sixth { bottom: 15%; left: 25%; transform: translate(-50%, 50%); }
+        .seventh { top: 50%; left: 0; transform: translateY(-50%); }
+        .eighth { top: 15%; left: 25%; transform: translate(-50%, -50%); }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="octagon">
+            <h1 class="second">A</h1>
+            <h1 class="third">A</h1>
+            <h1 class="fourth">?</h1>
+            <h1 class="fifth">A</h1>
+            <h1 class="sixth">A</h1>
+            <h1 class="seventh">A</h1>
+            <h1 class="eighth">A</h1>
+        </div>
+    </div>
+    <script>
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Hard Difficulties</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #leftSide {
+            width: 40%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-color: red;
+        }
+
+        #statusCheer {
+            width: 100%;
+            height: 30%;
+            background-color: aqua;
+        }
+
+        #questionPlate {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: bisque;
+        }
+
+        #rightSide {
+            width: 40%;
+            height: 90%;
+            background-color: lightblue;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #chancesCol {
+            width: 40%;
+            height: 100%;
+            background-color: blue;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #scoreCol {
+            width: 40%;
+            height: 100%;
+            background-color: pink;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        button {
+            padding: 1.3em 3em;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-top: 20px;
+            font-weight: 500;
+            width: 70%;
+            height: 15%;
+            color: #000000;
+            background-color: rgb(255, 187, 112);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: rgb(237, 148, 85);
+            box-shadow: 0px 15px 20px rgb(254, 239, 173);
+            color: rgb(255, 255, 255);
+            transform: translateY(-7px);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="leftSide">
+        <section id="statusCheer">
+            <h1 id="cheerYou">Good Luck!</h1>
+        </section>
+        <section id="questionPlate">
+            <h1 id="questHead">Question:</h1>
+            <p class="questions">Question text will appear here</p>
+        </section>
+    </div>
+
+    <div id="rightSide">
+        <section id="chancesCol">
+            <div id="chanceStat">Chances</div>
+            <button class="btns">Option 1</button>
+            <button class="btns">Option 2</button>
+        </section>
+
+        <section id="scoreCol">
+            <div id="scoreStats">Score</div>
+            <button class="btns">Option 3</button>
+            <button class="btns">Option 4</button>
+        </section>
+    </div>
+
+    <script>
+        let cheer = document.getElementById('cheerYou');
+        let questionDisplay = document.querySelector('.questions');
+        let chanceStatus = document.getElementById('chanceStat');
+        let scoreStatus = document.getElementById('scoreStats');
+        let buttons = document.querySelectorAll('.btns');
+
+        const QUESTNUMBER = parseInt(localStorage.getItem('numberOfQuestion'));
+        const QUESTION_TITLE = localStorage.getItem('QUESTIONFORMAT');
+        const QUESTION_HEAD = document.getElementById('questHead');
+
+        let turns = 0;
+        let score = 0;
+        let chances = 3;
+
+        const QUESTIONS = [
+            ['u = ?', '2(2x - 3)\u00B2 d/dx(________)', '2(2x - 3) * (________)dx', '________ 2dx', '________dx'],
+            ['u = ?', '(________)\u00B3', '________ u\u00B2 * ...', '3u ^________ * (...)dx', '3u\u00B2* (________)dx'],
+            ['u = ?', '(x\u00B3 - 7)\u00B9\u2044\u2082     n =?', '________(x\u00B3 - 7)\u207B\u00B9\u2044\u2082 (3x\u00B2)dx', ' (x\u00B3 - 7)\u207B\u00B9\u2044\u2082 (3x\u00B2) / ________', '3x\u00B2 / 2(x\u00B3 - 7)\u207B\u00B9\u2044\u2082'],
+            ['u = ?', 'v = ?', '________ - 1(x\u00B2 + 8)\u00B3 dx / v\u00B2', '- 3(x\u00B2 + 8)\u00B2 2x / (________)\u00B2', '6x / ________'],
+            ['The outermost function, u = ?', '________[tan(x\u2074)] * ...', 'cos[tan(x\u2074)] sec\u00B2(________) *  ...', 'sec\u00B2(x\u2074) * d/dx(________)', '________ * sec\u00B2(x\u2074) * cos(tan(x\u2074))'],
+            ['The outermost function,  u = ?', '________[tan(cos(x\u00B3))] * ...', '5sin\u2074(tan(cos(x\u00B3))) * cos(________) ...', 'cos(tan(cos(x\u00B3))) * sec\u00B2(________) ...', '(-sin(x\u00B3)) * ________', '- ________sin\u2074(tan(cos(x\u00B3))) * cos(tan(cos(x\u00B3))) ..., sec\u00B2(cos(x\u00B3)) * (sin(x\u00B3))']
+        ];
+
+        const CHOICES = [
+            [
+                ["2x - 3", "2x - 4", "2x - 5", "2x - 6"],
+                ["4x - 6", "4x - 7", "4x - 8", "4x - 9"],
+                ["2u", "3u", "4u", "5u"],
+                ["2x", "2u", "3x", "4u"],
+                ["4", "u", "x", "2"]
+            ],
+            [
+                ["x + 2", "x + 3", "x + 4", "x + 5"],
+                ["u + 3", "u + 4", "u + 5", "u + 6"],
+                ["3u", "4u", "5u", "6u"],
+                ["3", "4", "5", "6"],
+                ["x", "y", "u", "z"]
+            ],
+            [
+                ["x\u00B3 - 7", "x\u00B3 - 6", "x\u00B3 + 7", "x\u00B3 + 6"],
+                ["\u00BD", "\u2153", "\u00BC", "\u2155"],
+                ["\u00BD", "\u2153", "\u00BC", "\u2155"],
+                ["1", "-1", "-2", "2"],
+                ["\u00BD", "\u2153", "\u00BC", "\u2155"]
+            ],
+            [
+                ["1", "-1", "-2", "2"],
+                ["x\u00B2 + 8", "x\u00B3 + 8", "x\u00B2 - 8", "x + 8"],
+                ["0", "1", "-1", "2"],
+                ["3", "-3", "4", "2"],
+                ["(x\u00B2 + 8)\u2074", "(x\u00B2 - 8)\u2074", "(x\u00B2 + 8)\u00B3", "(x\u00B2 + 8)\u00B2"]
+            ],
+            [
+                ["tan(x\u2074)", "tan(x\u00B3)", "cos(x\u00B4)", "cos(x\u2074)"],
+                ["tan(x\u2074)", "tan(x\u00B3)", "cos(x\u00B4)", "cos(x\u2074)"],
+                ["tan(x\u2074)", "tan(x\u00B3)", "cos(x\u00B4)", "cos(x\u2074)"],
+                ["x\u2074", "x\u00B3", "x\u2075", "x\u2076"],
+                ["sec", "cos", "tan", "sin"]
+            ],
+            [
+                ["tan(cos(x\u00B3))", "cos(tan(x\u00B3))", "tan(x\u00B3)", "cos(x\u00B3)"],
+                ["tan(cos(x\u00B3))", "cos(tan(x\u00B3))", "tan(x\u00B3)", "cos(x\u00B3)"],
+                ["tan(cos(x\u00B3))", "cos(tan(x\u00B3))", "tan(x\u00B3)", "cos(x\u00B3)"],
+                ["x\u00B3", "x\u2074", "x\u00B2", "x\u00B9"],
+                ["sin", "sec", "cos", "tan"]
+            ]
+        ];
+
+
+        const ANSWERS = [
+            ["u = 2x - 3", "4x - 6", "2u", "2x", "u"],
+            ["x + 2", "u + 3", "3u", "3", "u"],
+            ["x\u00B3 - 7", "\u00BD", "\u00BD", "-1", "\u00BD"],
+            ["1", "x\u00B2 + 8", "1", "-3", "(x\u00B2 + 8)\u00B2"],
+            ["tan(x\u2074)", "tan(x\u2074)", "tan(x\u2074)", "x\u2074", "sec"],
+            ["tan(cos(x\u00B3))", "tan(cos(x\u00B3))", "tan(cos(x\u00B3))", "x\u00B3", "sin"]
+        ];
+
+
+        
+        let questionArr = QUESTIONS[QUESTNUMBER - 1];
+        let choicesArr = CHOICES[QUESTNUMBER - 1];
+        let answersArr = ANSWERS[QUESTNUMBER - 1];
+
+        let startQuiz = function () {
+            if (turns < questionArr.length) {
+                QUESTION_HEAD.innerHTML = `${QUESTION_TITLE} ${turns + 1}`;
+                questionDisplay.innerHTML = questionArr[turns];
+                
+                buttons.forEach((button, index) => {
+                    button.innerHTML = choicesArr[turns][index];
+                });
+            } else {
+                alert("Quiz Completed!");
+                location.reload();
+            }
+        }
+
+        window.onload = function () {
+            startQuiz();
+        };
+
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', function () {
+                if (turns < questionArr.length) {
+                    let userAnswer = this.innerText;
+                    let correctAnswer = answersArr[turns];
+
+                    if (userAnswer === correctAnswer) {
+                        score+= 5;
+                        cheer.innerHTML = "Correct!";
+                    } else {
+                        chances--;
+                        cheer.innerHTML = "Wrong!";
+                    }
+
+                    turns++;
+                    chanceStatus.innerHTML = `Chances: ${chances}`;
+                    scoreStatus.innerHTML = `Score: ${score}`;
+                    startQuiz();
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+        /*
+
+
+        
+        function tryClick(turn, numbers){
+
+        }
+
+        
+        function displayQuestionsOrder(question_list){
+            questionListDisplay.forEach(questions => {
+                questions.textContent = 
+            })
+        }
+        */
+        /*
+        
+        var QUESTION1 = 'f(x) = (2x-3)\u00B2' ;
+        var QUESTION2 = 'f(x) = tanx\u00B3';
+        var QUESTION3 = 'f(x) = (√x\u00B3 - 7) ';
+        var QUESTION4 = 'f(x) = (1/(x\u00B2 + 8)\u00B3)';
+        var QUESTION5 = 'f(x) = sin[tan(x\u00B3)]';
+        var QUESTION6 = 'f(x) = [sin\u2075(tan(cos(x\u00B3)))]';
+
+
+
+
+
+         const QUESTION_LIST = {
+            question1: ['u = ?', '2(2x - 3)\u00B2 d/dx(________)', '2(2x - 3) * (________)dx', '________ 2dx', '________dx'],
+
+            question2: ['u = ?', '(________)\u00B3', '________ u\u00B2 * ...', '3u ^________ * (...)dx', '3u\u00B2* (________)dx'],
+
+            question3: ['u = ?', '(x\u00B3 - 7)\u00B9\u2044\u2082     n =?',
+                '________(x\u00B3 - 7)\u207B\u00B9\u2044\u2082 (3x\u00B2)dx',
+                ' (x\u00B3 - 7)\u207B\u00B9\u2044\u2082 (3x\u00B2) / ________',
+                '3x\u00B2 / 2(x\u00B3 - 7)\u207B\u00B9\u2044\u2082'],
+
+
+            question4: ['u = ?', 'v = ?',
+                '________ - 1(x\u00B2 + 8)\u00B3 dx / v\u00B2',
+                '- 3(x\u00B2 + 8)\u00B2 2x / (________)\u00B2',
+                '6x / ________'],
+
+
+
+            question5: ['The outermost function, u = ?',
+                '________[tan(x\u2074)] * ...',
+                'cos[tan(x\u2074)] sec\u00B2(________) *  ...',
+                'sec\u00B2(x\u2074) * d/dx(________)',
+                '________ * sec\u00B2(x\u2074) * cos(tan(x\u2074))'],
+
+
+
+            question6: ['The outermost function,  u = ?',
+                '________[tan(cos(x\u00B3))] * ...',
+                '5sin\u2074(tan(cos(x\u00B3))) * cos(________) ...',
+                'cos(tan(cos(x\u00B3))) * sec\u00B2(________) ...',
+                '(-sin(x\u00B3)) * ________',
+                `- ________sin\u2074(tan(cos(x\u00B3))) * cos(tan(cos(x\u00B3))) ...,
+            sec\u00B2(cos(x\u00B3)) * (sin(x\u00B3))`]
+
+
+        };
+
+
+
+        const question1 = ['u = ?', '2(2x - 3)\u00B2 d/dx(________)', '2(2x - 3) * (________)dx', '________ 2dx', '________dx'];
+        const question2 = ['u = ?', '(________)\u00B3', '________ u\u00B2 * ...', '3u ^________ * (...)dx', '3u\u00B2* (________)dx'];
+        const question3 = ['u = ?', '(x\u00B3 - 7)\u00B9\u2044\u2082     n =?',
+            '________(x\u00B3 - 7)\u207B\u00B9\u2044\u2082 (3x\u00B2)dx',
+            ' (x\u00B3 - 7)\u207B\u00B9\u2044\u2082 (3x\u00B2) / ________',
+            '3x\u00B2 / 2(x\u00B3 - 7)\u207B\u00B9\u2044\u2082'];
+        const question4 = ['u = ?', 'v = ?',
+            '________ - 1(x\u00B2 + 8)\u00B3 dx / v\u00B2',
+            '- 3(x\u00B2 + 8)\u00B2 2x / (________)\u00B2',
+            '6x / ________'];
+        const question5 = ['The outermost function, u = ?',
+            '________[tan(x\u2074)] * ...',
+            'cos[tan(x\u2074)] sec\u00B2(________) *  ...',
+            'sec\u00B2(x\u2074) * d/dx(________)',
+            '________ * sec\u00B2(x\u2074) * cos(tan(x\u2074))'];
+        const question6 = ['The outermost function,  u = ?',
+            '________[tan(cos(x\u00B3))] * ...',
+            '5sin\u2074(tan(cos(x\u00B3))) * cos(________) ...',
+            'cos(tan(cos(x\u00B3))) * sec\u00B2(________) ...',
+            '(-sin(x\u00B3)) * ________',
+            `- ________sin\u2074(tan(cos(x\u00B3))) * cos(tan(cos(x\u00B3))) ...,
+            sec\u00B2(cos(x\u00B3)) * (sin(x\u00B3))`];
+
+
+
+        const num3_choice = [
+            ["x\u00B2 - 7", "x\u00B2 - 6", "x\u00B2 + 7", "x\u00B2 + 6"],
+            ["\u00BD", "\u2153", "\u00BC", "\u2155"],
+            ["\u00BD", "\u2153", "\u00BC", "\u2155"],
+            ["1", "-1", "-2", "2"],
+            ["\u00BD", "\u2153", "\u00BC", "\u2155"]
+        ];
+
+        const num4_choice = [
+            ["1", "-1", "-2", "2"],
+            ["x\u00B2 + 8", "x\u00B3 + 8", "x\u00B2 - 8", "x + 8"],
+            ["0", "1", "-1", "2"],
+            ["3", "-3", "4", "2"],
+            ["(x\u00B2 + 8)\u2074", "(x\u00B2 - 8)\u2074", "(x\u00B2 + 8)\u2075", "(x\u00B2 - 8)\u00B2"]
+        ];
+
+        const num5_choice = [
+            ["tan(x\u2074)", "cos(2x)", "sin(x\u00B2)", "tan(x)"],
+            ["sin", "sec", "cos", "tan"],
+            ["sec\u00B2", "csc", "sin", "tan"],
+            ["4x\u00B3", "5x\u00B3", "2x\u00B3", "5x\u2074"],
+            ["x\u2074", "x\u00B3", "x\u00B2", "x\u2075"]
+        ]
+
+        const num6_choice = [
+            ["sin\u2075(u)", "cos\u00B2(v)", "tan(3u)", "sec(x)"],
+            ["4", "3", "2", "5"],
+            ["sin", "sec", "cos", "tan"],
+            ["sec\u00B2", "csc", "sin", "tan"],
+            ["3", "-3", "2", "-2"]
+        ]
+
+
+
+        
+        */
+
+
+        //   ['u = ?', '2(2x - 3)\u00B2 d/dx(________)', '2(2x - 3) * (________)dx', '________ 2dx', '________dx'],
+
+        // ['2x - 3','2x - 2', '2x - 4', '3x - 3']
+
+        /*
+        
+        var QUESTION1 = 'f(x) = (2x-3)\u00B2' ;
+        var QUESTION2 = 'f(x) = tanx\u00B3';
+     ---   var QUESTION3 = 'f(x) = (√x\u00B3 - 7) ';
+        var QUESTION4 = 'f(x) = (1/(x\u00B2 + 8)\u00B3)';
+        var QUESTION5 = 'f(x) = sin[tan(x\u00B3)]';
+        var QUESTION6 = 'f(x) = [sin\u2075(tan(cos(x\u00B3)))]';
+
+        */
+
+
+        /*
+          
+        const ANSWER_LIST = {
+            number_3: ["x\u00B2 - 7", "\u00BD", "\u00BD", "2", "\u00BD"],
+            number_4: ["1", "x\u00B2 + 8", "0", "3", "(x\u00B2 + 8)\u2074"],
+            number_5: ["tan(x\u2074)", "cos", "sec\u00B2", "4x\u00B3", "x\u2074"],
+            number_6: ["sin\u2075(u)", "5", "cos", "sec\u00B2", "3"]
+
+        }
+
+
+        */
+
+
+        // answer in 1 ['2x - 3', '2', '2x - 3', '4x - 6', '8x - 12'],
+        // answer 2 ['u\u00B2', 'sin(u)', 'u\u00B2', 'u', '2']
+        // answer in 5 ['tan(x\u00B3)', 'cos', 'sec\u00B2', '3x\u00B2', '3x\u00B2'],
+        //answers  ['x\u00B3 - 7', '\u00B9\u2044\u00B2', 'x\u00B3 - 7', '3x\u00B2', 'x\u00B3 - 7'],
+        // anser in 6 ['tan(cos(x\u00B3))', 'cos', 'tan(cos(x\u00B3))', '-sin', '3x\u00B2']
+
+
+
+
+        // the 1/2 fraction = \u00BD
+        // raise to 3 = \u00B3
+        // raise to 1/2 = \u00B9\u2044\u00B2
+        // raise to 2 = \u00B2
+        // riase to negative 1/2 = \u207B\u00B9\u2044\u00B2
+        // raise to 4 \u2074 , \u2074
+
+
+
+
+
+        /*
+               const CHOICES = {
+            number_3: {
+                a: ["x\u00B2 - 7", "x\u00B2 - 6", "x\u00B2 + 7", "x\u00B2 + 6"],
+                b: ["\u00BD", "\u2153", "\u00BC", "\u2155"],
+                c: ["\u00BD", "\u2153", "\u00BC", "\u2155"],
+                d: ["1", "-1", "-2", "2"],
+                e: ["\u00BD", "\u2153", "\u00BC", "\u2155"]
+            },
+            number_4: {
+                a: ["1", "-1", "-2", "2"],
+                b: ["x\u00B2 + 8", "x\u00B3 + 8", "x\u00B2 - 8", "x + 8"],
+                c: ["0", "1", "-1", "2"],
+                d: ["3", "-3", "4", "2"],
+                e: ["(x\u00B2 + 8)\u2074", "(x\u00B2 - 8)\u2074", "(x\u00B2 + 8)\u2075", "(x\u00B2 - 8)\u00B2"]
+            },
+            number_5: {
+                a: ["tan(x\u2074)", "cos(2x)", "sin(x\u00B2)", "tan(x)"],
+                b: ["sin", "sec", "cos", "tan"],
+                c: ["sec\u00B2", "csc", "sin", "tan"],
+                d: ["4x\u00B3", "5x\u00B3", "2x\u00B3", "5x\u2074"],
+                e: ["x\u2074", "x\u00B3", "x\u00B2", "x\u2075"]
+            },
+            number_6: {
+                a: ["sin\u2075(u)", "cos\u00B2(v)", "tan(3u)", "sec(x)"],
+                b: ["4", "3", "2", "5"],
+                c: ["sin", "sec", "cos", "tan"],
+                d: ["sec\u00B2", "csc", "sin", "tan"],
+                e: ["3", "-3", "2", "-2"]
+            }
+        };
+        */
+
+
+    </script>
+</body>
+
+</html>

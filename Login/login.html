@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriggerGame</title>
+    <link rel="stylesheet" href="../trailingMouseEffect/trailsEffect.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: "Permanent Marker", cursive;
+
+        }
+
+        /* background-color: rgb(3, 174, 210);
+    
+        background-image: linear-gradient(to left, rgb(3, 174, 210), rgb(6, 214, 255));
+
+        */
+        body {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            /* background-image: linear-gradient(to left, rgb(3, 174, 210), rgb(4, 96, 114));*/
+            background-image: url('./LoginImg/cloud-5879038_1280.webp');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+
+        .login {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            align-content: space-between;
+            background-color: transparent;
+            border: .2px solid white;
+
+            width: 25%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 70%;
+            box-shadow: 1px 4px 16px rgba(37, 36, 36, 0.706);
+        }
+
+        .login::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter:blur(10px);
+            /* Apply blur effect */
+            z-index: -1;
+            /* Ensure it is behind the content */
+        }
+
+
+
+        /*
+        
+      
+
+        div>input {
+            border-radius: 20px;
+            border: none;
+            color: var(--text-color);
+            width: 70%;
+            font-size: 20px;
+            height: 40px;
+            text-align: center;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.443);
+            background-color: rgba(0, 0, 0, 0);
+            border-top: .1px solid rgb(255, 255, 255);
+            border-left: .1px solid rgb(255, 255, 255);
+
+        }
+        */
+
+        div>input {
+            background-color: rgb(254, 239, 173);
+            border: 1ex solid none;
+            border-top-width: 1.7em;
+            border-color: rgb(254, 239, 173);
+            margin: 0;
+            padding: 0;
+            word-wrap: break-word;
+            outline: 2px solid rgb(253, 222, 85);
+            border-bottom: .5px solid white;
+            width: 600px;
+            height: 30px;
+            border-radius: 10px;
+            color: #000;
+            font-size: 17px;
+            text-align: center;
+            transition: all .5s;
+            max-width: 190px;
+            font-weight: bold;
+            box-shadow: .5px 5px 5px rgba(1, 10, 19, 0.326);
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        #buttonDone {
+            font-size: 12px;
+            width: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            color: #000;
+            background-color:rgb(237, 148, 85);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+
+        }
+
+        #buttonDone:hover {
+            background-color: rgb(255, 236, 158);
+            box-shadow: 0px 15px 20px rgb(254, 239, 173);
+            color: rgb(255, 255, 255);
+            transform: translateY(-7px);
+        }
+
+        input::placeholder {
+            color: black;
+        }
+        input[type="text"]::placeholder {
+            color: rgb(0, 0, 0); /* Change this to the desired color */
+
+        }
+        button {
+            padding: 1.3em 3em;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-top: 20px;
+            font-weight: 500;
+            width: 45%;
+            color: #000000;
+            background-color:rgb(255, 187, 112);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            background-color:rgb(237, 148, 85);
+            box-shadow: 0px 15px 20px rgb(254, 239, 173);
+            color: rgb(255, 255, 255);
+            transform: translateY(-7px);
+        }
+
+
+        button:active,
+        #buttonDone:active {
+            transform: translateY(-1px);
+        }
+
+        #musicButton {
+            margin-bottom: -3em;
+        }
+
+        /*
+        #musicButton {
+            width: 130px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0);
+            border: none;
+            border-top: 1px solid white;
+            border-left: 1px solid white;
+            border-radius: 20px;
+            box-shadow: 2px 2px 4px black;
+            color: white;
+        }
+
+        #musicButton:hover {
+            opacity: .7;
+            cursor: pointer;
+        }
+
+        #musicButton:active {
+            opacity: .2;
+        }
+
+       */
+        div>h1 {
+            font-family: "Permanent Marker", cursive;
+            color: rgb(255, 255, 255);
+            text-shadow: 1px 3px 6px black;
+            text-align: center;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 2.5em;
+        }
+
+        div>input:hover {
+            opacity: 0.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .container {
+            --light: rgb(255, 255, 255);
+            --dark: rgb(50, 50, 50);
+            --br: 8px;
+        }
+
+        .container:hover .title {
+            opacity: 1;
+        }
+
+        .input {
+            background-color: transparent;
+            border: 2px solid white;
+            color: rgb(0, 0, 0);
+            max-width: 200px;
+            padding: .5rem;
+            border-radius: var(--br);
+            outline: none;
+            opacity: .8;
+            transition: .2s ease-in-out;
+        }
+
+        .input:focus {
+            opacity: 1;
+        }
+
+        .title {
+            border-radius: var(--br);
+            transform: translate(-50%, -150%);
+            background-color: var(--light);
+            transition: .2s ease-in-out;
+            opacity: 0;
+            color: var(--dark);
+            position: absolute;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            padding: .5rem;
+            left: 50%;
+        }
+
+        .title::before {
+            transform: translate(-50%, 50%) rotate(45deg);
+            background-color: var(--light);
+            position: absolute;
+            z-index: -1;
+            content: '';
+            width: 10px;
+            height: 10px;
+            bottom: 0;
+            left: 50%;
+        }
+        input::placeholder{
+            color: white;
+        }
+        
+      
+    </style>
+    <link rel="stylesheet" href="../BackgroundDesign/designs.css">
+</head>
+
+<body>
+
+
+
+
+    <audio id="audio" loop>
+        <source src="../GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/mpeg">
+        <source src="../GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/ogg">
+    </audio>
+
+    <div class="login">
+        <h1>Welcome to Trigger Game</h1>
+        <div class="container">
+            <div class="title">Nickname</div>
+            <input placeholder="Nickname" id="input" class="input" name="text" type="text">
+
+        </div>
+        <button id="musicButton"> Play <i class="fa-solid fa-music"></i></button>
+        <a id="buttonDoneAnchor" href="#" target="_self">
+            <h1 id="buttonDone">Go<i class="fa-solid fa-arrow-right"></i></h1>
+        </a>
+    </div>
+
+<!--
+    
+hello?-->
+
+    <script src="touchSound.js"></script>
+    <script src="../trailingMouseEffect/trailingMouse.js"></script>
+    <script src="login.js"></script>
+    <script>
+        document.addEventListener('load', function () {
+            let music = document.getElementById('audio');
+            music.paused();
+        })
+        // creating a value to store the clicked information 
+        document.getElementById('musicButton').addEventListener('click', function () {
+            localStorage.setItem('playMusicInfo', '1');
+            let music = document.getElementById('audio');
+
+            music.play();
+        })
+    </script>
+    <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+</body>
+
+<!--
+   
+    <script src="/trailingMouseEffect/trailingMouse.js"></script>
+
+
+
+    // logo attachment
+    // local storage deletion of specific item
+    // leaderboards
+    
+    // adjusting the image size in the image scrolls
+    // additional designs
+    // appending and deleting chiild container based on the length of answer
+
+
+
+
+    // to do later 
+    /// set up the template
+    // proceed to the designs in medium mode
+    // 
+
+
+-->
+
+</html>

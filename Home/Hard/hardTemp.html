@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming</title>
+    <link rel="stylesheet" href="../../BackgroundDesign/designs.css">
+    <link rel="icon" type="image/png" href="../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+    <link rel="stylesheet" href="../../../trailingMouseEffect/trailsEffect.css">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: 500;
+            user-select: none;
+        }
+
+        body {
+            background-image: url('./hardImg/fc1348a2a79e8bee98b5d71b520c0b5e.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            /* Ensure body takes full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30%;
+            color: rgb(255, 255, 255);
+            height: 70%;
+            background-color: transparent;
+            border: .2px solid white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 20px;
+            text-shadow: 2px 4px 5px rgb(0, 0, 0);
+            text-align: center;
+            /* Center text inside container */
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .container>h1 {
+            word-wrap: break-word;
+            display: inline-block;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .you-got {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 30px;
+            width: 100%;
+            font-weight: 200;
+        }
+
+        #score {
+            margin-left: 10px;
+        }
+
+        a#links {
+            text-decoration: none;
+        }
+
+        
+        button {
+            font-size: 20px;
+            letter-spacing: 2.5px;
+            width: 200px;
+            height: 60px;
+            font-weight: 500;
+            color: #000;
+            border: none;
+            background-color:rgb(254, 239, 173);
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            font-size: 25px;
+            background-color: rgb(253, 222, 85);
+            box-shadow: 0px 15px 20px rgb(249, 249, 249);
+            color: #000000;
+            transform: translateY(-10px);
+        }
+
+        button:active
+       {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body>
+    <!--
+    /GameSounds/loginSounds/mixkit-game-bonus-reached-2065.wav
+-->
+    <audio id="audioBackground">
+        <source src="/GameSounds/loginSounds/mixkit-game-bonus-reached-2065.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/mixkit-game-bonus-reached-2065.wav" type="audio/ogg">
+    </audio>
+    <div class="container">
+        <h1 id="greet">
+            Congrats you completed the Calculus Challenge
+        </h1>
+
+        <div class="you-got">You got: <h1 id="score"></h1>
+        </div>
+
+
+        <a href="../home.html" id="links"> <button id="buttongoHome"> Go Home </button></a>
+    </div>
+
+    <script src="../gamesTemplate/chemProgQuizTemp.js"> </script>
+    <script src="../../../trailingMouseEffect/trailingMouse.js"></script>
+
+
+    <script>
+        
+        let MUSICINFO = localStorage.getItem('playMusicInfo');
+        let MUSICBACKGROUND = document.getElementById('audioBackground');
+
+
+        function checkMusicBackground(music) {
+            let convertedToInt = parseInt(music);
+            if (convertedToInt) {
+                MUSICBACKGROUND.play();
+            }
+        }
+
+        checkMusicBackground(MUSICINFO);
+
+        let score = localStorage.getItem('calculusScore');
+        console.log(typeof parseInt(score));
+        console.log(parseInt(score));
+        document.getElementById('score').textContent = `${parseInt(score)} / 25`;
+
+
+    </script>
+</body>
+
+</html>

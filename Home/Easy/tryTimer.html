@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p id="timer">5:00</p>
+
+    <script>
+        
+        class Mechanics {
+            constructor(countDownTime) {
+                this.countDownTime = countDownTime;
+                this.minutes = Math.floor(countDownTime / 60);
+                this.seconds = countDownTime % 60;
+            }
+
+            setTime() {
+                this.x = setInterval(() => { // Arrow function to maintain the context of `this`
+                    this.minutes = Math.floor(this.countDownTime / 60);
+                    this.seconds = this.countDownTime % 60;
+                    document.getElementById("timer").innerHTML = this.minutes + ":" + (this.seconds < 10 ? "0" : "") + this.seconds;
+                    this.countDownTime--;
+                    if (this.countDownTime < 0) {
+                        clearInterval(this.x);
+                        document.getElementById("timer").innerHTML = "TIME OUT";
+                    }
+                }, 1000);
+            }
+        }
+        const timer = new Mechanics(5 * 60); // Pass the total seconds directly
+        timer.setTime();
+    </script>
+
+</body>
+
+</html>

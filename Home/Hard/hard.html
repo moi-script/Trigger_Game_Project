@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap">
+    <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Permanent Marker", cursive;
+
+
+        }
+
+        body {
+            height: 100vh;
+            background-image: url('./hardImg/math-5247958_1280.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .wrapper {
+            width: 90%;
+            max-width: 34.37em;
+            max-height: 90vh;
+            background-color: rgba(255, 223, 107, 0.77);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            padding: 3em;
+            border-radius: 1em;
+            box-shadow: .2px 2px 4px black;
+
+        }
+
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #wheel {
+            max-height: inherit;
+            width: inherit;
+            top: 0;
+            padding: 0;
+
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #spin-btn {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            height: 26%;
+            width: 26%;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 0;
+            background: radial-gradient(yellow 50%, orange 85%);
+            color: orange;
+            text-transform: uppercase;
+            font-size: 1.8em;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        #spin-btn:hover {
+            opacity: .9;
+        }
+
+        #spin-btn:active {
+            opacity: .5;
+        }
+
+
+        img {
+            position: absolute;
+            width: 4em;
+            top: 45%;
+            right: -8%;
+
+        }
+
+        #final-value {
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 1.5em;
+            color: rgb(0, 0, 0);
+            font-weight: 500;
+        }
+
+        @media screen and (max-width: 768px) {
+            .wrapper {
+                font-size: 12px;
+            }
+
+            img {
+                right: -5%;
+            }
+        }
+
+
+
+        #WheelResultTemp {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 20%;
+            left: 37%;
+            width: 25%;
+            height: 60%;
+            background-color: transparent;
+            visibility: hidden;
+
+        }
+
+
+
+        .book {
+            position: relative;
+            border-radius: 10px;
+            height: 500px;
+            width: 350px;
+            background-color: whitesmoke;
+            -webkit-box-shadow: 1px 1px 12px #000;
+            box-shadow: 1px 1px 12px #000;
+            -webkit-transform: preserve-3d;
+            -ms-transform: preserve-3d;
+            transform: preserve-3d;
+            -webkit-perspective: 2000px;
+            perspective: 2000px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        .cover {
+            position: absolute;
+            background-color: rgb(121, 56, 56);
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+            -webkit-transform-origin: 0;
+            -ms-transform-origin: 0;
+            transform-origin: 0;
+            -webkit-box-shadow: 1px 1px 12px #000;
+            box-shadow: 1px 1px 12px #000;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .book:hover .cover {
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+            -webkit-transform: rotatey(-80deg);
+            -ms-transform: rotatey(-80deg);
+            transform: rotatey(-80deg);
+        }
+
+        .cover p {
+            font-size: 2.5em;
+            font-weight: 500;
+            color: white;
+            text-shadow: 1px 4px 5px black;
+        }
+
+        .devs1>.book>p {
+            margin-left: 30px;
+            font-size: 1em;
+            color: rgb(23, 3, 35);
+            text-shadow: .3px 2px 5px rgba(43, 4, 75, 0.675);
+        }
+
+        #hardPlayQuestGames {
+            padding: 1.3em 3em;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-top: 20px;
+            font-weight: 500;
+            width: 45%;
+            color: #000000;
+            background-color: transparent;
+            border-right: .2px solid black;
+            border-bottom: .2px solid black;
+            border-radius: 10px;
+            box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #hardPlayQuestGames:hover {
+            background-color: rgb(62, 62, 60);
+            box-shadow: 0px 15px 20px rgb(254, 239, 173);
+            color: rgb(255, 255, 255);
+            transform: translateY(-7px);
+        }
+
+
+        #hardPlayQuestGames:active {
+            transform: translateY(-1px);
+        }
+        #bet{
+            text-decoration: none;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+ 
+
+    <div class="wrapper" id="wrapperContainer">
+        <div class="container">
+            <canvas id="wheel"></canvas>
+            <button id="spin-btn">Spin</button>
+            <img src="./hardImg/R.png" alt="./hardImg/R.png">
+        </div>
+        <duv id="final-value">
+            <p>Click on the spin button to Start</p>
+        </duv>
+    </div>
+
+    <div id="WheelResultTemp">
+
+        <section class="devs1">
+            <div class="book">
+                <p id="question">Color</p>
+                <button id="hardPlayQuestGames"><a id="bet" href="./hardPlay.html">Bet</a><i class="fa-solid fa-play fa-2xl" onclick="goToPlay()"></i></button>
+                <div class="cover" id="backgroundCol">
+                    <p id="coverContent">Color Question</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js""></script>
+
+
+ 
+
+    <script>
+
+      
+
+        let backgroundCol = document.getElementById('backgroundCol');
+        let WheelResultTemp = document.getElementById('WheelResultTemp');
+        let coverContent = document.getElementById('coverContent');
+
+        let wrapperContainer = document.getElementById('wrapperContainer');
+        const wheel = document.getElementById('wheel');
+
+
+        let questionInBook = document.getElementById('question');
+        //  var score = 0;
+        let calculus = localStorage.getItem('calculusScore');
+        console.log('This is the score in calculus', calculus);
+
+        if (calculus !== null) {
+            alert('You already played this game are not you? go back!');
+            window.location.href = "../home.html";
+        }
+
+
+
+        const spinBtn = document.getElementById('spin-btn');
+        const finalValue = document.getElementById('final-value');
+        /*
+        
+        if(calculus !== 'undefined' || calculus !== null || calculus !== NaN){
+            alert('You already play this game you cannot play this anymore');
+            window.location.href = "../home.html";
+        }
+
+
+        */
+
+
+
+
+
+        const rotationValues = [
+            { minDegree: 0, maxDegree: 30, value: 2 },
+            { minDegree: 31, maxDegree: 90, value: 1 },
+            { minDegree: 91, maxDegree: 150, value: 6 },
+            { minDegree: 151, maxDegree: 210, value: 5 },
+            { minDegree: 211, maxDegree: 270, value: 4 },
+            { minDegree: 271, maxDegree: 330, value: 3 },
+            { minDegree: 331, maxDegree: 360, value: 2 }
+        ];
+        // size of each piece
+
+        const data = [11, 11, 11, 11, 11, 11];
+
+        //   const data = ["Question1","Question2","Question3","Question4","Question5","Question6"];
+
+
+        // background color of each piece
+
+        var pieColors = [
+            "#2ADA03", //0
+            "#03DA85", //1
+            "#0385DA", //2
+            "#DACD03", //3
+            "#DA7F03", //4
+            "#DA1303" //5
+        ];
+
+        // let exponentString = "x\u00B2 + y\u00B3"; // x² + y³
+        // let squareRootHTML = "&radic;x";
+
+
+
+
+        // the 1/2 fraction = \u00BD
+        // raise to 3 = \u00B3
+        // raise to 1/2 = \u00B9\u2044\u00B2
+        // raise to 2 = \u00B2
+        // riase to negative 1/2 = \u207B\u00B9\u2044\u00B2
+        // raise to \u2074
+
+
+        var QUESTION1 = 'f(x) = (2x-3)\u00B2';
+        var QUESTION2 = 'f(x) = u\u00B2sin(u)';
+        var QUESTION3 = 'f(x) = (√x\u00B3 - 7) ';
+        var QUESTION4 = 'f(x) = (1/(x\u00B2 + 8)\u00B3)';
+        var QUESTION5 = 'f(x) = sin[tan(x\u00B3)]';
+        var QUESTION6 = 'f(x) = [sin\u2075(tan(cos(x\u00B3)))]';
+
+
+
+
+
+
+
+
+
+
+
+        var color = [
+            "#f2f2f2",
+            "#f2f2f2",
+            "#f2f2f2",
+            "#f2f2f2",
+            "#f2f2f2",
+            "#f2f2f2"
+            /*
+            
+              "#8b35bc",
+            "#8b35bc",
+            "#8b35bc",
+            "#8b35bc",
+            "#8b35bc",
+            "#8b35bc"
+            */
+        ]
+
+
+        // create a chart
+        let myChart = new Chart(wheel, {
+            // plugin for displaying text in pie chart
+            plugins: [ChartDataLabels],
+            // chart type pie
+            type: "pie",
+            data: { // lael values which are to be displauyed in chart
+                labels: [1, 2, 3, 4, 5, 6],
+                // settings for data sets pies
+                datasets: [
+                    {
+                        backgroundColor: pieColors,
+                        data: data,
+                    },
+
+                ],
+            },
+
+            options: {
+                // responsive chart
+                responsive: true,
+                animation: { duration: 0 },
+                plugins: {
+                    tooltip: false,
+                    legend: {
+                        display: false,
+                    }
+                },
+                datalabels: {
+                    color: "#ffffff",
+                    formatter: (_, context) => context.chart.data.labels[context.dataIndex],
+                    font: { size: 24 },
+                },
+            },
+        });
+
+        const valueGenerator = (angleValue) => {
+            for (let i of rotationValues) {
+                if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
+                    let questionStatus = i.value;
+                    setTimeout(() => {
+                        var color = '';
+                        if (questionStatus === 1) {
+                            backgroundCol.style.backgroundColor = '#2ADA03';
+                            color = 'Lime Green Quest';
+                            coverContent.textContent = color;
+                            questionInBook.textContent = QUESTION1;
+                            localStorage.setItem('numberOfQuestion', '0');
+                            localStorage.setItem('QUESTIONFORMAT', QUESTION1.toString());
+
+
+                        } else if (questionStatus === 2) {
+                            backgroundCol.style.backgroundColor = '#03DA85';
+                            color = 'Caribbean Green Quest';
+                            coverContent.textContent = color;
+                            questionInBook.textContent = QUESTION2;
+                            localStorage.setItem('numberOfQuestion', '1');
+                            localStorage.setItem('QUESTIONFORMAT', QUESTION2.toString());
+
+
+
+                        } else if (questionStatus === 3) {
+                            backgroundCol.style.backgroundColor = '#0385DA';
+                            color = 'Azure Blue Quest';
+                            coverContent.textContent = color;
+                            questionInBook.textContent = QUESTION3;
+                            localStorage.setItem('numberOfQuestion', '2');
+                            localStorage.setItem('QUESTIONFORMAT', QUESTION3.toString());
+
+
+
+
+                        } else if (questionStatus === 4) {
+                            backgroundCol.style.backgroundColor = '#DACD03';
+                            color = 'Bright Yellow Quest';
+                            coverContent.textContent = color;
+                            questionInBook.textContent = QUESTION4;
+                            localStorage.setItem('numberOfQuestion', '3');
+                            localStorage.setItem('QUESTIONFORMAT', QUESTION4.toString());
+
+
+
+                        } else if (questionStatus === 5) {
+                            backgroundCol.style.backgroundColor = '#DA7F03';
+                            color = 'Dark Orange Quest';
+                            coverContent.textContent = color;
+                            questionInBook.textContent = QUESTION5;
+                            localStorage.setItem('numberOfQuestion', '4');
+                            localStorage.setItem('QUESTIONFORMAT', QUESTION5.toString());
+
+
+
+                        } else if (questionStatus === 6) {
+                            backgroundCol.style.backgroundColor = '#DA1303';
+                            color = 'Vivid Red Quest';
+                            coverContent.textContent = color;
+                            questionInBook.textContent = QUESTION6;
+                            localStorage.setItem('numberOfQuestion', '5');
+                            localStorage.setItem('QUESTIONFORMAT', QUESTION6.toString());
+
+                        }
+                        wrapperContainer.style.visibility = 'hidden';
+                        WheelResultTemp.style.visibility = 'visible'
+                        finalValue.innerHTML = `<p>Question color: ${color} </p>`;
+                    }, 1500);
+
+
+                    spinBtn.disabled = false;
+                    break;
+                }
+            }
+        };
+
+        let count = 0;
+        let resultValue = 101;
+
+
+        spinBtn.addEventListener("click", () => {
+            spinBtn.disabled = true;
+            finalValue.innerHTML = `<p>Good Luck!</p>`;
+            let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
+
+            let rotationInterval = window.setInterval(() => {
+
+                myChart.options.rotation = myChart.options.rotation + resultValue;
+
+                myChart.update();
+
+                if (myChart.options.rotation >= 360) {
+                    count += 1;
+                    resultValue -= 5;
+                    myChart.options.rotation = 0;
+                } else if (count > 15 && myChart.options.rotation == randomDegree) {
+                    valueGenerator(randomDegree);
+                    clearInterval(rotationInterval);
+                    count = 0;
+                    resultValue = 101;
+                }
+            }, 10);
+        });
+
+        function goToPlay() {
+            window.location.href = "./hardPlay.html";
+        }
+
+
+
+
+
+    </script>
+    <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"><script>
+
+    -->
+</body>
+
+</html>

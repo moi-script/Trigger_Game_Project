@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing hard difficulties</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        body {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('./hardImg/math-3986758_1280.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            justify-content: space-evenly;
+            align-items: center
+        }
+
+        #leftSide {
+            width: 40%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #statusCheer {
+            width: 100%;
+            height: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 15px;
+            background-color: rgb(137, 137, 137);
+            box-shadow: 1px 2px 9px rgb(0, 0, 0);
+        }
+
+        #questionPlate {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 15px;
+            background-color: rgb(135, 135, 135);
+            box-shadow: 1px 2px 9px rgb(0, 0, 0);
+        }
+
+        #rightSide {
+            width: 40%;
+            height: 90%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #chancesCol {
+            width: 40%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #scoreCol {
+            width: 40%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+
+        button {
+            padding: 1.3em 3em;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-top: 20px;
+            font-weight: 500;
+            width: 70%;
+            height: 15%;
+            color: #000000;
+            background-color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: rgb(5, 5, 5);
+            box-shadow: 0px 15px 20px rgb(50, 50, 56);
+            color: rgb(255, 255, 255);
+            transform: translateY(-7px);
+        }
+
+        #chanceStat,
+        #scoreStats {
+            width: 100%;
+            height: 20%;
+            background-color: rgba(175, 175, 175, 0.82);
+            box-shadow: .5px 2px 4px rgb(255, 255, 255);
+            font-size: 1.5em;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+
+        button:active {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="audio" loop>
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/ogg">
+    </audio>
+
+    
+  <audio id="correctAnsAud">
+    <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/mpeg" />
+    <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/ogg" />
+  </audio>
+
+
+
+    <div id="leftSide">
+        <section id="statusCheer">
+            <h1 id="cheerYou">Take your Time</h1>
+            <h1 id="time">Time</h1>
+        </section>
+        <section id="questionPlate">
+            <h1 id="questHead"></h1>
+            <p class="questions" id="question1"></p>
+            <p class="questions" id="question2"></p>
+            <p class="questions" id="question3"></p>
+            <p class="questions" id="question4"></p>
+            <p class="questions" id="question5"></p>
+
+        </section>
+
+    </div>
+
+    <div id="rightSide">
+        <section id="chancesCol">
+            <div id="chanceStat"></div>
+            <button class="btns"></button>
+            <button class="btns"></button>
+        </section>
+
+        <section id="scoreCol">
+            <div id="scoreStats"></div>
+            <button class="btns"></button>
+            <button class="btns"></button>
+
+        </section>
+
+    </div>
+
+    <script>
+
+        let musicBG = document.getElementById('audio');
+        let correctAnsSound = document.getElementById('correctAnsAud');
+
+
+        let cheer = document.getElementById('cheerYou');
+        let timeLim = document.getElementById('time');
+
+
+        let chanceStatus = document.getElementById('chanceStat');
+        let scoreStatus = document.getElementById('scoreStats');
+
+
+        const QUESTNUMBER = localStorage.getItem('numberOfQuestion');
+        const QUESTION_DISPLAY_DERIVED = localStorage.getItem('QUESTIONFORMAT');
+
+        const question_num_1 = document.getElementById('question1');
+        const question_num_2 = document.getElementById('question2');
+        const question_num_3 = document.getElementById('question3');
+        const question_num_4 = document.getElementById('question4');
+        const question_num_5 = document.getElementById('question5');
+
+
+
+
+
+
+        const CHOICES = [
+            [
+                ['2x - 3', '2x - 2', '2x - 4', '3x - 3'],
+                ['3', '1', '2x', '2'],
+                ['2x - 3', '2x - 2', '2x - 4', '3x - 3'],
+                ['4x - 3', '4x - 6', '4x - 5', '4x + 4'],
+                ['8x - 10', '8x - 11', '8x - 13', "8x - 12"]
+            ],
+
+
+            [
+                ['u\u00B2', 'u\u00B2 + 1', 'u\u00B2 - 1', 'u\u00B3'],      // Variations of 'u²'
+                ['sin(u)', 'cos(u)', 'tan(u)', 'sin(u) + 1'],             // Variations of 'sin(u)'
+                ['u\u00B2', 'u\u00B3', 'u\u2074', 'u\u00B2 - 2'],         // Variations of 'u²'
+                ['u', 'u + 1', 'u - 1', 'u\u00B2'],                      // Variations of 'u'
+                ['2', '3', '4', '2x']                                    // Variations of '2'  // Variations of '2'
+            ],
+
+            [
+                ['x\u00B3 - 7', 'x\u00B3 - 6', 'x\u00B3 - 8', 'x\u2074 - 7'],  // Variations of 'x³ - 7'
+                ['\u00B9\u2044\u00B2', '\u00B9\u2044\u00B3', '\u00B2\u2044\u00B3', '1/4'],     // Variations of '¹⁄₂'
+                ['x\u00B3 - 7', 'x\u00B3 - 6', 'x\u00B3 - 8', 'x\u2074 - 7'],  // Variations of 'x³ - 7'
+                ['3x\u00B2', '3x\u00B3', '2x\u00B2', '4x\u00B2'],              // Variations of '3x²'
+                ['x\u00B3 - 7', 'x\u00B3 - 6', 'x\u00B3 - 8', 'x\u2074 - 7']   // Variations of 'x³ - 7'
+            ],
+
+            [
+                ["1", "2", "0", "-1"],                                         // Variations of "1"
+                ["x\u00B2 + 8", "x\u00B2 + 7", "x\u00B2 + 9", "x\u00B3 + 8"],   // Variations of "x² + 8"
+                ["0", "1", "-1", "2"],                                         // Variations of "0"
+                ["v\u00B2", "v\u00B3", "v\u2074", "v\u2075"],                   // Variations of "u³"
+                ["(x\u00B2 + 8)\u2074", "(x\u00B2 + 8)\u00B3", "(x\u00B2 + 7)\u2074", "(x\u00B2 + 9)\u2074"]  // Variations of "(x² + 8)⁴"
+            ],
+
+            [
+                ['tan(x\u00B3)', 'tan(x\u00B2)', 'tan(x\u2074)', 'sin(x\u00B3)'],      // Variations of 'tan(x³)'
+                ['cos', 'sin', 'tan', 'sec'],                                        // Variations of 'cos'
+                ['sec\u00B2', 'csc\u00B2', 'sec\u00B3', 'sec(x)'],                    // Variations of 'sec²'
+                ['3x\u00B2', '2x\u00B2', '4x\u00B2', '3x\u00B3'],                     // Variations of '3x²'
+                ['3x\u00B2', '2x\u00B2', '4x\u00B2', '3x\u00B3']                      // Variations of '3x²'
+            ],
+
+            [
+                ['tan(cos(x\u00B3))', 'tan(sin(x\u00B3))', 'tan(cos(x\u00B2))', 'tan(cos(x\u2074))'],   // Variations of 'tan(cos(x³))'
+                ['cos', 'sin', 'tan', 'sec'],                                                         // Variations of 'cos'
+                ['tan(cos(x\u00B3))', 'tan(sin(x\u00B3))', 'tan(cos(x\u00B2))', 'tan(cos(x\u2074))'],  // Variations of 'tan(cos(x³))'
+                ['-sin', '-cos', '-tan', '-sec'],                                                     // Variations of '-sin'
+                ['3x\u00B2', '2x\u00B2', '4x\u00B2', '3x\u00B3']                                       // Variations of '3x²'
+            ]
+
+        ];
+
+
+
+        const ANSWERS = [ // 8x − 12
+            ['2x - 3', '2', '2x - 3', '4x - 6', '8x - 12'],
+            ['u\u00B2', 'sin(u)', 'u\u00B2', 'u', '2'],
+            ['x\u00B3 - 7', '\u00B9\u2044\u00B2', 'x\u00B3 - 7', '3x\u00B2', 'x\u00B3 - 7'],
+            ["1", "x\u00B2 + 8", "0", "v\u00B3", "(x\u00B2 + 8)\u2074"],
+            ['tan(x\u00B3)', 'cos', 'sec\u00B2', '3x\u00B2', '3x\u00B2'],
+            ['tan(cos(x\u00B3))', 'cos', 'tan(cos(x\u00B3))', '-sin', '3x\u00B2']
+        ];
+
+
+
+        const QUESTIONS = [
+            ['u = ?', 'n = ?', '2(2x - 3) d/dx(________)', '(________) * (2)dx', '________dx'],
+
+            ['f/u = ?', 'v/g = ?', '________cos(u) + ...', 'u[________cos(u) + ...]', 'u[ucos(u) + ________usin(u)]'],
+
+            ['u = ?', 'n = ?', '\u00BD(x\u00B3 - 7)\u207B\u00B9\u2044\u00B2 d/dx(________)', '\u00BD(x\u00B3 - 7)\u207B\u00B9\u2044\u00B2 * ________dx', '3x\u00B2 / 2(________)\u00B9\u2044\u00B2'],
+
+            ['u = ?', 'v = ?', '________ - 1(x\u00B2 + 8)\u00B3 dx / v\u00B2', '- 3(x\u00B2 + 8)\u00B2 2x / (________)\u00B2', '6x / ________'],
+
+            ['The outermost function u = ?',
+                '________(tan(x\u00B3))...',
+                '________(x\u00B3)...',
+                ' ________dx',
+                '________sec\u00B2(x\u00B3)cos(tan(x\u00B3))d/dx'],
+
+
+
+            ['The outermost function of u = ?', '5sin\u2074(tan(cos(x\u00B3)))________(tan(cos(x\u00B3)))', 'd/du(________)sec\u00B2(cos(x\u00B3))', 'd/du ________(x\u00B3)', '________dx']
+        ];
+
+
+
+        // to replace after
+
+        //   ['2x - 3', '2', '2x - 3', '4x - 6', '8x - 12'],
+
+        // ['u\u00B2', 'sin(u)', 'u\u00B2', 'u', '2'],
+
+        // ['x\u00B3 - 7', '\u00B9\u2044\u00B2', 'x\u00B3 - 7', '3x\u00B2', 'x\u00B3 - 7'],
+        // ["1", "x\u00B2 + 8", "0", "u\u00B3", '(x\u00B2 + 8)\u2074'],
+
+        //  ['tan(x\u00B3)', 'cos', 'sec\u00B2', '3x\u00B2', '3x\u00B2'],
+
+
+
+        const REPLACE = [
+            ['u = 2x - 3', 'n = 2', '2(2x - 3) d/dx(2x - 3)', '(4x - 6) * (2)dx', '8x - 12 - 12dx'],
+            ['f/u = u\u00B2', 'v/g = sin(u)', 'u\u00B2cos(u) + ...', 'u[ucos(u) + ...]', 'u[ucos(u) + 2usin(u)]'],
+            ['u = x\u00B3 - 7', 'n = \u00B9\u2044\u00B2', '\u00BD(x\u00B3 - 7)\u207B\u00B9\u2044\u00B2 d/dx(x\u00B3 - 7)', '\u00BD(x\u00B3 - 7)\u207B\u00B9\u2044\u00B2 * 3x\u00B2dx', '3x\u00B2 / 2(x\u00B3 - 7)\u00B9\u2044\u00B2'],
+            ['u = 1', 'v = x\u00B2 + 8', '0 - 1(x\u00B2 + 8)\u00B3 dx / v\u00B2', '- 3(x\u00B2 + 8)\u00B2 2x / (u\u00B3)\u00B2', '6x / (x\u00B2 + 8)\u2074'],
+            ['The outermost function u = tan(x\u00B3)', 'cos(tan(x\u00B3))...', 'sec\u00B2(x\u00B3)...', ' 3x\u00B2dx', '3x\u00B2sec\u00B2(x\u00B3)cos(tan(x\u00B3))d/dx'],
+            ['The outermost function of u = tan(cos(x\u00B3))', '5sin\u2074(tan(cos(x\u00B3))) cos(tan(cos(x\u00B3)))',
+                'd/du(tan(cos(x\u00B3)))sec\u00B2(cos(x\u00B3))', 'd/du-sin(x\u00B3)', '3x\u00B2dx']
+            //
+        ]
+
+        // 
+
+
+
+
+        //  ['tan(cos(x\u00B3))', 'cos', 'tan(cos(x\u00B3))', '-sin', '3x\u00B2']
+        // 
+        // 
+
+
+
+        let MUSICINFO = localStorage.getItem('playMusicInfo');
+
+
+        function playMusic(music){
+            if(parseInt(music)){
+                musicBG.play();
+            }
+        }
+
+        playMusic(MUSICINFO);
+
+
+
+
+
+
+
+
+
+        const QUESTION_HEAD = document.getElementById('questHead');
+        let questionListDisplay = document.querySelectorAll('.questions');
+        let buttons = document.querySelectorAll('.btns');
+
+        let turns = 0;
+        var number = parseInt(QUESTNUMBER);
+        var score = 0;
+        var chance = 2;
+        localStorage.setItem('calculusScore', score.toString());
+
+
+       // console.log('THis is the turn value', turns);
+      //  console.log('this is the number of queston: ', number, 'and type is: ', typeof number);
+
+
+        function displayChoices(number, turns, obj) {
+            let numbers = number;
+            let turn = turns;
+            console.log('This is numbers', numbers);
+            console.log('This is turns', turn);
+            console.log('Buttons length:', buttons.length);
+            console.log('Obj:', obj);
+            console.log('Obj[numbers]:', obj[numbers]);
+            console.log('Obj[numbers][turn]:', obj[numbers][turn]);
+            if (turns <= 4) {
+                buttons.forEach((btns, index) => {
+                    btns.textContent = obj[numbers][turn][index];
+                });
+            }
+
+        }
+
+        displayChoices(number, turns, CHOICES);
+
+        displayQuestionHead(QUESTION_DISPLAY_DERIVED);
+
+        displayQuestionInPage(number, turns);
+        displayChances(chance);
+        displayScore(score);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function displayChances(chance) {
+            chanceStatus.textContent = `Chance ${chance}`;
+
+        }
+        function displayScore(score) {
+            scoreStatus.textContent = `Score ${score}`;
+        }
+
+        function displayTime() {
+            var seconds = 65;
+            setInterval(() => {
+                seconds--
+                if (seconds === 0) {
+                    localStorage.setItem('calculusScore', score.toString());
+                    window.location.href = "./hardTemp.html";
+                } else if(seconds === 20){
+                    document.getElementById('cheerYou').textContent = 'OPPS! time is running out!'
+                }
+                timeLim.textContent = seconds;
+            }, 1000);
+        }
+        displayTime();
+
+
+
+        function displayQuestionHead(question) {
+            QUESTION_HEAD.textContent = question;
+        }
+
+        function displayQuestionInPage(numberQuestion, turns) {
+            const nums = numberQuestion;
+            //  console.log('This is the numberQuestion value', nums);
+            const turn = turns;
+            if (turn <= 4) {
+                questionListDisplay[turn].textContent = QUESTIONS[nums][turn];
+
+            }
+        }
+
+
+
+
+        /*
+        
+        const REPLACE = [
+            ['u = 2x - 3', 'n = 2', '2(2x - 3) d/dx(2x - 3)', '(4x - 6) * (2)dx', '8x - 12 - 12dx'],
+            ['f/u = u\u00B2', 'v/g = sin(u)', 'u\u00B2cos(u) + ...', 'u[ucos(u) + ...]', 'u[ucos(u) + 2usin(u)]'],
+            ['u = x\u00B3 - 7', 'n = \u00B9\u2044\u00B2', '\u00BD(x\u00B3 - 7)\u207B\u00B9\u2044\u00B2 d/dx(x\u00B3 - 7)', '\u00BD(x\u00B3 - 7)\u207B\u00B9\u2044\u00B2 * 3x\u00B2dx', '3x\u00B2 / 2(x\u00B3 - 7)\u00B9\u2044\u00B2']
+            ['u = 1', 'v = x\u00B2 + 8', '0 - 1(x\u00B2 + 8)\u00B3 dx / v\u00B2', '- 3(x\u00B2 + 8)\u00B2 2x / (u\u00B3)\u00B2', '6x / (x\u00B2 + 8)\u2074'],
+            ['The outermost function u = tan(x\u00B3)', 'cos(tan(x\u00B3))...', 'sec\u00B2(x\u00B3)...', ' 3x\u00B2dx', '3x\u00B2sec\u00B2(x\u00B3)cos(tan(x\u00B3))d/dx']
+
+        ]
+        */
+
+
+
+
+        function displayReplacePrev(numberQuestion, turns) {
+            const nums = numberQuestion;
+            const turn = turns;
+         //   console.log('This is the number in question', nums);
+         //   console.log('This is the value of the turn', turn)
+            if (turn <= 4) {
+              //  console.log(`This is the value in the replace with turn: ${turn} and nums: ${nums} ---- ${REPLACE[nums]}`)
+                questionListDisplay[turns].textContent = REPLACE[nums][turn];
+            }
+
+
+        }
+
+
+        function checkAnswer(ans, number, turns) {
+            if (ans === ANSWERS[number][turns]) {
+                // console.log('This is the correct answer: ', ANSWERS[number[turns]])
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function eventClicked(turns) {
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function (event) {
+                    answer = event.target.textContent;
+                    console.log('Current number of turn is ', turns);
+                    console.log('This is the answer', answer, 'type is', typeof answer);
+
+                    if (turns <= 4) {
+                        if (checkAnswer(answer, number, turns)) {
+                            displayReplacePrev(number, turns);
+
+                            turns++;
+                            score += 5;
+                            correctAnsSound.play();
+
+                            // sounds
+                            displayScore(score);
+                            displayChoices(number, turns, CHOICES);
+                            displayQuestionInPage(number, turns);
+                            localStorage.setItem('calculusScore', score.toString());
+                            let scoreDebug = localStorage.getItem('calculusScore');
+                            console.log('This is the value of the score debug', scoreDebug);
+
+                            if (score === 25) {
+
+                                window.location.href = "./hardTemp.html";
+                            } else if (turns > 4) {
+                                localStorage.setItem('calculusScore', score.toString());
+
+                                window.location.href = "./hardTemp.html";
+
+                            }
+
+
+                            console.log(true);
+                        } else {
+                            // sounds
+                            chance--;
+                            if (chance === 0) {
+                                localStorage.setItem('calculusScore', score.toString());
+                                window.location.href = "./hardTemp.html";
+                            }
+                            displayChances(chance);
+                            console.log(false);
+                        }
+                    }
+
+                })
+            })
+        }
+        eventClicked(turns);
+
+
+
+
+
+
+
+
+
+
+
+
+        // creating a replace after, it was the full completed solution each turns
+
+        /*Now the process to displace and replace is good*/
+
+        // logic of anser checking
+        // score incements
+        // time limits
+        // additional designs
+        // miscellaneous config
+
+        /*
+        
+        */
+
+
+
+
+    </script>
+
+</body>
+
+</html>

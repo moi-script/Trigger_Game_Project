@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Riddels</title>
+  <link rel="icon" type="image/png" href="../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: 500;
+            user-select: none;
+            border-radius: 15px;
+            color: white;
+        }
+
+        body {
+            background-image: url('./MediumGamesImg/nature-7602212_640.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .head {
+            width: 90vw;
+            height: 55vh;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 5vh;
+            margin-top: 5vh;
+            background-color: transparent;
+        }
+
+
+        .foot {
+            width: 80vw;
+            height: 30vh;
+            margin-left: 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: .2px solid white;
+        }
+
+        .questionsTemp,
+        .detailsTemp {
+            width: 40vw;
+            height: 55vh;
+        }
+
+        .questionsTemp {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: .2px solid white;
+            box-shadow: 1px 4px 6px black;
+
+        }
+
+        .questionsTemp>h1 {
+            color: rgb(255, 255, 255);
+
+        }
+
+
+        .detailsTemp {
+            padding-top: 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-content: space-around;
+            align-items: center;
+            background-color: transparent;
+            border: .2px solid white;
+            box-shadow: 1px 4px 6px black;
+        }
+
+        .detailsTemp>div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .detailsTemp>div>h1 {
+            text-shadow: 2px 4px 5px black;
+        }
+
+        .row1,
+        .row2,
+        .row3 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            width: 75vw;
+            height: 10vh;
+        }
+
+        .row1 {
+            margin-top: 10px;
+        }
+
+        input {
+            position: relative;
+            width: 30vw;
+            height: 5vh;
+            top: -10px;
+            padding: 20px;
+            color: white;
+            border: .2px solid white;
+            box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+            background-color:transparent;
+
+
+        }
+
+
+
+
+        button {
+            font-size: 1.5em;
+            width: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            color: #ffffff;
+            text-shadow: 2px 4px 5px black;
+            background-color:transparent;
+            border: .2px solid white;
+            border-radius: 10px;
+            box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+
+        }
+
+
+        button:hover {
+            background-color: rgb(253, 222, 85);
+            box-shadow: 0px 15px 20px rgb(254, 239, 173);
+            color: rgb(255, 255, 255);
+            transform: translateY(-7px);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        #clear,
+        #enter {
+            margin-top: 10px;
+
+        }
+
+        .mainContainer {
+            background-color: transparent;
+        }
+
+        #questionContents {
+            font-size: 4em;
+            text-shadow: 1px 4px 5px black;
+
+        }
+
+        .octagon {
+            width: 250px;
+            height: 250px;
+            background-color: rgba(71, 71, 71, 0.843);
+            border: 4px solid rgba(71, 71, 71, 0.843);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .octagon h1 {
+            color: white;
+        }
+
+        .first {
+            position: relative;
+            top: 34%;
+            left: 0;
+        }
+
+        .second {
+            position: relative;
+            top: 45%;
+            left: 27%;
+        }
+
+        .third {
+            position: relative;
+            top: 32%;
+            left: 52%;
+        }
+
+        .fourth {
+            position: relative;
+            top: 1%;
+            left: 60%;
+        }
+
+        .fifth {
+            position: relative;
+            top: -30%;
+            left: 30%;
+        }
+
+        .sixth {
+            position: relative;
+            top: -45%;
+            left: -10%;
+        }
+
+        .seventh {
+            position: relative;
+            top: -30%;
+            left: -50%;
+        }
+
+        .eignth {
+            position: relative;
+            left: -75%;
+        }
+
+        #container {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="correctAnsAud">
+        <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/mpeg" />
+        <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/ogg" />
+    </audio>
+
+    <audio id="audio" loop>
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/ogg">
+    </audio>
+
+
+
+    <div class="mainContainer">
+        <div class="head">
+            <div id="questionsTemp" class="questionsTemp">
+                <h1 id="questionContents"></h1>
+                <div id="container"></div>
+
+            </div>
+
+            <div id="detailsTemp" class="detailsTemp">
+                <h1>Put the correct value</h1>
+                <div>
+                    <h1 id="Score">Score: 0</h1>
+                    <h1 id="Lives">Chances: 3</h1>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="foot">
+            <div class="row1">
+                <input id="input" disabled type="text">
+                <button id="enter" onclick="submitInput()">Enter</button>
+                <button id="clear" onclick="clearInput()">Clear</button>
+
+
+            </div>
+
+            <div class="row2">
+                <button id="num1" onclick="getUserInput('1')" class="num1">1</button>
+                <button id="num2" onclick="getUserInput('2')" class="num2">2</button>
+                <button id="num3" onclick="getUserInput('3')" class="num3">3</button>
+                <button id="num4" onclick="getUserInput('4')" class="num4">4</button>
+                <button id="num5" onclick="getUserInput('5')" class="num5">5</button>
+
+            </div>
+
+
+            <div class="row3">
+
+                <button id="num6" onclick="getUserInput('6')" class="num6">6</button>
+                <button id="num7" onclick="getUserInput('7')" class="num7">7</button>
+                <button id="num8" onclick="getUserInput('8')" class="num8">8</button>
+                <button id="num9" onclick="getUserInput('9')" class="num9">9</button>
+                <button id="num10" onclick="getUserInput('10')" class="num10">10</button>
+            </div>
+
+
+        </div>
+
+        <!--
+
+        Creating a different qeustions 
+        
+
+
+        
+        
+        
+        -->
+
+    </div>
+
+    <script>
+        let questions = document.getElementById('questionContents');
+        let playerScore = document.getElementById('Score');
+        let playerChance = document.getElementById('Lives');
+        var userStringInput = '';
+
+
+        var turns = 0;
+        var score = 0;
+        var chanceLeft = 3;
+
+        var flag = false;
+
+
+        const answerList = ['48', '7831', '41', '27', '17'];
+
+
+        let musicBG = document.getElementById('audio');
+        let musicCorrect = document.getElementById('correctAnsAud')
+        let musicStat = localStorage.getItem('playMusicInfo');
+        
+          window.addEventListener('load', function () {
+            if (parseInt(musicStat)) {
+                musicBG.play();
+            
+            }
+        });
+
+    
+
+
+        const questionsObject = {
+            question1: function () {
+                questions.innerHTML = ` 4, 8 = 32 <br>
+             5, 3 = 15 <br>
+            10,2 = 20 <br>
+             8, 6 = __?`
+            },
+            question2: function () {
+                questions.innerHTML = `1783 <br> 3178 <br> 8317 <br> ___?`
+            },
+            question3: function () {
+                questions.innerHTML = `8 = 17 <br> 22 = 45 <br> 15 = 30 <br> 20 = _?`
+            },
+            question4: function () {
+                questions.innerHTML = `6, 5 = 33 <br> 7, 2 = 17 <br> 11, 4 = 47 <br> 3, 8 = _?`
+            },
+            question5: function () {
+                questions.innerHTML = '';
+
+                const parentContainer = document.getElementById('container');
+                parentContainer.style.display = 'block';
+
+                const childDiv = document.createElement('div');
+                childDiv.className = 'octagon';
+                parentContainer.appendChild(childDiv);
+                const container = document.querySelector('.octagon');
+
+                const child1 = document.createElement('h1');
+                child1.className = 'first';
+                child1.textContent = '4';
+                container.appendChild(child1);
+
+                const secondChild = document.createElement('h1');
+                secondChild.className = 'second';
+                secondChild.textContent = '9';
+                container.appendChild(secondChild);
+
+                const thirdChild = document.createElement('h1');
+                thirdChild.className = 'third';
+                thirdChild.textContent = '5';
+                container.appendChild(thirdChild);
+
+                const fourthChild = document.createElement('h1');
+                fourthChild.className = 'fourth';
+                fourthChild.textContent = '?';
+                container.appendChild(fourthChild);
+
+                const fifthChild = document.createElement('h1');
+                fifthChild.className = 'fifth';
+                fifthChild.textContent = '12';
+                container.appendChild(fifthChild);
+
+                const sixthChild = document.createElement('h1');
+                sixthChild.className = 'sixth';
+                sixthChild.textContent = '19';
+                container.appendChild(sixthChild);
+
+                const seventhChild = document.createElement('h1');
+                seventhChild.className = 'seventh';
+                seventhChild.textContent = '7';
+                container.appendChild(seventhChild);
+
+                const eighthChild = document.createElement('h1');
+                eighthChild.className = 'eignth';
+                eighthChild.textContent = '11';
+                container.appendChild(eighthChild);
+            }
+        };
+
+        //    questionsObject.question5();
+
+        function getUserInput(val) {
+            const userInput = document.getElementById('input');
+            userStringInput += val;
+
+            userInput.style.color = 'white';
+            userInput.style.fontSize = '1.5em';
+            userInput.style.textShadow = '2px 4px 5px black';
+
+            //console.log(userStringInput);
+            userInput.value = userStringInput;
+            //console.log(userStringInput);
+        }
+
+        function clearInput() {
+            const userInput = document.getElementById('input');
+
+            userStringInput = '';
+            userInput.value = userStringInput;
+        }
+
+
+
+        function displayScore(pScore) {
+            playerScore.textContent = `Score: ${pScore}`
+        }
+
+        function displayChanceLeft(pChanceLeft) {
+            playerChance.textContent = `Chances: ${pChanceLeft}`;
+        }
+
+
+        function displayQuestions(index) {
+            let counts = 0;
+            for (quest in questionsObject) {
+                if (index === counts) {
+                    questionsObject[quest]();
+                    console.log("This got executed")
+                    break;
+                }
+                counts++;
+            }
+        }
+
+
+        // initializer
+        questionsObject.question1();
+
+        function submitInput() {
+
+            if (userStringInput === answerList[turns]) {
+                turns++;
+                document.getElementById('input').value = '';
+                score += 5;
+                if(parseInt(musicStat)){
+                musicCorrect.play();
+                }
+                displayQuestions(turns);
+                displayScore(score);
+                userStringInput = '';
+                if (score === 25) {
+                    localStorage.setItem('mathRiddlesScore', score.toString());
+                    window.location.href = './mathRiddlesTemp.html';
+                }
+                console.log('The turns at: ' + turns);
+            }
+
+            else {
+                document.getElementById('input').value = ''
+                userStringInput = '';
+                chanceLeft--;
+                displayChanceLeft(chanceLeft);
+                if (chanceLeft === 0) {
+                    localStorage.setItem('mathRiddlesScore', score.toString());
+
+                    window.location.href = './mathRiddlesTemp.html';
+                }
+
+            }
+        }
+
+
+
+
+    </script>
+<script src="../touchSound.js"></script>
+
+</body>
+
+</html>

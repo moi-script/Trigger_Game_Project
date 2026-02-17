@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>crossword</title>
+  <link rel="stylesheet" href="/BackgroundDesign/designs.css" />
+  <link rel="icon" type="image/png" href="../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+  <link rel="stylesheet" href="/trailingMouseEffect/trailsEffect.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      border-radius: 15px;
+      color: white;      
+      user-select: none;
+    }
+
+    body {
+      display: flex;
+      background-image: url('./MediumGamesImg/silver-bordered-fritillary-877121_1280.jpg');
+      flex-direction: column;
+      background-size: cover;
+      background-repeat: no-repeat;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body>#container>#circles {
+      margin: 40px;
+
+    }
+
+    table {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 90px;
+    }
+
+    td {
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      border: 0.2px solid white;
+      box-shadow: 0.5px 2px 8px rgba(51, 50, 50, 0.25);
+    }
+
+    #not {
+      opacity: 0;
+    }
+
+    #choices {
+      width: 400px;
+      height: 400px;
+      background-color: transparent;
+      border: .2px solid white;
+      -moz-border-radius: 200px;
+      -webkit-border-radius: 200px;
+      border-radius: 200px;
+      color: white;
+      box-shadow: 0.5px 2px 8px rgba(51, 50, 50, 0.25);
+    }
+
+    #circles {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    #circles>div {
+      margin-bottom: 20px;
+    }
+
+    #circles>#answerPlace>.placeHolder {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2em;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 2px 4px 8px rgb(51, 50, 50);
+      border-bottom: 3px solid white;
+      border-right: 3px solid white;
+
+    }
+
+    #answerPlace {
+      width: 550px;
+      height: 70px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    #header {
+      width: 550px;
+      height: 70px;
+      display: flex;
+      border: 0.2px solid white;
+      box-shadow: 0.5px 2px 8px rgba(51, 50, 50, 0.25);
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    #choices {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin-left: 20px;
+      align-items: center;
+      color: rgb(255, 255, 255);
+    }
+
+    #GandN,
+    #RAndY {
+      width: 330px;
+      height: 90px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: transparent;
+    }
+
+    #R,
+    #Y,
+    #G,
+    #N,
+    #topE,
+    #bottomE {
+      user-select: none;
+      font-size: 50px;
+      font-weight: 500;
+      transition: font-size 0.3s;
+      color: white;
+      text-shadow: 5px 5px 5px black;
+    }
+
+    #R:hover,
+    #Y:hover,
+    #G:hover,
+    #N:hover,
+    #topE:hover,
+    #bottomE:hover {
+      cursor: pointer;
+      font-size: 90px;
+    }
+
+    #container {
+      width: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 710px;
+    }
+
+    #bott {
+      width: 90%;
+      height: 70px;
+      background-color: transparent;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    #bott>button {
+      font-size: 12px;
+      width: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 50px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
+      margin-bottom: 40px;
+      color: #000;
+      background-color: rgb(3, 174, 210);
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      outline: none;
+    }
+
+    #bott>button:hover {
+      font-size: 20px;
+      background-color: rgb(253, 222, 85);
+      box-shadow: 0px 15px 20px rgb(254, 239, 173);
+      color: rgb(0, 0, 0);
+      transform: translateY(-7px);
+    }
+
+    #bott>button:active {
+      transform: translateY(-1px);
+    }
+    #score, #life{
+      font-size: 2.3em;
+      text-shadow: 5px 5px 5px black;
+
+    }
+  </style>
+</head>
+
+<body>
+  <audio id="correctAnsAud">
+    <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/mpeg" />
+    <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/ogg" />
+  </audio>
+
+  <audio id="audio" loop>
+    <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/mpeg">
+    <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/ogg">
+</audio>
+
+  <div id="container">
+    <div id="tables">
+      <table>
+        <tr>
+          <td id="not"></td>
+          <td id="not"></td>
+          <td id="not"></td>
+          <td id="not"></td>
+
+          <td class="num1"></td>
+
+          <td id="not"></td>
+
+          <td id="not"></td>
+        </tr>
+
+        <tr>
+          <td id="not"></td>
+          <td id="not"></td>
+          <td id="not"></td>
+          <td id="not"></td>
+
+          <td class="num1"></td>
+
+          <td id="not"></td>
+
+          <td id="not"></td>
+        </tr>
+
+        <tr>
+          <td id="not"></td>
+          <td id="not"></td>
+          <td id="not"></td>
+
+          <td id="num2"></td>
+          <td id="num2" class="num1"></td>
+          <td id="num2"></td>
+          <td id="num2" class="num3"></td>
+        </tr>
+        <tr>
+          <td id="not"></td>
+          <td id="not"></td>
+          <td id="not"></td>
+          <td id="not"></td>
+
+          <td class="num1"></td>
+
+          <td id="not"></td>
+          <td id="not"></td>
+        </tr>
+        <tr>
+          <td id="num4" class="num5"></td>
+          <td id="num4"></td>
+          <td id="num4"></td>
+          <td id="num4"></td>
+          <td class="num1" id="num4"></td>
+          <td id="num4"></td>
+
+          <td id="not"></td>
+        </tr>
+        <tr>
+          <td class="num5"></td>
+
+          <td id="not"></td>
+          <td id="not">3</td>
+          <td id="not">4</td>
+          <td id="not">5</td>
+          <td id="not">6</td>
+          <td id="not"></td>
+        </tr>
+        <tr>
+          <td class="num5" id="num6"></td>
+          <td id="num6"></td>
+          <td id="num6"></td>
+          <td id="num6"></td>
+
+          <td id="not">2</td>
+          <td id="not">3</td>
+          <td id="not">4</td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="circles">
+      <div id="header">
+        <h1 id="score">Score: 0</h1>
+        <h1 id="life">Chances: 5</h1>
+      </div>
+      <div id="answerPlace">
+        <div class="placeHolder"></div>
+        <div class="placeHolder"></div>
+        <div class="placeHolder"></div>
+        <div class="placeHolder"></div>
+        <div class="placeHolder"></div>
+        <div class="placeHolder"></div>
+      </div>
+
+      <div id="choices">
+        <div class="letter" id="topE">E</div>
+
+        <div id="RAndY">
+          <div class="letter" id="R">R</div>
+          <div class="letter" id="Y">Y</div>
+        </div>
+
+        <div id="GandN">
+          <div class="letter" id="G">G</div>
+          <div class="letter" id="N">N</div>
+        </div>
+
+        <div class="letter" id="bottomE">E</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="bott">
+    <button id="Hints" onclick="">Hints</button>
+    <button id="submit" onclick="submitButton()">Submit</button>
+    <button id="retry" onclick="retryButton()">Retry</button>
+  </div>
+  <script src="/trailingMouseEffect/trailingMouse.js"></script>
+
+  <script>
+    let num1 = document.querySelectorAll(".num1");
+    let num2 = document.querySelectorAll("#num2");
+    let num3 = document.querySelectorAll(".num3");
+    let num4 = document.querySelectorAll("#num4");
+    let num5 = document.querySelectorAll(".num5");
+    let num6 = document.querySelectorAll("#num6");
+    let retry = document.getElementById("retry");
+    let score = document.getElementById("score");
+    let lifeStatus = document.getElementById("life");
+    let placeHold = document.querySelectorAll(".placeHolder");
+    let letters = document.querySelectorAll(".letter");
+    var attemptAns = [];
+    var chances = 5;
+    var index = 0;
+    // always initialize the score to avoid the null value at the end of the game
+    var currentScoreValue = 0;
+    localStorage.setItem( "crossWordScore", currentScoreValue.toString());
+    let numAns1 = "GREEN";
+    let numAns2 = "GENE";
+    let numAns4 = "ENERGY";
+    let numAns5 = "ERG";
+    let numAns6 = "GREY";
+    let correctAnsSound = document.getElementById("correctAnsAud");
+
+
+    let musicBG = document.getElementById('audio');
+        let musicCorrect = document.getElementById('correctAnsAud')
+        let musicStat = localStorage.getItem('playMusicInfo');
+        
+          window.addEventListener('load', function () {
+            if (parseInt(musicStat)) {
+                musicBG.play();
+            }
+        });
+
+    function createAudioElement() {
+      var audio = document.createElement("audio");
+      audio.id = "touchSound";
+
+      var sourceMP3 = document.createElement("source");
+      sourceMP3.src = "pop-sound-effect-197846.mp3"; // this one should be link to the eaysy game chem
+      sourceMP3.type = "audio/mpeg";
+
+      var sourceOGG = document.createElement("source");
+      sourceOGG.src = "pop-sound-effect-197846.mp3"; // this one should be link to the eaysy game chem
+      sourceOGG.type = "audio/ogg";
+
+      audio.appendChild(sourceMP3);
+      audio.appendChild(sourceOGG);
+
+      document.body.appendChild(audio);
+    }
+
+    function addClickListener() {
+      window.addEventListener("click", function () {
+        var music = document.getElementById("touchSound");
+        music.play();
+      });
+    }
+    function mouseEnterEventSound() {
+      letters.forEach((elem) => {
+        elem.addEventListener("mouseenter", function () {
+          var music = document.getElementById("touchSound");
+          music.play();
+        });
+      });
+    }
+    createAudioElement();
+    addClickListener();
+
+
+    letters.forEach((element) => {
+      element.addEventListener("mouseenter", function (event) {
+        let placeToHold = event.target;
+        createAudioElement(); // initiate the music touch sounds
+        mouseEnterEventSound(); // done
+        if (placeToHold.style.fontSize !== "90px") {
+          placeToHold.style.fontSize = "90px";
+          placeHold[index].textContent = placeToHold.textContent;
+          attemptAns.push(placeHold.textContent);
+          placeHold.textContent = placeToHold.textContent;
+          console.log(
+            `this is the letter got entered: ${placeHold.textContent}`
+          );
+          index++;
+          if (index > 7) {
+            placeHold.forEach((valueToRemove) => {
+              valueToRemove.textContent = "";
+            });
+            index = 0;
+          }
+        }
+      });
+    });
+    retry.addEventListener("mouseenter", function () {
+      retryButton();
+    });
+    const answersList = {
+      num1: "GREEN",
+      num2: "GENE",
+      num4: "ENERGY",
+      num5: "ERG",
+      num6: "GREY",
+    };
+    // initialize the place holder
+
+
+
+    /*
+       function submitButton() {
+          let ansFromThePlaceHolder = '';
+          placeHold.forEach(values => {
+              ansFromThePlaceHolder += values.textContent;
+          })
+          for (x in answersList) {
+              if (ansFromThePlaceHolder === answersList[x]) {
+                  currentScoreValue += 5;
+                  // when the ERG OR other correct answer are correct sometimes it was not adding to 5
+                  // it was in order if the answer are not in order it will not be computed
+                  console.log(answersList[x]);
+                  score.textContent = `Score: ${currentScoreValue}`;
+                  // apply some sounds here
+                  if (currentScoreValue === 25) {
+                      localStorage.setItem('crossWordScore', currentScoreValue.toString());
+                      window.location.href = '/Home/Medium/mediumTemplate.html'
+                  }
+                  delete answersList[x];
+                  break;
+              }
+              else {
+                  chances--;
+                  if (chances === 0) {
+                      localStorage.setItem('crossWordScore', currentScoreValue.toString());
+                      window.location.href = '/Home/Medium/mediumTemplate.html'
+                  }
+                  lifeStatus.textContent = `Chance: ${chances}`;
+                  break;
+              }
+          }
+          
+
+          console.log(`This is the selected choices: ${ansFromThePlaceHolder}`)
+          letters.forEach(letter => {
+              letter.style.fontSize = '60px';
+          })
+          placeHold.forEach(values => {
+              values.textContent = '';
+          })
+          index = 0;
+      }
+
+      */
+    // WILL CHANGE THIS LATER
+
+    function retryButton() {
+      letters.forEach((values) => {
+        values.style.fontSize = "50px";
+      });
+      placeHold.forEach((values) => {
+        values.textContent = "";
+      });
+      attemptAns.length = 0;
+      index = 0;
+    }
+
+    function checkedNextPage(chances, currentScoreValue) {
+      if (chances === 0) {
+        window.location.href = "/Home/Medium/medium.html";
+      } else if (currentScoreValue === 25) {
+        window.location.href = "/Home/Medium/medium.html";
+      }
+    }
+    checkedNextPage(chances, currentScoreValue);
+
+
+
+
+    function submitButton() {
+      let ansFromThePlaceHolder = "";
+      placeHold.forEach((values) => {
+        ansFromThePlaceHolder += values.textContent;
+      });
+
+      let found = false; // Flag to check if the answer was found
+
+      for (let x in answersList) {
+        if (ansFromThePlaceHolder === answersList[x]) {
+          currentScoreValue += 5;
+          if (parseInt(musicStat)) {
+            correctAnsSound.play();
+            }
+          score.textContent = `Score: ${currentScoreValue}`;
+          if (currentScoreValue === 25) {
+            localStorage.setItem(
+              "crossWordScore",
+              currentScoreValue.toString()
+            );
+            window.location.href = "/Home/Medium/mediumTemplate2.html";
+          }
+          switch (ansFromThePlaceHolder) {
+            case numAns1:
+              num1.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+
+            case numAns2:
+              num2.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+
+            case numAns4:
+              num4.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+            case numAns5:
+              num5.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+
+            case numAns6:
+              num6.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+            default:
+              break;
+          }
+          found = true; // Set the flag to true since we found the answer
+          delete answersList[x]; // Remove the found answer from the list
+          break; // Exit the loop after finding and handling the correct answer
+        }
+      }
+
+      if (!found) {
+        // Handle the case when the answer is not found
+        chances--;
+        if (chances === 0) {
+          localStorage.setItem("crossWordScore",currentScoreValue.toString());
+          window.location.href = "/Home/Medium/mediumTemplate2.html";
+        }
+        lifeStatus.textContent = `Chances: ${chances}`;
+        if (chances === 0) {
+          localStorage.setItem(
+            "crossWordScore",
+            currentScoreValue.toString()
+          );
+          window.location.href = "/Home/Medium/mediumTemplate2.html";
+        }
+      }
+
+      // Reset the placeholders and font size for the next attempt
+      letters.forEach((letter) => {
+        letter.style.fontSize = "60px";
+      });
+      placeHold.forEach((value) => {
+        value.textContent = "";
+      });
+      index = 0;
+    }
+
+    /*
+
+ 
+
+
+OLD
+
+function submitButton() {
+      let ansFromThePlaceHolder = "";
+      placeHold.forEach((values) => {
+        ansFromThePlaceHolder += values.textContent;
+      });
+
+      let found = false; // Flag to check if the answer was found
+
+      for (let x in answersList) {
+        if (ansFromThePlaceHolder === answersList[x]) {
+          currentScoreValue += 5;
+          correctAnsSound.play();
+          score.textContent = `Score: ${currentScoreValue}`;
+          if (currentScoreValue === 25) {
+            localStorage.setItem(
+              "crossWordScore",
+              currentScoreValue.toString()
+            );
+            window.location.href = "/Home/Medium/mediumTemplate.html";
+          }
+          switch (ansFromThePlaceHolder) {
+            case numAns1:
+              num1.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+
+            case numAns2:
+              num2.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+
+            case numAns4:
+              num4.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+            case numAns5:
+              num5.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+
+            case numAns6:
+              num6.forEach((box, index) => {
+                box.textContent = ansFromThePlaceHolder[index];
+                box.style.backgroundColor = "green";
+                box.style.color = "white";
+                box.style.fontSize = "20px";
+                box.style.fontWeight = "500";
+              });
+              break;
+            default:
+              break;
+          }
+          found = true; // Set the flag to true since we found the answer
+          delete answersList[x]; // Remove the found answer from the list
+          break; // Exit the loop after finding and handling the correct answer
+        }
+      }
+
+      if (!found) {
+        // Handle the case when the answer is not found
+        chances--;
+        if (chances === 0) {
+          localStorage.setItem(
+            "crossWordScore",
+            currentScoreValue.toString()
+          );
+          window.location.href = "/Home/Medium/mediumTemplate.html";
+        }
+        lifeStatus.textContent = `Chance: ${chances}`;
+        if (chances === 0) {
+          localStorage.setItem(
+            "crossWordScore",
+            currentScoreValue.toString()
+          );
+          window.location.href = "/Home/Medium/mediumTemplate.html";
+        }
+      }
+
+      // Reset the placeholders and font size for the next attempt
+      letters.forEach((letter) => {
+        letter.style.fontSize = "60px";
+      });
+      placeHold.forEach((value) => {
+        value.textContent = "";
+      });
+      index = 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function submitButton() {
+      let ansFromThePlaceHolder = "";
+      placeHold.forEach((values) => {
+        ansFromThePlaceHolder += values.textContent;
+      });
+
+      let found = false; // Flag to check if the answer was found
+
+      for (let i = 0; i < answersList.length; i++) {
+        if (ansFromThePlaceHolder === answersList[i]) {
+          currentScoreValue += 5;
+          correctAnsSound.play();
+          score.textContent = `Score: ${currentScoreValue}`;
+
+          // Check for winning condition
+          if (currentScoreValue === 25) {
+            localStorage.setItem(
+              "crossWordScore",
+              currentScoreValue.toString()
+            );
+            window.location.href = "/Home/Medium/mediumTemplate.html";
+            return; // Exit function after redirecting
+          }
+
+          // Handle correct answer case
+          switch (ansFromThePlaceHolder) {
+            case numAns1:
+              updateBoxes(num1, ansFromThePlaceHolder);
+              break;
+            case numAns2:
+              updateBoxes(num2, ansFromThePlaceHolder);
+              break;
+            case numAns4:
+              updateBoxes(num4, ansFromThePlaceHolder);
+              break;
+            case numAns5:
+              updateBoxes(num5, ansFromThePlaceHolder);
+              break;
+            case numAns6:
+              updateBoxes(num6, ansFromThePlaceHolder);
+              break;
+            default:
+              break;
+          }
+
+          found = true; // Set the flag to true since we found the answer
+          answersList.splice(i, 1); // Remove the found answer from the list
+          break; // Exit the loop after finding and handling the correct answer
+        }
+      }
+
+      if (!found) {
+        // Handle the case when the answer is not found
+        chances--;
+        if (chances === 0) {
+          localStorage.setItem(
+            "crossWordScore",
+            currentScoreValue.toString()
+          );
+          window.location.href = "/Home/Medium/mediumTemplate.html";
+          return; // Exit function after redirecting
+        }
+        lifeStatus.textContent = `Chance: ${chances}`;
+      }
+
+      // Reset the placeholders and font size for the next attempt
+      letters.forEach((letter) => {
+        letter.style.fontSize = "60px";
+      });
+      placeHold.forEach((value) => {
+        value.textContent = "";
+      });
+      index = 0;
+    }
+
+    function updateBoxes(boxes, answer) {
+      boxes.forEach((box, index) => {
+        box.textContent = answer[index];
+        box.style.backgroundColor = "green";
+        box.style.color = "white";
+        box.style.fontSize = "20px";
+        box.style.fontWeight = "500";
+      });
+    }
+
+
+
+
+
+
+
+
+  // correct sounds 
+
+
+      
+      
+      */
+  </script>
+<script src="../touchSound.js"></script>
+
+</body>
+
+</html>

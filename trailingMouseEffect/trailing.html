@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotating Diamond Mouse Trail</title>
+<style>
+  @keyframes rotate {
+    0% {
+      transform: rotate(0) scale(0);
+    }
+    50% {
+      transform: rotate(180deg) scale(1);
+    }
+    100% {
+      transform: rotate(360deg) scale(0);
+    }
+  }
+
+  .trail {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background-color: rgb(174, 0, 208);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.2s;
+    /* Create a diamond shape */
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+</style>
+</head>
+<body>
+
+<script>
+  // Function to create a trail element
+  function createTrailElement(x, y) {
+    const trail = document.createElement('body');
+    trail.classList.add('trail');
+    trail.style.left = (x - 5) + 'px'; // Center the trail on the cursor
+    trail.style.top = (y - 5) + 'px';
+    document.body.appendChild(trail);
+
+    // Apply the rotation animation
+    trail.style.animation = 'rotate 0.5s linear forwards';
+
+    // Fade out the trail element after a short delay
+    setTimeout(() => {
+      trail.style.opacity = '0';
+      setTimeout(() => {
+        document.body.removeChild(trail);
+      }, 200); // Match the duration of the opacity transition
+    }, 300); // Start fading out after 300ms
+  }
+
+  // Event listener for mouse movement
+  document.addEventListener('mousemove', (e) => {
+    createTrailElement(e.pageX, e.pageY);
+  });
+</script>
+
+</body>
+</html>

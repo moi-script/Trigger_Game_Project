@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Octagon</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            color: white;
+        }
+
+        .octagon {
+            width: 200px;
+            height: 200px;
+            background-color: black;
+            border: 4px solid rgb(0, 0, 0);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .octagon h1 {
+            color: white;
+        }
+
+        .first {
+            position: relative;
+            top: 60px;
+            left: 20px;
+        }
+
+        .second {
+            position: relative;
+            top: 90px;
+            left: 55px;
+        }
+
+        .third {
+            position: relative;
+            top: 60px;
+            left: 100px;
+        }
+
+        .fourth {
+            position: relative;
+            top: 5px;
+            left: 105px;
+        }
+
+        .fifth {
+            position: relative;
+            top: -60px;
+            left: 55px;
+        }
+
+        .sixth {
+            position: relative;
+            top: -90px;
+            left: -30px;
+        }
+
+        .seventh {
+            position: relative;
+            top: -70px;
+            left: -120px;
+        }
+
+        .eignth {
+            position: relative;
+            left: -170px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        
+
+
+        </div>
+
+    </div>
+    <script>
+       function createOctagon() {
+            const parentContainer = document.getElementById('container');
+            const childDiv = document.createElement('div');
+            childDiv.className = 'octagon';
+            parentContainer.appendChild(childDiv);
+            const container = document.querySelector('.octagon');
+
+            const child1 = document.createElement('h1');
+            child1.className = 'first';
+            child1.textContent = 'A';
+            container.appendChild(child1);
+
+            const secondChild = document.createElement('h1');
+            secondChild.className = 'second';
+            secondChild.textContent = 'B';
+            container.appendChild(secondChild);
+
+            const thirdChild = document.createElement('h1');
+            thirdChild.className = 'third';
+            thirdChild.textContent = 'C';
+            container.appendChild(thirdChild);
+
+            const fourthChild = document.createElement('h1');
+            fourthChild.className = 'fourth';
+            fourthChild.textContent = 'D';
+            container.appendChild(fourthChild);
+
+            const fifthChild = document.createElement('h1');
+            fifthChild.className = 'fifth';
+            fifthChild.textContent = 'E';
+            container.appendChild(fifthChild);
+
+            const sixthChild = document.createElement('h1');
+            sixthChild.className = 'sixth';
+            sixthChild.textContent = 'F';
+            container.appendChild(sixthChild);
+
+            const seventhChild = document.createElement('h1');
+            seventhChild.className = 'seventh';
+            seventhChild.textContent = 'G';
+            container.appendChild(seventhChild);
+
+            const eighthChild = document.createElement('h1');
+            eighthChild.className = 'eignth';
+            eighthChild.textContent = 'H';
+            container.appendChild(eighthChild);
+        }
+      createOctagon();
+
+    </script>
+</body>
+
+</html>

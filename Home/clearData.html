@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Interface</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        #container{
+            width: 40%;
+            height: 60%;
+        }
+    </style>
+</head>
+<body>
+    
+   <div id="container">
+    <label for="Passcode">Password</label>
+    <input type="text" id="input" placeholder="Passcode"><br>
+    <input type="submit" id="submitButton" value="delete">
+
+   </div>
+
+   <script>
+    let input = document.getElementById('input');
+    let button = document.getElementById('submitButton');
+    const Password = 123123123;
+    button.addEventListener('click', function(){
+        if((input.value).toString() === '123123123'){
+            localStorage.clear();
+            alert('Your local Storage has ben cleared');
+        }
+        else {
+            alert('Wrong passcode');
+        }
+    })
+
+   </script>
+</body>
+</html>

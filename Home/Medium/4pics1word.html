@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4 pics</title>
+  <link rel="icon" type="image/png" href="../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    #parentContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding-top:1%;
+      background-image: url('./MediumGamesImg/thuja-7382049_640.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding-bottom: 30px;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+    }
+
+    .detailsDescription {
+      width: 90vw;
+      height: 10vh;
+      border: .2px solid white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 15px;
+    }
+
+    .detailsDescription>p {
+      color: white;
+      font-size: 2em;
+      padding: 20%;
+
+    }
+
+    .imagesContainer {
+      width: 80%;
+      height: 30%;
+      background-size: cover;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      border-radius: 15px;
+    }
+
+    .row1,
+    .row2 {
+      width: 75%;
+      height: 20%;
+      background-color: transparent;
+      padding: 10px;
+    }
+
+    .answerPlaceHolder {
+      width: 100%;
+      height: 20%;
+      background-color: transparent;
+      padding: 10px;
+    }
+
+    .answerPlaceHolder {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin: 10px;
+    }
+
+    .placeHold {
+      width: 5%;
+      height: 90%;
+      font-size: 3em;
+      color: white;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+      border-bottom: 2px solid white;
+      border-right: 2px solid white;
+      text-shadow: 1px 5px 4px rgba(0, 0, 0, 0.911) ;
+
+      box-shadow: 3px 6px 7px rgba(0, 0, 0, 0.911);
+    }
+
+    .row1,
+    .row2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    button {
+      font-size: 2.5em;
+      width: 13vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 13vh;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
+      margin-bottom: 40px;
+      color: #ffffff;
+      background-color: transparent;
+      border: .2px solid white;
+      border-radius: 10px;
+      text-shadow: 1px 4px 1px black;
+      box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      outline: none;
+    }
+
+    button:hover {
+      font-size: 50px;
+      background-color: rgb(253, 222, 85);
+      box-shadow: 0px 15px 20px rgb(254, 239, 173);
+      color: rgb(0, 0, 0);
+      transform: translateY(-15px);
+    }
+
+    button:active {
+      transform: translateY(-1px);
+    }
+
+    .footer {
+      width: 95vw;
+      height: 7vh;
+      border-radius: 15px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    #submit,
+    #clear,
+    #clearLast {
+      font-size: 20px;
+      width: 50%;
+      display: flex;
+      margin: 70px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 70%;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
+      margin-bottom: 40px;
+      color: #ffffff;
+      border: .2px solid white;
+      background-color:transparent;
+      border-radius: 10px;
+      box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      outline: none;
+    }
+
+    #submit:hover,
+    #clear:hover,
+    #clearLast:hover {
+      font-size: 30px;
+      background-color: rgb(253, 222, 85);
+      box-shadow: 0px 15px 20px rgb(254, 239, 173);
+      color: rgb(0, 0, 0);
+      transform: translateY(-15px);
+    }
+
+    #submit:active,
+    #clear:active,
+    #clearLast:active {
+      transform: translateY(-1px);
+
+    }
+
+    img {
+      width: 15%;
+      border-radius: 15px;
+      box-shadow: 1px 6px 16px rgba(1, 10, 19, 0.875);
+
+    
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <audio id="correctAnsAud">
+    <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/mpeg" />
+    <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/ogg" />
+  </audio>
+
+  <audio id="audio" loop>
+    <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/mpeg">
+    <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/ogg">
+</audio>
+
+
+
+
+  <div id="parentContainer">
+
+    <div class="detailsDescription">
+      <p id="score">Score: 0</p>
+      <p id="timeLeft">Time left: </p>
+
+    </div>
+
+    <div class="imagesContainer">
+      <img class="images" src="" alt="" />
+      <img class="images" src="" alt="" />
+      <img class="images" src="" alt="" />
+      <img class="images" src="" alt="" />
+    </div>
+
+    <div class="answerPlaceHolder" id="answerPlaceHolder">
+
+    </div>
+
+     <!--
+     
+         <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+      <div class="placeHold"></div>
+  
+    -->
+   
+
+    <div class="row1">
+      <button onclick="" class="btn">1</button>
+      <button onclick="" class="btn">2</button>
+      <button onclick="" class="btn">3</button>
+      <button onclick="" class="btn">4</button>
+      <button onclick="" class="btn">5</button>
+      <button onclick="" class="btn">6</button>
+    </div>
+
+    <div class="row2">
+      <button onclick="" class="btn">1</button>
+      <button onclick="" class="btn">2</button>
+      <button onclick="" class="btn">3</button>
+      <button onclick="" class="btn">4</button>
+      <button onclick="" class="btn">5</button>
+      <button onclick="" class="btn">6</button>
+    </div>
+    <div class="footer">
+      <button onclick="" id="submit">Submit</button>
+      <button onclick="" id="clear">Clear</button>
+      <button onclick="deleteLast()" id="clearLast"> <- </button>
+
+    </div>
+  </div>
+
+  <a
+    href="/Home/Medium/4pics1WordImg/4pics 1 word/STATISTICS/Screenshot_2024-06-07-08-27-08-64_680d03679600f7af0b4c700c6b270fe7.jpg"></a>
+
+  <script>
+
+    var buttons = document.querySelectorAll('.btn');
+    let placeHolder = document.querySelectorAll('.placeHold');
+    var score = document.getElementById('score');
+    var timeLeft = document.getElementById('timeLeft');
+    var images = document.querySelectorAll('.images');
+    var submitButton = document.getElementById('submit');
+    var clearButton = document.getElementById('clear');
+
+
+    var turns = 0;
+    var index = 0;
+    let musicBG = document.getElementById('audio');
+        let musicCorrect = document.getElementById('correctAnsAud')
+        let musicStat = localStorage.getItem('playMusicInfo');
+        
+          window.addEventListener('load', function () {
+            if (parseInt(musicStat)) {
+                musicBG.play();
+            
+            }
+        });
+    let correctAnsSound = document.getElementById("correctAnsAud");
+    let recordedIndex = [];
+
+    // objects to initialize different answers
+    const answerList = [
+      "VERTEX", "INTERSECTION", "UNIVERSAL", "STATISTICS"
+    ];
+
+    // objects to initialize different inputs Value
+
+    const distributors = [
+      "EXVPOEZTSQRF", "NERTESITCOIN", "VLUSIENEQRAL", "TSMITSRCATIS"
+    ];
+
+
+/*
+
+    <div class="answerPlaceHolder" id="answerPlaceHolder">
+  
+    </div>
+
+
+*/
+var containerPlaceHolder = document.getElementById('answerPlaceHolder');
+    
+    function disTributeDivPlaceHolder(pLength){
+      for(var i=0; i<pLength; i++){
+        const childDiv = document.createElement('div');
+              childDiv.className = 'placeHold';
+              containerPlaceHolder.appendChild(childDiv);
+        // when i try this to console it says undefined which as far as i know the selected
+       // placeHolder[i].innerHTML = "Looll";
+
+      }
+    }
+
+    function updateChildDivs(newValue) {
+            const childDivs = document.querySelectorAll('.placeHold');
+            childDivs.forEach((div, index) => {
+                //div.textContent = `${index + 1}`;
+            });
+        }
+
+    function deleteContainerPlaceHolder(pLength){
+      const childDivs = document.querySelectorAll('.placeHold');
+      const container = document.getElementById('answerPlaceHolder');
+      for(let i=0; i<pLength; i++){
+        container.removeChild(childDivs[i]);
+        console.log('WIll i get removed');
+      }
+      console.log('This function is executed');
+    }
+
+    disTributeDivPlaceHolder(answerList[turns].length);
+    updateChildDivs();
+
+    // objects to initialize different imagesSources
+   
+
+    const imagesList = [
+      ["/Home/Medium/4pics1WordImg/4pics 1 word/Vertex/Screenshot_2024-06-07-08-18-04-94_680d03679600f7af0b4c700c6b270fe7.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Vertex/Screenshot_2024-06-07-08-18-28-57_680d03679600f7af0b4c700c6b270fe7.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Vertex/Screenshot_2024-06-07-08-18-54-26_680d03679600f7af0b4c700c6b270fe7.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Vertex/Screenshot_2024-06-07-08-19-28-57_680d03679600f7af0b4c700c6b270fe7.jpg"
+      ],
+      [
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Intersection/737ddbc85590652f406134b713c286e8.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Intersection/8674508af0f9ce2b5d597446db07494e.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Intersection/996304c26ccc3bf1ee4a3f4dca243e79.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Intersection/a0b6981bcc210ece6a0eddc9fa50e9f0.jpg"
+      ],
+      [
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Universal/42f81761c0e2ecd7676bdbdc0661907f.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Universal/e784c5669cfa7fd9e5c56b6fff5cc3a4.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Universal/f445f114df428c0700b0f61417c1e5aa.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/Universal/Screenshot_2024-06-07-08-34-43-42_680d03679600f7af0b4c700c6b270fe7.jpg"
+      ],
+      [
+        "/Home/Medium/4pics1WordImg/4pics 1 word/STATISTICS/80cea13dab58804b0f5f1daa8781e47c.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/STATISTICS/Screenshot_2024-06-07-08-21-42-74_680d03679600f7af0b4c700c6b270fe7.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/STATISTICS/Screenshot_2024-06-07-08-25-30-56_680d03679600f7af0b4c700c6b270fe7.jpg",
+        "/Home/Medium/4pics1WordImg/4pics 1 word/STATISTICS/Screenshot_2024-06-07-08-27-08-64_680d03679600f7af0b4c700c6b270fe7.jpg"
+      ]
+    ];
+
+    // initilize the global variable to use 
+    
+    
+    // always initiallize the score to avoid the null value at the end of game
+    var scorePoint = 0;
+    localStorage.setItem('4picsTotalScore', scorePoint.toString());
+    
+    var indexToGetLast = 0;
+    var isFinished = false;
+
+     // initialize the place holder base on the length of answer list
+     //disTributeDivPlaceHolder(answerList[turns].length);
+
+    function displayImages(turn) {
+      images.forEach(img => {
+        img.src = imagesList[turn];
+      });
+    }
+    function displayImages(turn) {
+      let images = document.querySelectorAll('.images');
+      images.forEach((img, index) => {
+        img.src = imagesList[turn][index];
+      });
+    }
+
+    function displayInputValue(turn) {
+      buttons.forEach((buttonVal, index) => {
+        buttonVal.textContent = distributors[turn][index];
+      });
+    }
+
+    function clearInputValue() {
+      const placeHolder = document.querySelectorAll('.placeHold')
+      placeHolder.forEach(values => {
+        values.textContent = '';
+      });
+    }
+
+    function getInput() {
+      const childDivs = document.querySelectorAll('.placeHold');
+
+      let userAnswer = '';
+      childDivs.forEach(placeValue => {
+        userAnswer += placeValue.textContent;
+      });
+      return userAnswer;
+    }
+
+    function checkAnswer(userAnswer, turns) {
+      if (userAnswer === answerList[turns]) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
+    function displayScore(scoreValue) {
+      score.textContent = `Score: ${scoreValue}`;
+    }
+
+    let seconds = 120;
+    window.addEventListener('load', function () {
+      let interval = setInterval(() => {
+        timeLeft.textContent = `Time left: ${seconds}`;
+        seconds--;
+        if(seconds < 0){
+          alert('Done');
+          window.location.href = "./mediumTemplate.html";
+
+        }
+      }, 1000);
+    });
+    
+    function createAudioElement() {
+      var audio = document.createElement("audio");
+      audio.id = "touchSound";
+
+      var sourceMP3 = document.createElement("source");
+      sourceMP3.src = "pop-sound-effect-197846.mp3"; // this one should be link to the eaysy game chem
+      sourceMP3.type = "audio/mpeg";
+
+      var sourceOGG = document.createElement("source");
+      sourceOGG.src = "pop-sound-effect-197846.mp3"; // this one should be link to the eaysy game chem
+      sourceOGG.type = "audio/ogg";
+
+      audio.appendChild(sourceMP3);
+      audio.appendChild(sourceOGG);
+
+      document.body.appendChild(audio);
+    }
+
+    function addClickListener() {
+      window.addEventListener("click", function () {
+        var music = document.getElementById("touchSound");
+        music.play();
+      });
+    }
+
+
+    createAudioElement();
+    addClickListener();
+    displayImages(turns);
+    displayInputValue(turns);
+    displayScore(scorePoint);
+
+    
+
+
+    function resetButtons() {
+      index = 0;
+      buttons.forEach(btn => {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+      });
+    }
+
+
+
+    function deleteLast() {
+      let found;
+      const childDivs = document.querySelectorAll('.placeHold');
+
+      let n = recordedIndex.length - 1;
+      for (let i = 0; i < childDivs.length; i++) {
+        if (childDivs[i].textContent === '') {
+          found = i;
+          childDivs[i - 1].textContent = '';
+          index--;
+          break;
+        }
+      }
+      buttons.forEach((elem, index) => {
+        if (index === recordedIndex[n]) {
+          elem.style.opacity = '1';
+          elem.disabled = false;
+          recordedIndex.pop();
+        }
+      })
+
+      console.log(`This is the index found ${found}`);
+      // there was an error here;
+    }
+
+
+
+
+
+    // making the button last click opacity back to 1
+
+    // Define a function to handle button clicks
+    function handleClick(event, btnIndex) {
+      // Access the last button clicked using event.target
+      let lastButtonClicked = event.target;
+      indexToGetLast = btnIndex;
+      recordedIndex.push(indexToGetLast);
+      console.log(recordedIndex);
+      console.log(`Last button click at index: ${btnIndex}`, lastButtonClicked.textContent);
+    }
+
+    // Get all buttons and attach a click event listener to each
+    buttons.forEach((button, btnIndex) => {
+      button.addEventListener('click', (event) => {
+        handleClick(event, btnIndex);
+      });
+    });
+
+
+
+
+    function connectButtonToPlaceHolder(index, buttonValue) {
+      const childDivs = document.querySelectorAll('.placeHold');
+      childDivs.forEach((value, num) => {
+        if (index === num) {
+          value.textContent = buttonValue;
+        }
+      });
+    }
+
+
+    buttons.forEach((btn, btnNum) => {
+      btn.addEventListener('click', function () {
+        let buttonValue = btn.textContent;
+        connectButtonToPlaceHolder(index, buttonValue);
+        index++;
+        btn.style.opacity = '0.4';
+        btn.disabled = true;
+
+      });
+    });
+
+    clearButton.addEventListener('click', function () {
+      resetButtons();
+      clearInputValue();
+
+    });
+
+    submitButton.addEventListener('click', function () {
+      let answer = getInput();
+      if (checkAnswer(answer, turns)) {
+        if (parseInt(musicStat)) {
+          correctAnsSound.play();
+          }
+        console.log("This is trueeeee");
+        scorePoint += 5;
+        deleteContainerPlaceHolder(answerList[turns].length);
+        turns++;
+       // disTributeDivPlaceHolder(answerList[turns]);
+        if (turns === 4) {
+          correctAnsSound.play();
+          localStorage.setItem('4picsTotalScore', scorePoint.toString());
+          window.location.href = "./mediumTemplate.html";
+        }
+        else {
+        disTributeDivPlaceHolder(answerList[turns].length);
+          correctAnsSound.play();
+          localStorage.setItem('4picsTotalScore', scorePoint.toString());
+          displayScore(scorePoint);
+          displayImages(turns);
+          displayInputValue(turns);
+          clearInputValue();
+          resetButtons();
+        }
+      }
+      else {
+        const placeHolder = document.querySelectorAll('.placeHold');
+        placeHolder.forEach(holder => {
+          holder.style.backgroundColor = 'red';
+          seconds -= 5;
+        });
+        setTimeout(function () {
+          placeHolder.forEach(holder => {
+            holder.style.backgroundColor = 'transparent';
+          });
+        }, 900);
+        clearInputValue();
+        resetButtons();
+
+      }
+    });
+
+
+
+
+
+    /*
+        connectButtonToPlaceHolder(index, buttonValue);
+        index++;
+    submitButton.addEventListener('click', function(){
+      let answer = getInput();
+     
+
+      // getInput
+      // displayImage
+      // display input value
+      // check answers
+      // display score
+      if(checkAnswer()){
+        // score increment;
+        turns++;
+        displayImages(turns);
+       displayInputValue(turns);
+      }
+    
+    })
+    */
+
+    // condition when appending and deleting a child when a certain turns are in in the proccess
+
+
+
+
+
+
+
+
+  </script>
+<script src="../touchSound.js"></script>
+
+</body>
+
+</html>

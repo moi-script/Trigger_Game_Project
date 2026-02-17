@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++</title>
+    <link rel="stylesheet" href="../../../BackgroundDesign/designs.css">
+    <link rel="stylesheet" href="../../../trailingMouseEffect/trailsEffect.css">
+    <link rel="icon" type="image/png" href="../../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            font-weight: 500;
+            user-select: none;
+            font-family: "Permanent Marker", cursive;
+
+        }
+
+        body {
+            background-image: url('./ProgrammingImg/origGrif.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .headers {
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 90%;
+            height: 40%;
+            background-image: url('./ProgrammingImg/3253b657b173887057d956a73846b71e.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            box-shadow: var(--shadow);
+            border-radius: 15px;
+            font-size: 20px;
+
+        }
+
+        .choices {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 10px;
+            height:50%;
+        }
+
+        .ch {
+            border-radius: 30px;
+            width: 200px;
+            height: 200px;
+            border: none;
+            font-size: 35px;
+            opacity: .8;
+            margin: 10px;
+        }
+
+        pre {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .Score,
+        .timeLeft {
+            font-size: 45px;
+        }
+
+        button {
+            font-size: 7px;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #ffffff;
+            border: none;
+            background-color: rgb(35, 39, 39);
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            font-size: 27px;
+            background-color: rgb(255, 225, 92);
+            box-shadow: 0px 15px 20px rgb(249, 249, 249);
+            color: #898989;
+            transform: translateY(-7px);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="headers">
+        <div id="Score" class="Score">Score: 0 </div>
+        <pre id="q1" class="q1">Something question here </pre>
+        <div id="timeLeft" class="timeLeft">Time left</div>
+    </div>
+    <div class="choices">
+        <button id="item-1" class="ch"></button>
+        <button id="item-2" class="ch"></button>
+        <button id="item-3" class="ch"></button>
+        <button id="item-4" class="ch"></button>
+    </div>
+
+    <audio id="audioBackground" loop>
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/answeringQuestionSound.wav" type="audio/ogg">
+    </audio>
+
+    <audio id="correctAnsAud">
+        <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/mixkit-game-experience-level-increased-2062.wav" type="audio/ogg">
+    </audio>
+
+
+
+
+
+    <script>
+        let correctAnsSound = document.getElementById('correctAnsAud');
+        let scoreprog = 0;
+        localStorage.setItem('scoreprog', scoreprog.toString());
+
+
+
+        let MUSICINFO = localStorage.getItem('playMusicInfo');
+        let MUSICBACKGROUND = document.getElementById('audioBackground');
+
+
+        function checkMusicBackground(music) {
+            let convertedToInt = parseInt(music);
+            if (convertedToInt) {
+                MUSICBACKGROUND.play();
+            }
+        }
+
+        checkMusicBackground(MUSICINFO);
+
+
+        class Mechanics {
+            constructor(countDownTime, questions, choices, correctAnswers) {
+                this.correctAnswers = correctAnswers;
+                this.countDownTime = countDownTime;
+                this.initialCountDownTime = countDownTime; // Store the initial countdown time
+                this.questionCount = 0; // Initialize the question count
+                this.choices = choices;
+                this.questions = questions; // Store the question list
+                this.totalQuestions = Object.keys(questions).length; // Get the total number of questions
+                this.minutes = Math.floor(countDownTime / 60);
+                this.seconds = countDownTime % 60;
+
+            }
+
+            setTime() {
+                this.displayQuestion(); // Display the current question
+                this.displayChoices(this.questionCount); // to display the choices
+                this.setupChoices(); // Setup choice click handlers
+
+                this.x = setInterval(() => { // Arrow function to maintain the context of `this`
+                    this.minutes = Math.floor(this.countDownTime / 60);
+                    this.seconds = this.countDownTime % 60;
+                    document.getElementById("timeLeft").innerHTML = this.minutes + ":" + (this.seconds < 10 ? "0" : "") + this.seconds;
+                    this.countDownTime--;
+
+                    if (this.countDownTime < 0) {
+                        clearInterval(this.x);
+                        this.questionCount++;
+                        document.getElementById("timeLeft").innerHTML = "TIME OUT";
+
+                        if (this.questionCount < this.totalQuestions) {
+                            this.resetTime(); // Reset the timer and start again
+                        } else {
+                            //alert("You completed all the questions");
+                            window.location.href = 'ProgrammingTemp.html';
+
+                        }
+                    }
+                }, 1000);
+            }
+
+            resetTime() {
+                clearInterval(this.x); // Clear the current interval
+                this.countDownTime = this.initialCountDownTime; // Reset the countdown time
+                if (this.questionCount < this.totalQuestions) {
+                    this.setTime(); // Start the timer again
+                } else {
+                    // get the total score in quiz
+                    localStorage.setItem('scoreprog', scoreprog.toString());
+                    //alert("You completed all the questions");
+                    window.location.href = 'ProgrammingTemp.html';
+                    document.getElementById("timeLeft").innerHTML = "Completed all questions";
+                }
+            }
+
+            displayQuestion() {
+                const currentQuestionKey = `question${this.questionCount + 1}`;
+                const currentQuestion = this.questions[currentQuestionKey];
+                if (currentQuestion) {
+                    document.getElementById('q1').innerHTML = currentQuestion;
+                }
+            }
+
+            displayChoices(questionNumber) {
+                this.questionNumber = questionNumber;
+                let divChoices = document.querySelectorAll('.ch');
+                let keyObj;
+                switch (this.questionNumber) {
+                    case 0:
+                        keyObj = choicesList[0].question1;
+                        break;
+                    case 1:
+                        keyObj = choicesList[1].question2;
+                        break;
+                    case 2:
+                        keyObj = choicesList[2].question3;
+                        break;
+                    case 3:
+                        keyObj = choicesList[3].question4;
+                        break;
+                    case 4:
+                        keyObj = choicesList[4].question5;
+                        break;
+                    case 5:
+                        keyObj = choicesList[5].question6;
+                        break;
+                    case 6:
+                        keyObj = choicesList[6].question7;
+                        break;
+                    case 7:
+                        keyObj = choicesList[7].question8;
+                        break;
+                    case 8:
+                        keyObj = choicesList[8].question9;
+                        break;
+                    case 9:
+                        keyObj = choicesList[9].question10;
+                        break;
+                }
+                Object.entries(keyObj).forEach(([qkey, qvalue], index) => {
+                    divChoices[index].textContent = qvalue;
+                });
+            }
+
+
+            setupChoices() {
+                let divChoices = document.querySelectorAll('.ch');
+                divChoices.forEach((choice, index) => {
+                    choice.onclick = () => {
+                        if (choice.textContent === this.correctAnswers[this.questionCount]) {
+                            // alert('Nice you got it right');
+                            scoreprog += 3;
+                            document.getElementById('Score').textContent = `Score: ${scoreprog}`;
+                            correctAnsSound.play();
+                            this.questionCount++;
+                            this.resetTime();
+                        } else {
+                            this.questionCount++;
+                            this.resetTime();
+                            //alert('Hehe boy');
+                        }
+                    }
+                });
+            }
+
+        };
+
+        const questionList = {
+            question1: `
+int main() {
+    cout << "Hello, World!" << _____;
+    return 0;
+}
+What should be placed in the blank to make the program compile and run correctly?`,
+            question2: `int main() {
+    int x = 10;
+    int y = 20;
+    if (x < y) {
+        cout << "x is less than y" << _____;
+    }
+}
+What should be placed in the blank to complete the statement inside the if block?`,
+            question3: `
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    _____(int i = 0; i < 5; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+What keyword is missing to complete the loop declaration?`,
+            question4: `void sayHello() {
+    cout << "Hello!" << endl;
+}
+
+int main() {
+    sayHello();
+    _____ 0;
+}
+What keyword is missing to return a value from the main function?`,
+            question5: `
+int main() {
+    int x = 10;
+    cout << "Enter a number: ";
+    cin >> _____;
+    cout << "You entered: " << x << endl;
+    return 0;
+}
+What variable should be used to store the input from the user?`,
+            question6: `
+
+int main() {
+    int num = 7;
+    if (num % 2 == 0) {
+        cout << "Even" << endl;
+    } else {
+        cout << "_____";
+    }
+    return 0;
+}
+What should be printed if num is odd?`,
+            question7: `
+void printMessage() {
+    cout << "Welcome to C++ programming!" << endl;
+}
+
+int main() {
+    _____();
+    return 0;
+}
+What function should be called to print the welcome message?`,
+            question8: `
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50};
+    for (_____ i = 0; i < 5; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
+What should be declared before i to define the loop variable properly?`,
+            question9: `
+
+int main() {
+    int a = 10, b = 5;
+    cout << "Quotient: " << a _____ b << endl;
+    return 0;
+}
+What operator should be used to compute the quotient of a divided by b?`,
+            question10: `
+
+void multiply(int a, int b) {
+    int product = a * b;
+    cout << "Product is: " << product << endl;
+}
+
+int main() {
+    multiply(3, 4);
+    return 0;
+}
+Identify and correct any potential errors in this code.`
+        };
+
+        const choicesList = [
+            {
+                question1: {
+                    A: ";",
+                    B: "endl",
+                    C: "return",
+                    D: "cout"
+                }
+            },
+            {
+                question2: {
+                    A: ";",
+                    B: "endl",
+                    C: "return",
+                    D: "cout"
+                }
+            },
+            {
+                question3: {
+                    A: "if",
+                    B: "while",
+                    C: "for",
+                    D: "do"
+                }
+            },
+            {
+                question4: {
+                    A: "return",
+                    B: "cout",
+                    C: "continue",
+                    D: "break"
+                }
+            },
+            {
+                question5: {
+                    A: "y",
+                    B: "z",
+                    C: "x",
+                    D: "Wrong question"
+                }
+            },
+            {
+                question6: {
+                    A: "Odd",
+                    B: "Even",
+                    C: "num",
+                    D: "Number"
+                }
+            },
+            {
+                question7: {
+                    A: "print",
+                    B: "printMsg",
+                    C: "printMessage",
+                    D: "message"
+                }
+            },
+            {
+                question8: {
+                    A: "const",
+                    B: "int",
+                    C: "float",
+                    D: "double"
+                }
+            },
+            {
+                question9: {
+                    A: "*",
+                    B: "%",
+                    C: "+",
+                    D: "/"
+                }
+            },
+            {
+                question10: {
+                    A: "No errors",
+                    B: "int multiply(int a, int b)",
+                    C: "void multiply()",
+                    D: 'cout << "Product is: " product << endl;'
+                }
+            }
+        ];
+
+        const correctAnswers = [
+            "endl",
+            "endl",
+            "for",
+            "return",
+            "Wrong question",
+            "Odd",
+            "printMessage",
+            "int",
+            "/",
+            "No errors"
+        ];
+        const timer = new Mechanics(.7 * 60, questionList, choicesList, correctAnswers); // Pass the total seconds directly
+        timer.setTime();
+
+
+
+        // display choices
+        // check answer
+        // 
+
+
+
+
+
+        /*
+        
+        var q1 = document.getElementById('q1');
+                var questionCount = 1;
+        
+                class Mechanics {
+                    constructor(countDownTime) {
+                        this.countDownTime = countDownTime;
+                        this.initialCountDownTime = countDownTime; // Store the initial countdown time
+                        this.questionCount = 0; // Initialize the question count
+                        this.minutes = Math.floor(countDownTime / 60);
+                        this.seconds = countDownTime % 60;
+                    }
+        
+        
+                    setTime() {
+                        this.x = setInterval(() => { // Arrow function to maintain the context of `this`
+                            this.minutes = Math.floor(this.countDownTime / 60);
+                            this.seconds = this.countDownTime % 60;
+                            document.getElementById("timeLeft").innerHTML = this.minutes + ":" + (this.seconds < 10 ? "0" : "") + this.seconds;
+                            this.countDownTime--;
+                            if (this.countDownTime < 0) {
+                                clearInterval(this.x);
+                                this.questionCount++;
+                                document.getElementById("timeLeft").innerHTML = "TIME OUT";
+        
+                                if (this.questionCount < 10) {
+                                    this.resetTime(); // Reset the timer and start again
+                                } else {
+                                    document.getElementById("timeLeft").innerHTML = "DONE";
+                                }
+                            }
+                        }, 1000);
+                    }
+        
+                    resetTime() {
+                        this.countDownTime = this.initialCountDownTime; // Reset the countdown time
+                        this.setTime(); // Start the timer again
+                    }
+                }
+        
+                const timer = new Mechanics(.7 * 60); // Pass the total seconds directly
+                timer.setTime();
+        
+        
+                class Question {
+                    constructor(questions) {
+                        this.questions = questions;
+                    }
+                    display() {
+                        return this.questions;
+                    }
+                }
+                const questionList = {
+                    question1: `
+                #include <iostream>
+                using namespace std;
+        
+                int main() {
+                cout << "Hello, World!" << _____;
+                return 0;
+                 }
+                 What should be placed in the blank to make 
+                 the program compile and run correctly?
+                
+                `,
+                    question2: `
+                int main() {
+                int x = 10;
+                int y = 20;
+                if (x < y) {
+                cout << "x is less than y" << _____;
+                    }
+                }
+                What should be placed in the blank to 
+                complete the statement inside the if block?
+        
+                `, question3:
+                        `
+                #include <iostream>
+                using namespace std;
+        
+                int main() {
+                int arr[] = {1, 2, 3, 4, 5};
+                _____(int i = 0; i < 5; i++) {
+                cout << arr[i] << " ";
+                    }
+                return 0;
+                }
+                What keyword is missing to complete 
+                the loop declaration?
+                `, question4:
+                        `
+                void sayHello() {
+                cout << "Hello!" << endl;
+                }
+        
+                int main() {
+                    sayHello();
+                    _____ 0;
+                }
+                What keyword is missing to return a value 
+                from the main function?
+                `, question5:
+                        `
+                #include <iostream>
+                using namespace std;
+        
+                int main() {
+                int x = 10;
+                cout << "Enter a number: ";
+                cin >> _____;
+                cout << "You entered: " << x << endl;
+                    return 0;
+                }
+                What variable should be used to 
+                store the input from the user?
+                `, question6:
+                        `
+                #include <iostream>
+                using namespace std;
+        
+                int main() {
+                int num = 7;
+                if (num % 2 == 0) {
+                cout << "Even" << endl;
+                } else {
+                    cout << "_____";
+                }
+                    return 0;
+                }
+                What should be printed if num is odd?
+                `, question7:
+                        `
+                #include <iostream>
+                using namespace std;
+        
+                void printMessage() {
+                    cout << "Welcome to C++ programming!" << endl;
+                }
+        
+                int main() {
+                _____();
+                    return 0;
+                }
+                What function should be called 
+                to print the welcome message?
+                `, question8:
+                        `
+                #include <iostream>
+                using namespace std;
+        
+                int main() {
+                    int arr[] = {10, 20, 30, 40, 50};
+                    for (_____ i = 0; i < 5; i++) {
+                        cout << arr[i] << " ";
+                    }
+                    cout << endl;
+                    return 0;
+                }
+                What should be declared before i to 
+                define the loop variable properly?
+                `, question9:
+                        `
+                #include <iostream>
+                using namespace std;
+        
+                int main() {
+                int a = 10, b = 5;
+                    cout << "Quotient: " << a _____ b << endl;
+                    return 0;
+                }
+                What operator should be used to compute 
+                the quotient of a divided by b?
+                `, question10:
+                        `
+                #include <iostream>
+                using namespace std;
+        
+                void multiply(int a, int b) {
+                    int product = a * b;
+                    cout << "Product is: " << product << endl;
+                }
+        
+                int main() {
+                    multiply(3, 4);
+                    return 0;
+                }
+                Identify and correct any 
+                potential errors in this code.
+                ` }
+        
+        
+                //proceed next question after time left or wrong and correct
+                function proceedNext() {
+                        let questionFirst = new Question(questionList.question1);
+                        q1.textContent = questionFirst.display();
+            
+                }
+                proceedNext();
+        
+        
+        */
+
+
+
+    </script>
+    <script src="../../../trailingMouseEffect/trailingMouse.js"></script>
+    <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

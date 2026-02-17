@@ -1,0 +1,653 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: rgba(236, 236, 236, 0.841);
+    font-family: "Permanent Marker", cursive;
+
+    font-weight: 500;
+    user-select: none;
+
+}
+
+body {
+    /* background-image: linear-gradient(to left, rgb(3, 174, 210), rgb(4, 96, 114));*/
+    background-image: url('./HomeImg/Asset\ -\ Cartoons\ -\ Background\ -\ Classroom\ -\ 02\ 3D\ model.jpg');
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboardDisplay {
+    background-image: url('./HomeImg/paper-1468883_1280.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 2px 4px 8px black;
+    position: absolute;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    right: 35%;
+    height: 60%;
+    bottom: 20%;
+    text-align: center;
+    display: none;
+    border-radius: 15px;
+
+
+}
+
+.leaderboardDisplay > header > h1 {
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 4px 4px black;
+    font-weight: bolder;
+    font-size: 3em;
+}
+
+.leaderboardDisplay > div > span > p {
+    padding: 5%;
+    display: inline;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.leaderboardDisplay > div > span {
+    margin-bottom: 5%;
+}
+
+.leaderboardDisplay > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 70%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.leaderboardDisplay > div::-webkit-scrollbar {
+    display: none;
+}
+
+
+.description>#page {
+    margin: 20%;
+    text-align: center;
+    font-weight: 500;
+    text-indent: 10px;
+    font-size: 1.2em;
+    line-height: 30px;
+    letter-spacing: 1px;
+
+
+}
+
+
+body>div>.leaderboards {
+    height: 300px;
+    width: 50px;
+}
+
+
+body>div>.description {
+    width: 500px;
+    height: 500px;
+    /* will put some shadow later*/
+}
+
+.leaderboards>a {
+    height: 300px;
+}
+
+.guides>a {
+    text-shadow: var(--textShadow);
+}
+
+.body {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 10%;
+    height: 50%;
+    padding: 1.2em;
+    text-align: center;
+    background-image: url('./HomeImg/Screenshot\ 2024-06-11\ 114025.png');
+    border-radius: 15px;
+    border-bottom: 50px solid rgba(237, 148, 85, 0.589);
+    box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+
+}
+
+
+.description>h1>a:hover {
+    opacity: .5;
+}
+
+
+.leaderboards {
+    color: #000000;
+    width: 70px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+}
+
+.head {
+    padding-top: 10px;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    z-index: 2;
+}
+
+.guides>a {
+    display: inline;
+    font-size: 2em;
+
+}
+
+.guides {
+    transition: all .3s ease;
+}
+
+.guides:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.guides:active {
+    transform: scale(1, 1);
+    opacity: .7;
+
+}
+
+
+.leaderboards {
+    background-image: url('./HomeImg/leaderBoardandSettingsbg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: transform .3s;
+
+}
+
+.leaderboards:hover {
+    cursor: pointer;
+    transform: scale(.9, .9);
+}
+
+.leaderboards:active {
+    transform: scale(1, 1);
+    opacity: .7;
+}
+
+#go {
+    font-size: 15px;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    color: white;
+    background-image: url('./HomeImg/blueBallpen.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+#go:hover {
+    font-size: 20px;
+    background-color: rgb(255, 236, 158);
+    box-shadow: 0px 15px 20px rgb(254, 239, 173);
+    color: rgb(0, 0, 0);
+    transform: translateY(-7px);
+}
+
+#exit {
+    border-radius: 10px;
+    box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    font-size: 12px;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    background-image: url('./HomeImg/Red_Pen_Clipart_Hd_PNG__A_Red_Hook_Line_Pen_Illustration__A_Pen__Red_Pen_Illustration__Hook_Line_Pen_Illustration_PNG_Image_For_Free_Download-removebg-preview.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+#exit:hover {
+    font-size: 20px;
+    background-color: rgb(255, 236, 158);
+    box-shadow: 0px 15px 20px rgb(254, 239, 173);
+    color: rgb(0, 0, 0);
+    transform: translateY(-7px);
+}
+
+#exit:active {
+    transform: translateY(1px);
+
+}
+
+
+
+
+#go:active {
+    transform: translateY(-1px);
+}
+
+.goButton {
+    margin-bottom: 1.2em;
+}
+
+#page {
+    text-align: center;
+}
+
+#content {
+    height: 50%;
+}
+
+/* section*/
+
+.contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.contents>#page,
+.contents>#score {
+    color: black;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+
+/* page*/
+
+
+.difficulties {
+    width: 30%;
+    background-color: rgba(195, 27, 27, 0);
+    flex-direction: column;
+    /* margin-left: 7%; */
+
+    height: 35%;
+
+
+}
+
+
+#buttonsSelection {
+    width: 5%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 7%;
+}
+
+#buttonUp,
+#buttonDown {
+    background-image: url('./HomeImg/leaderBoardandSettingsbg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 15%;
+    width: 70%;
+    height: 50%;
+    background-color: transparent;
+    border: none;
+    box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+    transition: all .3s ease;
+}
+
+#buttonUp {
+    margin-bottom: 10px;
+}
+
+#buttonUp:hover {
+    transform: translate(0px, -16px);
+    transform: scale(1.1, 1.1);
+
+}
+
+#buttonDown:hover {
+    transform: translate(0px, 16px);
+    transform: scale(1.1, 1.1);
+
+}
+
+#buttonUp:active {
+    transform: translate(0px, -32px);
+}
+
+#buttonDown:active {
+    transform: translate(0px, 32px);
+}
+
+
+
+a>section {
+    margin: 2px;
+}
+
+a>.easy {
+    text-align: center;
+    font-size: var(--GrowFontSize);
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+
+
+
+
+
+}
+
+a>.medium,
+.hard {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    width: 70%;
+    height: 70%;
+
+
+
+}
+
+/*boardsBackground" class="leaderboards*/
+
+a>.hard,
+.medium {
+    z-index: -1;
+}
+
+a>.easy:hover,
+.medium:hover,
+.hard:hover {
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+
+a>.easy,
+a>.medium,
+a>.hard {
+    background-image: url('./HomeImg/Screenshot_2024-06-11_093824-removebg-preview.png');
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 10px 10px;
+    text-transform: uppercase;
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    text-shadow: none;
+    cursor: pointer;
+    transition: 0.5s ease;
+    user-select: none;
+
+}
+
+
+a>.easy {
+    font-size: 60px;
+}
+
+a>.easy:hover,
+a>.easy:focus,
+a>.medium:hover,
+a>.medium:focus,
+a>.hard:hover,
+a>.hard:focus {
+    color: #000000;
+    background-color: rgb(255, 187, 112);
+
+    border: 1px solid #ffffff;
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+    box-shadow: 0 0 5px #ffffff, 0 0 20px #ffffff, 0 0 50px #ffffff,
+        0 0 100px #ffffff;
+}
+
+
+#settingsContainer {
+    display: flex;
+    background-image: url('./HomeImg/leaderBoardandSettingsbg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    width: 3%;
+    height: 30%;
+    background-color: transparent;
+    transition: all .3s;
+}
+
+#settingsContainer:hover {
+    transform: scale(.8, .8);
+    cursor: pointer;
+}
+
+#settingsContainer:active {
+    transform: scale(1, 1);
+    opacity: .7;
+
+}
+
+
+
+#settingsBackground {
+    visibility: hidden;
+    width: 70%;
+    height: 70%;
+    background-image: url('./HomeImg/ecc0b16f2fd78a96f0afb5fd5dbfa08f.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 2px 4px 8px black;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10%;
+    right: 15%;
+    border-radius: 15px;
+    display: none;
+
+}
+
+#settingsSpan {
+    width: 79%;
+    height: 70%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    border: .2px solid white;
+
+}
+
+#backButton {
+    position: relative;
+   
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+    width: 20%;
+    height: 10%;
+    font-size: 2em;
+    border: none;
+    transition: all .3s ease;
+
+}
+
+#backButton:hover {
+    transform: translate(0px, -7px);
+    opacity: .7;
+    cursor: pointer;
+}
+
+#backButton:active {
+    transform: translate(0px, 7px);
+}
+
+#settingsSpan>button {
+    width: 31%;
+    height: 11%;
+    margin-bottom: 10px;
+    background-color: transparent;
+    border: .2px solid white;
+    border-radius: 15px;
+    transition: transform 0.5s ease;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+/*
+#settingsSpan > button:hover{
+    opacity: .7;
+    transform: scale(1.5, 1.5);
+}
+
+
+button {
+    width: 130px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    font-size: 30px;
+    border: none;
+    position: relative;
+    top: 150px;
+
+}
+
+button:hover {
+    opacity: .3;
+    cursor: pointer;
+}
+
+
+*/
+
+
+#confirmPlate {
+    position: absolute;
+    top: 30%;
+    right: 30%;
+    width: 45vw;
+    height: 35vh;
+    background-image: linear-gradient(to left, rgb(241, 127, 19), rgba(210, 108, 30, 0.867));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 15px;
+    visibility: hidden;
+}
+#gameStats{
+    font-size: 1.7em;
+}
+#down{
+    width: 90%;
+    height: 45%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#top{
+    width: 90%;
+    height: 45%;
+    color: white;
+}
+#yes, #no {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin-top: 20px;
+    font-weight: 500;
+    width: 45%;
+    color: #000000;
+    background-color:rgb(255, 187, 112);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 8px 7px rgba(1, 10, 19, 0.326);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+#yes:hover, #no:hover {
+    background-color:rgb(237, 148, 85);
+    box-shadow: 0px 15px 20px rgb(254, 239, 173);
+    color: rgb(255, 255, 255);
+    transform: translateY(-7px);
+}
+
+
+#yes:active,
+#no:active {
+    transform: translateY(-1px);
+}
+
+#no{
+    background-color: rgb(128, 79, 19);
+}
+

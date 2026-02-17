@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../BackgroundDesign/designs.css">
+    <link rel="icon" type="image/png" href="../../Logo/445817274_1144030270238498_6594786965558331914_n.jpg">
+
+    <!--
+/TriggerGame_Project/BackgroundDesign/designs.css
+C:\Users\moises\Desktop\TriggerGame_Project\trailingMouseEffect\trailsEffect.css
+
+-->
+    <title>Easy</title>
+    <link rel="stylesheet" href="../../trailingMouseEffect/trailsEffect.css">
+
+    <style>
+        :root {
+            --lighter: linear-gradient(to bottom, rgb(233, 191, 113), rgb(189, 109, 11));
+            --normal: linear-gradient(to bottom, rgb(233, 191, 113), rgb(75, 42, 1));
+            --darker: linear-gradient(to bottom, rgb(233, 191, 113), rgb(50, 29, 4));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: "Permanent Marker", cursive;
+
+        }
+
+        body {
+            background-image: url('./EasyImg/Placa_de_madeira_de_desenho_animado___Vetor_Premium-removebg-preview.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100vw;
+            height: 100vh;
+
+        }
+
+        .descriptions {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: none;
+            width: 100%;
+            height: 400px;
+        }
+
+        .gameOptions {
+            position: fixed;
+            display: flex;
+
+            width: 100%;
+            height: 400px;
+            align-items: center;
+            justify-content: space-around;
+            /* 
+// darker
+            background-image: linear-gradient(to bottom, rgb(233, 191, 113), rgb(50, 29, 4));
+// normal
+            background-image: linear-gradient(to bottom, rgb(233, 191, 113), rgb(75, 42, 1));
+// lighter
+            background-image: linear-gradient(to bottom, rgb(233, 191, 113), rgb(189, 109, 11));
+
+*/
+
+        }
+
+        .gameOptions>div {
+            border-radius: 50px;
+            width: 30%;
+            height: 400px;
+        }
+
+        .gameOptions>.chemistry {
+            position: relative;
+            height: 300px;
+            opacity: .9;
+        }
+
+        .chemistry,
+        .programming,
+        .simpleQuiz {
+            opacity: 1;
+            box-shadow: .2px 8px 12px rgb(0, 0, 0);
+        }
+
+
+
+
+
+        .gameOptions>.simpleQuiz {
+            position: relative;
+            right: 200px;
+            opacity: .2;
+            width: 20%;
+            z-index: -1;
+            height: 200px;
+        }
+
+        .gameOptions>.programming {
+
+            position: relative;
+            opacity: .2;
+            left: 200px;
+            width: 20%;
+            z-index: -1;
+            height: 200px;
+        }
+
+
+        /*
+        to make the text overlap in the image after the player played it*/
+        .texts {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: rgb(18, 17, 17);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chemistry>.texts {
+            color: rgb(30, 22, 19);
+            font-size: 30px;
+        }
+
+
+
+        #page {
+
+            color: rgb(0, 0, 0);
+            font-size: 40px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            color: rgb(8, 8, 8);
+            font-size: 20px;
+        }
+
+        img {
+            border-radius: 50px;
+        }
+
+        .descriptionPage {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            border: .5px solid white;
+            opacity: .9;
+            border-radius: 15px;
+            background-image: url('./EasyImg/Placa_de_madeira_de_desenho_animado___Vetor_Premium-removebg-preview.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            box-shadow: .2px 3px 8px black;
+            height: 250px;
+            width: 70%;
+
+        }
+
+        .play {
+            display: flex;
+            margin-left: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /*
+
+
+        background-image: linear-gradient(to left, rgb(3, 174, 210), rgb(6, 214, 255));
+
+          button {
+            font-size: 20px;
+            border-radius: 50px;
+            border: none;
+            width: 140px;
+            height: 50px;
+            color: rgb(1, 1, 1);
+            box-shadow: 4px 4px black;
+            background-image: linear-gradient(to right, grey, white);
+        }
+
+        button:hover {
+            opacity: .5;
+            border: .5px solid white;
+            cursor: pointer;
+        }
+        */
+
+
+
+
+        button {
+            padding: 1.3em 3em;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #000;
+            background-color: rgb(253, 222, 85);
+            border: none;
+            border-radius: 14px;
+            box-shadow: .5px 4px 8px rgba(51, 50, 50, 0.704);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            font-size: 10px;
+            background-color: rgb(254, 239, 173);
+            box-shadow: 0px 15px 20px rgba(255, 255, 255, 0.992);
+            color: #000000;
+            transform: translateY(-7px);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        #PlayAndBack {
+            display: flex;
+            justify-content: center;
+        }
+
+
+        #buttonUp:active{
+            transform: scale(1.6, 1.6);
+        }
+        #buttonDown:active{
+            transform: scale(1.6, 1.6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="audioBackground" loop>
+        <source src="/GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/mpeg">
+        <source src="/GameSounds/loginSounds/mixkit-sicilian-coffee-613.mp3" type="audio/ogg">
+    </audio>
+
+
+
+    <div class="descriptions" id="descriptions">
+        <div class="descriptionPage" id="descriptionPage">
+            <p class="page" id="page">Chemistry</p>
+            <p id="detailsPage">Hello kunichiwa</p>
+            <div id="PlayAndBack">
+                <div class="play" id="playButton"> <a href="../Easy/chemistryGame/table.html" id="links"
+                        class="links"><button>Play</button></a> </div>
+
+                <div class="play" id="playButton"> <a href="../home.html" id="links"
+                        class="links"><button>Back</button></a> </div>
+
+            </div>
+        </div>
+
+
+        <div id="buttonContainer">
+            <button id="buttonUp"><i class="fa-solid fa-arrow-left fa-2xl"></i></button>
+            <button id="buttonDown"><i class="fa-solid fa-arrow-right fa-2xl"></i></button>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="gameOptions" id="gameOptions">
+
+
+
+        <!--
+            
+           gamesImg\istockphoto-819618592-170667a.jpg
+          gamesImg/OIP (1).jpg
+         gamesImg/school-boy-test-anxious-little-do-worried-146959074.webp
+        -->
+        <div id="programming" class="programming">
+            <img id="prog" src=" gamesImg/OIP (1).jpg" width="100%" height="200px">
+            <div class="texts"></div>
+        </div>
+
+
+
+        <div id="chemistry" class="chemistry">
+            <img id="chem" src="gamesImg\istockphoto-819618592-170667a.jpg" width="100%" height="300px">
+            <div class="texts"></div>
+
+        </div>
+
+
+        <div id="simpleQuiz" class="simpleQuiz">
+            <img id="simpleQuiz" src=" gamesImg/school-boy-test-anxious-little-do-worried-146959074.webp" width="100%"
+                height="200px">
+            <div class="texts"></div>
+        </div>
+    </div>
+
+    <script src="easy.js"> </script>
+    <script src="../../trailingMouseEffect/trailingMouse.js"></script>
+    <script src="https://kit.fontawesome.com/747aa55a95.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
